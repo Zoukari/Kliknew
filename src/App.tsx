@@ -198,7 +198,7 @@ function App() {
         <nav className="container mx-auto px-4 h-full flex items-center justify-between">
           <div className="flex items-center gap-4">
             <a href="#" className="text-2xl font-bold text-theme"></a>
-            <img src="src/logo.png" alt="KLIK Logo" className="h-12 w-auto" />
+            <img src="klik/src/logo.png" alt="KLIK Logo" className="h-12 w-auto" />
           </div>
           
           <div className="flex items-center gap-4">
