@@ -127,7 +127,7 @@ function App() {
       name: "SHAKPOT",
       description: "Restaurant de spécialités africaines modernes",
       website: "https://shakpot.com",
-      image: "2.png",
+      image: "src/2.png",
       color: "from-orange-500 to-red-600",
       icon: Utensils,
       services: [
@@ -149,7 +149,7 @@ function App() {
       name: "VAGABOX",
       description: "Service de livraison de colis innovant",
       website: "https://vagabox.com",
-      image: "1.png",
+      image: "src/1.png",
       color: "from-blue-500 to-cyan-500",
       icon: Package,
       services: [
@@ -171,7 +171,7 @@ function App() {
       name: "DEEQSAN",
       description: "Marketplace de produits artisanaux africains",
       website: "https://deeqsan.com",
-      image: "Deeqsanlogo.png",
+      image: "src/Deeqsanlogo.png",
       color: "from-violet-500 to-purple-600",
       icon: BookOpen,
       services: [
@@ -198,7 +198,7 @@ function App() {
         <nav className="container mx-auto px-4 h-full flex items-center justify-between">
           <div className="flex items-center gap-4">
             <a href="#" className="text-2xl font-bold text-theme"></a>
-            <img src="klik/logo.png" alt="KLIK Logo" className="h-12 w-auto" />
+            <img src="src/logo.png" alt="KLIK Logo" className="h-12 w-auto" />
           </div>
           
           <div className="flex items-center gap-4">
@@ -350,7 +350,7 @@ function App() {
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="relative fade-up order-2 md:order-1">
                 <img 
-                  src="4.png" 
+                  src="src/4.png" 
                   alt="Team working"
                   className="rounded-lg shadow-2xl w-full"
                 />
