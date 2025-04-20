@@ -149,7 +149,7 @@ function App() {
       name: "VAGABOX",
       description: "Service de livraison de colis innovant",
       website: "https://vagabox.com",
-      image: "src/1.png",
+      image: "1.png",
       color: "from-blue-500 to-cyan-500",
       icon: Package,
       services: [
