@@ -399,7 +399,7 @@ function App() {
                   className={`relative group cursor-pointer transition-all duration-500 ${
                     selectedClient === client.id 
                       ? 'w-full md:w-[600px] h-[300px] md:h-[70vh]' 
-                      : 'w-full md:w-[100px] h-[200px] md:h-[70vh] hover:w-full md:hover:w-[150px]'
+                      : 'w-full md:w-[135px] h-[200px] md:h-[70vh] hover:w-full md:hover:w-[210px]'
                   }`}
                   onClick={() => setSelectedClient(selectedClient === client.id ? null : client.id)}
                 >
