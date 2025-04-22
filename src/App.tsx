@@ -127,7 +127,7 @@ function App() {
       name: "SHAKPOT",
       description: "Restaurant de spécialités africaines modernes",
       website: "https://shakpot.com",
-      image: "src/2.png",
+      image: "2.png",
       color: "from-orange-500 to-red-600",
       icon: Utensils,
       services: [
@@ -171,7 +171,7 @@ function App() {
       name: "DEEQSAN",
       description: "Marketplace de produits artisanaux africains",
       website: "https://deeqsan.com",
-      image: "src/Deeqsanlogo.png",
+      image: "Deeqsanlogo.png",
       color: "from-violet-500 to-purple-600",
       icon: BookOpen,
       services: [
@@ -198,7 +198,7 @@ function App() {
         <nav className="container mx-auto px-4 h-full flex items-center justify-between">
           <div className="flex items-center gap-4">
             <a href="#" className="text-2xl font-bold text-theme"></a>
-            <img src="src/logo.png" alt="KLIK Logo" className="h-12 w-auto" />
+            <img src="logo.png" alt="KLIK Logo" className="h-12 w-auto" />
           </div>
           
           <div className="flex items-center gap-4">
@@ -350,7 +350,7 @@ function App() {
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="relative fade-up order-2 md:order-1">
                 <img 
-                  src="src/4.png" 
+                  src="4.png" 
                   alt="Team working"
                   className="rounded-lg shadow-2xl w-full"
                 />
