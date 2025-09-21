@@ -1,21 +1,11 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  optimizeDeps: {
-    include: ['react', 'react-dom', 'lucide-react']
-  },
   build: {
     target: 'es2015',
     minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true
-      }
-    },
     rollupOptions: {
       output: {
         manualChunks: {
@@ -29,5 +19,8 @@ export default defineConfig({
   server: {
     host: true,
     port: 5173
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'lucide-react']
   }
-});
+})
