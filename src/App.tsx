@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Menu, X, ArrowRight, Mail, Phone, Globe, Map , Key, Users, Rocket, Shield, Sun, Moon, MessageCircle, ExternalLink, Utensils, Package, BookOpen, CheckCircle, Target, Heart, Trophy } from 'lucide-react';
+import { Menu, X, ArrowRight, Mail, Phone, Globe, Map , Key, Users, Rocket, Shield, Sun, Moon, MessageCircle, ExternalLink, Utensils, Package, BookOpen, CheckCircle, Target, Heart, Trophy, Plane, ShoppingBag, BarChart3 } from 'lucide-react';
 
 // Translations
 const translations = {
@@ -85,68 +85,39 @@ const translations = {
       title: 'Nos Clients',
       shakpot: {
         name: 'SHAKPOT',
-        description: 'Restaurant de folie',
+        description: 'Restaurant de folie - Une expérience culinaire unique qui révolutionne la gastronomie locale avec des plats créatifs et une ambiance exceptionnelle.',
         website: 'https://shakpot.com',
-        visitSite: 'Visiter le site',
-        servicesProvided: 'Services fournis',
-        resultsObtained: 'Résultats obtenus',
-        services: [
-          "Création d'un système de POS (Point de vente, Gestion stock, Facturation)",
-          "Partie commande clients via téléphone",
-          "Création de contenu visuel",
-          "Animation des réseaux sociaux",
-          "Stratégie de fidélisation client",
-          "Marketing digital",
-          "Photographie culinaire"
-        ],
-        results: [
-          "Augmentation de 150% de l'engagement sur Instagram",
-          "Mise en place d'un programme de fidélité digital",
-          "Gestion des bots WhatsApp",
-          "Création d'une identité visuelle cohérente",
-          "Campagnes publicitaires ciblées"
-        ]
+        visitSite: 'Visiter le site'
       },
       vagabox: {
         name: 'VAGABOX',
-        description: 'Service de livraison de colis innovant',
+        description: 'Service de livraison de colis innovant - Une solution logistique moderne qui simplifie l\'envoi et la réception de colis avec une technologie de pointe.',
         website: 'https://vagabox.fr',
-        visitSite: 'Visiter le site',
-        servicesProvided: 'Services fournis',
-        resultsObtained: 'Résultats obtenus',
-        services: [
-          "Création du site web (interface clients et admin)",
-          "Analyse de data",
-          "Développement de l'image de marque",
-          "Gestion des réseaux sociaux",
-          "Stratégie marketing digitale",
-          "Relations publiques"
-        ],
-        results: [
-          "Refonte complète de l'identité visuelle",
-          "Campagne d'influence avec des créateurs locaux",
-          "Optimisation du parcours client"
-        ]
+        visitSite: 'Visiter le site'
       },
       deeqsan: {
         name: 'DEEQSAN',
-        description: 'Maison d\'édition',
+        description: 'Maison d\'édition - Une plateforme dédiée à la promotion de la littérature et de la culture, offrant une sélection soigneusement choisie d\'ouvrages et de contenus éditoriaux.',
         website: 'https://deeqsan.net',
-        visitSite: 'Visiter le site',
-        servicesProvided: 'Services fournis',
-        resultsObtained: 'Résultats obtenus',
-        services: [
-          "Création du site e-commerce",
-          "Optimisation SEO",
-          "Gestion de la marketplace",
-          "Support technique"
-        ],
-        results: [
-          "Site e-commerce responsive et performant",
-          "Système de paiement sécurisé",
-          "Optimisation pour les moteurs de recherche",
-          "Interface utilisateur intuitive"
-        ]
+        visitSite: 'Visiter le site'
+      },
+      voyageVoyage: {
+        name: 'VOYAGE VOYAGE',
+        description: 'Agence touristique à Djibouti - Votre partenaire de confiance pour découvrir les merveilles de Djibouti et de la Corne de l\'Afrique avec des circuits personnalisés et des expériences authentiques.',
+        website: 'https://voyagevoyagedj.com',
+        visitSite: 'Visiter le site'
+      },
+      byLouli: {
+        name: 'BY LOULI',
+        description: 'Mode féminine élégante - Collection exclusive de vêtements pour femme, voiles, abayas et jellabas, alliant tradition et modernité pour une élégance raffinée.',
+        website: null,
+        visitSite: null
+      },
+      marketStudyCena: {
+        name: 'MARKET STUDY CENA',
+        description: 'Études de marché et recherche - Société spécialisée dans les études de marché, sondages, phoning, analyse financière et enquêtes face à face pour optimiser vos stratégies business.',
+        website: 'https://www.marketstudycena.com/',
+        visitSite: 'Visiter le site'
       }
     },
     contact: {
@@ -273,68 +244,39 @@ const translations = {
       title: 'Our Clients',
       shakpot: {
         name: 'SHAKPOT',
-        description: 'Crazy restaurant',
+        description: 'Crazy restaurant - A unique culinary experience that revolutionizes local gastronomy with creative dishes and exceptional ambiance.',
         website: 'https://shakpot.com',
-        visitSite: 'Visit website',
-        servicesProvided: 'Services provided',
-        resultsObtained: 'Results obtained',
-        services: [
-          "POS system creation (Point of sale, Stock management, Invoicing)",
-          "Customer phone ordering system",
-          "Visual content creation",
-          "Social media animation",
-          "Customer loyalty strategy",
-          "Digital marketing",
-          "Culinary photography"
-        ],
-        results: [
-          "150% increase in Instagram engagement",
-          "Digital loyalty program implementation",
-          "WhatsApp bot management",
-          "Coherent visual identity creation",
-          "Targeted advertising campaigns"
-        ]
+        visitSite: 'Visit website'
       },
       vagabox: {
         name: 'VAGABOX',
-        description: 'Innovative package delivery service',
+        description: 'Innovative package delivery service - A modern logistics solution that simplifies package sending and receiving with cutting-edge technology.',
         website: 'https://vagabox.fr',
-        visitSite: 'Visit website',
-        servicesProvided: 'Services provided',
-        resultsObtained: 'Results obtained',
-        services: [
-          "Website creation (client and admin interface)",
-          "Data analysis",
-          "Brand image development",
-          "Social media management",
-          "Digital marketing strategy",
-          "Public relations"
-        ],
-        results: [
-          "Complete visual identity redesign",
-          "Influencer campaign with local creators",
-          "Customer journey optimization"
-        ]
+        visitSite: 'Visit website'
       },
       deeqsan: {
         name: 'DEEQSAN',
-        description: 'Publishing house',
+        description: 'Publishing house - A platform dedicated to promoting literature and culture, offering a carefully selected collection of books and editorial content.',
         website: 'https://deeqsan.net',
-        visitSite: 'Visit website',
-        servicesProvided: 'Services provided',
-        resultsObtained: 'Results obtained',
-        services: [
-          "E-commerce site creation",
-          "SEO optimization",
-          "Marketplace management",
-          "Technical support"
-        ],
-        results: [
-          "Responsive and performant e-commerce site",
-          "Secure payment system",
-          "Search engine optimization",
-          "Intuitive user interface"
-        ]
+        visitSite: 'Visit website'
+      },
+      voyageVoyage: {
+        name: 'VOYAGE VOYAGE',
+        description: 'Tourist agency in Djibouti - Your trusted partner to discover the wonders of Djibouti and the Horn of Africa with personalized tours and authentic experiences.',
+        website: 'https://voyagevoyagedj.com',
+        visitSite: 'Visit website'
+      },
+      byLouli: {
+        name: 'BY LOULI',
+        description: 'Elegant women\'s fashion - Exclusive collection of women\'s clothing, veils, abayas and jellabas, combining tradition and modernity for refined elegance.',
+        website: null,
+        visitSite: null
+      },
+      marketStudyCena: {
+        name: 'MARKET STUDY CENA',
+        description: 'Market research and studies - Company specialized in market research, surveys, phoning, financial analysis and face-to-face surveys to optimize your business strategies.',
+        website: 'https://www.marketstudycena.com/',
+        visitSite: 'Visit website'
       }
     },
     contact: {
@@ -461,68 +403,39 @@ const translations = {
       title: 'عملاؤنا',
       shakpot: {
         name: 'SHAKPOT',
-        description: 'مطعم مجنون',
+        description: 'مطعم مجنون - تجربة طهوية فريدة تثور على المطبخ المحلي بأطباق إبداعية وأجواء استثنائية.',
         website: 'https://shakpot.com',
-        visitSite: 'زيارة الموقع',
-        servicesProvided: 'الخدمات المقدمة',
-        resultsObtained: 'النتائج المحققة',
-        services: [
-          "إنشاء نظام نقاط البيع (نقطة البيع، إدارة المخزون، الفواتير)",
-          "نظام طلب العملاء عبر الهاتف",
-          "إنشاء المحتوى المرئي",
-          "تحريك وسائل التواصل الاجتماعي",
-          "استراتيجية ولاء العملاء",
-          "التسويق الرقمي",
-          "التصوير الطهوي"
-        ],
-        results: [
-          "زيادة 150% في المشاركة على إنستغرام",
-          "تنفيذ برنامج ولاء رقمي",
-          "إدارة بوتات واتساب",
-          "إنشاء هوية بصرية متماسكة",
-          "حملات إعلانية مستهدفة"
-        ]
+        visitSite: 'زيارة الموقع'
       },
       vagabox: {
         name: 'VAGABOX',
-        description: 'خدمة توصيل الطرود المبتكرة',
+        description: 'خدمة توصيل الطرود المبتكرة - حل لوجستي حديث يبسط إرسال واستقبال الطرود بتكنولوجيا متطورة.',
         website: 'https://vagabox.fr',
-        visitSite: 'زيارة الموقع',
-        servicesProvided: 'الخدمات المقدمة',
-        resultsObtained: 'النتائج المحققة',
-        services: [
-          "إنشاء الموقع (واجهة العملاء والإدارة)",
-          "تحليل البيانات",
-          "تطوير صورة العلامة التجارية",
-          "إدارة وسائل التواصل الاجتماعي",
-          "استراتيجية التسويق الرقمي",
-          "العلاقات العامة"
-        ],
-        results: [
-          "إعادة تصميم كاملة للهوية البصرية",
-          "حملة تأثير مع المبدعين المحليين",
-          "تحسين رحلة العميل"
-        ]
+        visitSite: 'زيارة الموقع'
       },
       deeqsan: {
         name: 'DEEQSAN',
-        description: 'دار النشر',
+        description: 'دار النشر - منصة مخصصة لتعزيز الأدب والثقافة، تقدم مجموعة مختارة بعناية من الكتب والمحتوى التحريري.',
         website: 'https://deeqsan.net',
-        visitSite: 'زيارة الموقع',
-        servicesProvided: 'الخدمات المقدمة',
-        resultsObtained: 'النتائج المحققة',
-        services: [
-          "إنشاء موقع التجارة الإلكترونية",
-          "تحسين محركات البحث",
-          "إدارة السوق",
-          "الدعم التقني"
-        ],
-        results: [
-          "موقع تجارة إلكترونية متجاوب وفعال",
-          "نظام دفع آمن",
-          "تحسين محركات البحث",
-          "واجهة مستخدم بديهية"
-        ]
+        visitSite: 'زيارة الموقع'
+      },
+      voyageVoyage: {
+        name: 'VOYAGE VOYAGE',
+        description: 'وكالة سياحية في جيبوتي - شريكك الموثوق لاكتشاف عجائب جيبوتي والقرن الأفريقي مع جولات مخصصة وتجارب أصيلة.',
+        website: 'https://voyagevoyagedj.com',
+        visitSite: 'زيارة الموقع'
+      },
+      byLouli: {
+        name: 'BY LOULI',
+        description: 'أزياء نسائية أنيقة - مجموعة حصرية من الملابس النسائية والحجاب والعبايات والجلابيات، تجمع بين التقليد والحداثة لأناقة راقية.',
+        website: null,
+        visitSite: null
+      },
+      marketStudyCena: {
+        name: 'MARKET STUDY CENA',
+        description: 'دراسات السوق والبحوث - شركة متخصصة في دراسات السوق والاستطلاعات والاتصالات الهاتفية والتحليل المالي والاستطلاعات وجهاً لوجه لتحسين استراتيجياتك التجارية.',
+        website: 'https://www.marketstudycena.com/',
+        visitSite: 'زيارة الموقع'
       }
     },
     contact: {
@@ -670,13 +583,6 @@ function App() {
     setTheme(prev => prev === 'dark' ? 'light' : 'dark');
   };
 
-  const toggleLanguage = () => {
-    setLanguage(prev => {
-      if (prev === 'fr') return 'en';
-      if (prev === 'en') return 'ar';
-      return 'fr';
-    });
-  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -742,13 +648,9 @@ function App() {
       description: t.clients.shakpot.description,
       website: t.clients.shakpot.website,
       visitSite: t.clients.shakpot.visitSite,
-      servicesProvided: t.clients.shakpot.servicesProvided,
-      resultsObtained: t.clients.shakpot.resultsObtained,
       image: "2.png",
       color: "from-orange-500 to-red-600",
-      icon: Utensils,
-      services: t.clients.shakpot.services,
-      prestations: t.clients.shakpot.results
+      icon: Utensils
     },
     {
       id: "vagabox",
@@ -756,13 +658,9 @@ function App() {
       description: t.clients.vagabox.description,
       website: t.clients.vagabox.website,
       visitSite: t.clients.vagabox.visitSite,
-      servicesProvided: t.clients.vagabox.servicesProvided,
-      resultsObtained: t.clients.vagabox.resultsObtained,
       image: "1.png",
       color: "from-blue-500 to-cyan-500",
-      icon: Package,
-      services: t.clients.vagabox.services,
-      prestations: t.clients.vagabox.results
+      icon: Package
     },
     {
       id: "deeqsan",
@@ -770,13 +668,39 @@ function App() {
       description: t.clients.deeqsan.description,
       website: t.clients.deeqsan.website,
       visitSite: t.clients.deeqsan.visitSite,
-      servicesProvided: t.clients.deeqsan.servicesProvided,
-      resultsObtained: t.clients.deeqsan.resultsObtained,
       image: "Deeqsanlogo.png",
-      color: "from-violet-500 to-purple-600",
-      icon: BookOpen,
-      services: t.clients.deeqsan.services,
-      prestations: t.clients.deeqsan.results
+      color: "from-green-500 to-emerald-600",
+      icon: BookOpen
+    },
+    {
+      id: "voyageVoyage",
+      name: t.clients.voyageVoyage.name,
+      description: t.clients.voyageVoyage.description,
+      website: t.clients.voyageVoyage.website,
+      visitSite: t.clients.voyageVoyage.visitSite,
+      image: "voyagevoyagelogo.png",
+      color: "from-[#fc8172] to-[#408398]",
+      icon: Plane
+    },
+    {
+      id: "byLouli",
+      name: t.clients.byLouli.name,
+      description: t.clients.byLouli.description,
+      website: t.clients.byLouli.website,
+      visitSite: t.clients.byLouli.visitSite,
+      image: "logoglamourvoile.png",
+      color: "from-amber-700 to-amber-900",
+      icon: ShoppingBag
+    },
+    {
+      id: "marketStudyCena",
+      name: t.clients.marketStudyCena.name,
+      description: t.clients.marketStudyCena.description,
+      website: t.clients.marketStudyCena.website,
+      visitSite: t.clients.marketStudyCena.visitSite,
+      image: "Logo MS CENA.webp",
+      color: "from-indigo-500 to-blue-600",
+      icon: BarChart3
     }
   ];
 
@@ -1115,61 +1039,30 @@ function App() {
                           <X size={24} />
                         </button>
                         
-                        <div className="mb-8">
-                          <div className="flex items-center gap-3 mb-4">
-                            <client.icon className={`w-8 h-8 bg-gradient-to-r ${client.color} rounded-lg p-1.5 text-white`} />
-                            <h3 className={`text-2xl md:text-3xl font-bold ${theme === 'dark' ? 'text-black' : 'text-white'}`}>{client.name}</h3>
+                        <div className="flex flex-col items-center justify-center h-full text-center">
+                          <div className="flex items-center gap-3 mb-6">
+                            <div className="relative">
+                              <img 
+                                src={client.image} 
+                                alt={client.name}
+                                className="w-16 h-16 object-contain rounded-lg"
+                              />
+                              <div className={`absolute inset-0 bg-gradient-to-r ${client.color} opacity-20 rounded-lg`} />
                           </div>
-                          <p className={`${theme === 'dark' ? 'text-gray-700' : 'text-gray-300'} text-base md:text-lg mb-4`}>{client.description}</p>
+                            <h3 className={`text-3xl md:text-4xl font-bold ${theme === 'dark' ? 'text-black' : 'text-white'}`}>{client.name}</h3>
+                          </div>
+                          <p className={`${theme === 'dark' ? 'text-gray-700' : 'text-gray-300'} text-lg md:text-xl mb-8 max-w-2xl leading-relaxed`}>{client.description}</p>
+                          {client.website && client.visitSite && (
                           <a
                             href={client.website}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className={`inline-flex items-center bg-gradient-to-r ${client.color} text-white px-4 py-2 rounded-lg hover:opacity-90 transition-opacity`}
+                              className={`inline-flex items-center bg-gradient-to-r ${client.color} text-white px-8 py-4 rounded-lg hover:opacity-90 transition-all transform hover:-translate-y-1 text-lg font-semibold`}
                           >
                             <span className="mr-2">{client.visitSite}</span>
-                            <ExternalLink size={18} />
-                          </a>
-                        </div>
-                        
-                        <div className="space-y-6 md:space-y-8">
-                          <div>
-                            <h4 className={`text-lg md:text-xl font-semibold ${theme === 'dark' ? 'text-violet-700' : 'text-violet-400'} mb-4`}>{client.servicesProvided}</h4>
-                            <ul className="space-y-2">
-                              {client.services.map((service, index) => (
-                                <li 
-                                  key={index} 
-                                  className={`flex items-center ${
-                                    theme === 'dark' 
-                                      ? 'bg-gray-100 text-gray-800 hover:bg-gray-200' 
-                                      : 'bg-white/5 text-gray-300 hover:bg-white/10'
-                                  } p-3 rounded-lg transition-colors text-sm md:text-base`}
-                                >
-                                  <ArrowRight size={16} className={`mr-2 ${theme === 'dark' ? 'text-violet-700' : 'text-violet-400'} flex-shrink-0`} />
-                                  {service}
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                          
-                          <div>
-                            <h4 className={`text-lg md:text-xl font-semibold ${theme === 'dark' ? 'text-violet-700' : 'text-violet-400'} mb-4`}>{client.resultsObtained}</h4>
-                            <ul className="space-y-2">
-                              {client.prestations.map((prestation, index) => (
-                                <li 
-                                  key={index} 
-                                  className={`flex items-center ${
-                                    theme === 'dark' 
-                                      ? 'bg-gray-100 text-gray-800 hover:bg-gray-200' 
-                                      : 'bg-white/5 text-gray-300 hover:bg-white/10'
-                                  } p-3 rounded-lg transition-colors text-sm md:text-base`}
-                                >
-                                  <ArrowRight size={16} className={`mr-2 ${theme === 'dark' ? 'text-violet-700' : 'text-violet-400'} flex-shrink-0`} />
-                                  {prestation}
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
+                              <ExternalLink size={20} />
+                            </a>
+                          )}
                         </div>
                       </div>
                     )}
