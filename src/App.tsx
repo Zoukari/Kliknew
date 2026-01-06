@@ -98,7 +98,7 @@ const translations = {
       deeqsan: {
         name: 'DEEQSAN',
         description: 'Maison d\'édition - Une plateforme dédiée à la promotion de la littérature et de la culture, offrant une sélection soigneusement choisie d\'ouvrages et de contenus éditoriaux.',
-        website: 'https://deeqsan.net',
+        website: 'https://deeqsan.com',
         visitSite: 'Visiter le site'
       },
       voyageVoyage: {
@@ -257,7 +257,7 @@ const translations = {
       deeqsan: {
         name: 'DEEQSAN',
         description: 'Publishing house - A platform dedicated to promoting literature and culture, offering a carefully selected collection of books and editorial content.',
-        website: 'https://deeqsan.net',
+        website: 'https://deeqsan.com',
         visitSite: 'Visit website'
       },
       voyageVoyage: {
@@ -416,7 +416,7 @@ const translations = {
       deeqsan: {
         name: 'DEEQSAN',
         description: 'دار النشر - منصة مخصصة لتعزيز الأدب والثقافة، تقدم مجموعة مختارة بعناية من الكتب والمحتوى التحريري.',
-        website: 'https://deeqsan.net',
+        website: 'https://deeqsan.com',
         visitSite: 'زيارة الموقع'
       },
       voyageVoyage: {
