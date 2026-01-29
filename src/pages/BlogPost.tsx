@@ -1,0 +1,112 @@
+import React, { useEffect, useMemo, useState } from 'react';
+import DOMPurify from 'dompurify';
+import { NavLink, useOutletContext, useParams } from 'react-router-dom';
+import { ArrowLeft, Calendar } from 'lucide-react';
+import { stripHtml } from '../lib/html';
+import { getPostBySlug, type WpPost } from '../lib/wordpress';
+
+type OutletCtx = {
+  language: 'fr' | 'en' | 'ar' | 'is';
+};
+
+export default function BlogPost() {
+  const { language } = useOutletContext<OutletCtx>();
+  const { slug } = useParams();
+
+  const [post, setPost] = useState<WpPost | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!slug) return;
+    let cancelled = false;
+    getPostBySlug(slug)
+      .then((p) => {
+        if (cancelled) return;
+        if (!p) {
+          setError(language === 'en' ? 'Article not found.' : 'Article introuvable.');
+          return;
+        }
+        setPost(p);
+      })
+      .catch((e) => {
+        if (cancelled) return;
+        setError(e instanceof Error ? e.message : String(e));
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [language, slug]);
+
+  const status: 'loading' | 'success' | 'error' = error ? 'error' : post ? 'success' : 'loading';
+
+  const dateLabel = useMemo(() => {
+    if (!post?.date) return '';
+    const d = new Date(post.date);
+    if (isNaN(d.getTime())) return '';
+    return d.toLocaleDateString(language === 'en' ? 'en-US' : 'fr-FR', {
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit',
+    });
+  }, [language, post]);
+
+  const safeTitle = useMemo(() => (post ? DOMPurify.sanitize(post.titleHtml) : ''), [post]);
+  const safeContent = useMemo(() => (post ? DOMPurify.sanitize(post.contentHtml) : ''), [post]);
+
+  return (
+    <div className="relative z-10">
+      <section className="min-h-[50vh] flex items-center relative z-10 overflow-hidden py-16 md:py-24 px-4 md:px-6 lg:px-10 lamp-section">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-violet-600/10 blur-[120px] rounded-full" />
+        </div>
+        <div className="container mx-auto px-4 md:px-6 lg:px-10 relative max-w-6xl">
+          <NavLink
+            to="/blog"
+            className="inline-flex items-center gap-3 text-violet-400 font-bold uppercase text-xs tracking-[0.3em] hover:text-white transition-all mb-8 group"
+          >
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-2 transition-transform" />
+            {language === 'en' ? 'Back to Blog' : 'Retour au blog'}
+          </NavLink>
+
+          <div className="max-w-4xl mx-auto rounded-2xl border border-white/10 bg-white/[0.11] p-8 md:p-12 text-center fade-in-up">
+            <div className="flex items-center justify-center gap-4 text-theme-secondary font-bold uppercase text-xs tracking-widest mb-6">
+              <div className="p-2 bg-violet-500/10 border border-violet-500/20 rounded-lg">
+                <Calendar className="w-4 h-4 text-violet-400" />
+              </div>
+              <span>{dateLabel}</span>
+            </div>
+            <h1
+              className="text-4xl md:text-7xl font-black text-theme leading-tight tracking-tighter"
+              dangerouslySetInnerHTML={{ __html: safeTitle }}
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className="pb-24 md:pb-32 relative z-10 lamp-section">
+        <div className="container mx-auto px-4">
+          {status === 'success' && post && (
+            <article className="max-w-4xl mx-auto">
+              {post.featuredImageUrl && (
+                <div className="mb-16 rounded-[48px] overflow-hidden klik-card shadow-[0_0_80px_rgba(0,0,0,0.3)]">
+                  <img
+                    src={post.featuredImageUrl}
+                    alt={stripHtml(post.titleHtml)}
+                    className="w-full h-auto object-cover max-h-[600px]"
+                    loading="lazy"
+                  />
+                </div>
+              )}
+
+              <div
+                className="klik-card p-10 md:p-20 rounded-[48px] text-theme leading-relaxed wp-content text-xl font-medium shadow-[0_0_100px_rgba(124,58,237,0.05)]"
+                dangerouslySetInnerHTML={{ __html: safeContent }}
+              />
+            </article>
+          )}
+        </div>
+      </section>
+    </div>
+  );
+}
+
