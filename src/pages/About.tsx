@@ -19,6 +19,7 @@ const texts = {
     localExpertise: 'Expertise Locale',
     totalCommitment: 'Engagement Total',
     revelation: "La participation au Hackaton de Nantes 2023 a été l'étincelle. Nous avons réalisé que le monde digital avait besoin de plus que du code — il avait besoin d'âme, d'une exécution premium et d'une mentalité produit qui résout réellement les problèmes. Nous étions fiers de représenter KLIK en France.",
+    revelationTitle: 'Notre Révélation',
     ceoMessage: 'Message de la CEO',
     peopleBehind: 'Les personnes derrière',
     expertsDesc: "Un collectif d'experts dédiés à votre succès.",
@@ -42,6 +43,7 @@ const texts = {
     localExpertise: 'Local Expertise',
     totalCommitment: 'Total Commitment',
     revelation: 'Participation in the Nantes Hackathon 2023 was the spark. We realized the digital world needed more than code — it needed soul, premium execution, and a product mindset that actually solves problems. We were proud to represent KLIK in France.',
+    revelationTitle: 'Our Revelation',
     ceoMessage: 'Message from CEO',
     peopleBehind: 'The people behind',
     expertsDesc: 'A collective of experts dedicated to your success.',
@@ -56,7 +58,7 @@ const texts = {
     ourStory: 'قصتنا',
     about: 'حول',
     heroDesc: 'رؤية، طموح، تأثير. نقدم رقمية متميزة — دون التنازل عن التنفيذ.',
-    meetTeam: 'تعرف على الفريق',
+    meetTeam: 'اكتشف الفريق',
     teamTitle: 'الفريق الذي يُحدث ثورة في الرقمية',
     teamDesc: 'فريق متماسك يصمم ويبني ويُنجز. عقلية المنتج أولاً — الوضوح والجودة، في كل مرة.',
     valuesDesc: 'ما يحركنا — وما نقدمه في كل مشروع.',
@@ -65,6 +67,7 @@ const texts = {
     localExpertise: 'خبرة محلية',
     totalCommitment: 'التزام كامل',
     revelation: 'كانت المشاركة في هاكاثون نانت 2023 الشرارة. أدركنا أن العالم الرقمي يحتاج أكثر من مجرد كود — يحتاج روحًا، تنفيذًا متميزًا، وعقلية منتج تحل المشاكل فعلاً. كنا فخورين بتمثيل KLIK في فرنسا.',
+    revelationTitle: 'إلهامنا',
     ceoMessage: 'رسالة من المديرة التنفيذية',
     peopleBehind: 'الأشخاص وراء',
     expertsDesc: 'مجموعة من الخبراء مكرسين لنجاحك.',
@@ -115,13 +118,11 @@ export default function About() {
               <span className="text-gradient-anim">KLIK</span>
             </h1>
             <p className="text-lg md:text-2xl text-theme-secondary mt-4 max-w-xl leading-relaxed mx-auto">
-              {language === 'en'
-                ? 'Vision, ambition, impact. We ship premium digital — and we never compromise on execution.'
-                : "Vision, ambition, impact. On livre du digital premium — sans jamais lâcher sur l'exécution."}
+              {t.heroDesc}
             </p>
             <div className="mt-10 flex justify-center">
               <a href="#team" className="inline-flex items-center px-8 py-4 klik-btn klik-btn-primary text-lg">
-                {language === 'en' ? 'Meet the team' : 'Découvrir l’équipe'}
+                {t.meetTeam}
                 <ArrowRight className="ml-2" size={22} />
               </a>
             </div>
@@ -134,9 +135,7 @@ export default function About() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-black text-theme mb-3 pb-4 border-b-2 border-violet-500/30 inline-block">
-            {language === 'en'
-              ? 'The team revolutionizing digital'
-              : 'L’Équipe qui révolutionne le digital'}
+            {t.teamTitle}
           </h2>
           <p className="text-theme-secondary mt-4 max-w-3xl mx-auto">
             {t.teamDesc}
@@ -153,9 +152,7 @@ export default function About() {
                 </div>
                 <div className="text-2xl font-black text-theme mb-4 uppercase tracking-tight">{v.title}</div>
                 <div className="text-lg text-theme-secondary leading-relaxed">
-                  {language === 'en'
-                    ? 'What drives us — and what we deliver on every project.'
-                    : 'Ce qui nous anime — et ce qu’on livre sur chaque projet.'}
+                  {t.valuesDesc}
                 </div>
               </div>
             ))}
@@ -176,13 +173,9 @@ export default function About() {
                   <Trophy size={16} />
                   <span>2023 Revelation</span>
                 </div>
-                <h2 className="text-4xl md:text-6xl font-black mb-6 leading-tight">
-                  Notre <span className="bg-gradient-to-r from-amber-200 via-amber-300 to-white bg-clip-text text-transparent drop-shadow-[0_0_24px_rgba(251,191,36,0.25)]">Révélation</span>
-                </h2>
+                <h2 className="text-4xl md:text-6xl font-black mb-6 leading-tight"><span className="bg-gradient-to-r from-amber-200 via-amber-300 to-white bg-clip-text text-transparent drop-shadow-[0_0_24px_rgba(251,191,36,0.25)]">{(t as Record<string, string>).revelationTitle}</span></h2>
                 <p className="text-lg md:text-2xl text-theme-secondary leading-relaxed font-medium">
-                  {language === 'en'
-                    ? 'Participation in the Nantes Hackathon 2023 was the spark. We realized the digital world needed more than code — it needed soul, premium execution, and a product mindset that actually solves problems.'
-                    : 'La participation au Hackaton de Nantes 2023 a été l’étincelle. Nous avons réalisé que le monde digital avait besoin de plus que du code — il avait besoin d’âme, d’une exécution premium et d’une mentalité produit qui résout réellement les problèmes.'}
+                  {t.revelation}
                 </p>
               </div>
 
@@ -214,8 +207,7 @@ export default function About() {
                 <span>{t.ceoMessage}</span>
               </div>
               <h2 className="text-3xl md:text-5xl font-black mb-6 pb-4 border-b-2 border-violet-500/30 inline-block leading-tight">
-                Mot de la <br />
-                <span className="text-gradient-anim">CEO</span>
+                {t.ceoMessage}
               </h2>
               <div className="relative space-y-5">
                 <span className="absolute -top-8 -left-8 text-7xl text-violet-500/10 font-serif">“</span>
@@ -239,7 +231,7 @@ export default function About() {
               {t.peopleBehind} <span className="text-gradient-anim">KLIK</span>
             </h2>
             <p className="text-theme-secondary text-xl max-w-2xl mx-auto">
-              {language === 'en' ? 'A collective of experts dedicated to your success.' : 'Un collectif d’experts dédiés à votre succès.'}
+              {t.expertsDesc}
             </p>
           </div>
           

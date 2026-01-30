@@ -16,8 +16,15 @@ type FormState = {
   diplomas: string;
 };
 
+const texts = {
+  fr: { joinUs: 'Nous Rejoindre', careers: 'Carrières', heroDesc: "Construisez quelque chose qui compte. On recrute — et l'équipe veille au fit.", apply: 'Postuler', formDesc: 'Remplis le formulaire, puis envoie ton CV et ta photo sur WhatsApp — on te recontacte vite.', fullName: 'Nom complet', phone: 'Téléphone', city: 'Ville', sector: 'Secteur', select: 'Sélectionner', otherSpecify: 'Autre (précisez)', yourSector: 'Votre secteur...', subSector: 'Sous-secteur', experiences: 'Expériences', experiencesPlaceholder: 'Parlez-nous de votre parcours...', diplomas: 'Diplômes', diplomasPlaceholder: 'Diplômes et certifications...', applyWhatsApp: 'Postuler via WhatsApp', applyEmail: 'Postuler par email', questions: 'Questions ? WhatsApp ou email', msgIntro: 'Bonjour, je souhaite postuler dans votre société. ', msgBody: "Je m'appelle {name}, vous pouvez me joindre au {phone}. J'habite à {city}. Je suis intéressé(e) par le secteur {sector}{sub}. Mon parcours : {exp} Mes diplômes et certifications : {dip} Je vous enverrai mon CV et ma photo via WhatsApp. Merci." },
+  en: { joinUs: 'Join Us', careers: 'Careers', heroDesc: 'Build something that matters. We hire — and our team vets for fit.', apply: 'Apply Now', formDesc: "Fill the form, then send your CV + photo on WhatsApp — we'll get back to you fast.", fullName: 'Full name', phone: 'Phone', city: 'City', sector: 'Sector', select: 'Select', otherSpecify: 'Other (specify)', yourSector: 'Your sector...', subSector: 'Sub-sector', experiences: 'Experiences', experiencesPlaceholder: 'Tell us about your background...', diplomas: 'Diplomas', diplomasPlaceholder: 'Degrees and certifications...', applyWhatsApp: 'Apply via WhatsApp', applyEmail: 'Apply by email', questions: 'Questions? WhatsApp or email', msgIntro: 'Hello, I would like to apply to your company. ', msgBody: `My name is {name}, you can reach me at {phone}. I am based in {city}. I am interested in the {sector} sector{sub}. My background: {exp} My diplomas and certifications: {dip} I will send my CV and photo via WhatsApp. Thank you.` },
+  ar: { joinUs: 'انضم إلينا', careers: 'الوظائف', heroDesc: 'ابنِ شيئاً له معنى. نحن نوظف — والفريق يتحقق من الملاءمة.', apply: 'تقدم الآن', formDesc: 'املأ النموذج، ثم أرسل سيرتك الذاتية وصورتك على واتساب — سنتواصل معك بسرعة.', fullName: 'الاسم الكامل', phone: 'الهاتف', city: 'المدينة', sector: 'القطاع', select: 'اختر', otherSpecify: 'آخر (حدد)', yourSector: 'قطاعك...', subSector: 'القسم الفرعي', experiences: 'الخبرات', experiencesPlaceholder: 'حدثنا عن مسارك...', diplomas: 'الشهادات', diplomasPlaceholder: 'الشهادات والاعتمادات...', applyWhatsApp: 'تقدم عبر واتساب', applyEmail: 'تقدم بالبريد', questions: 'أسئلة؟ واتساب أو بريد', msgIntro: 'مرحباً، أود التقديم في شركتكم. ', msgBody: 'اسمي {name}، يمكنكم التواصل معي على {phone}. أقيم في {city}. مهتم بقطاع {sector}{sub}. خلفيتي: {exp} شهاداتي: {dip} سأرسل سيرتي وصورتي عبر واتساب. شكراً.' },
+};
+
 export default function Careers() {
   const { language } = useOutletContext<OutletCtx>();
+  const t = texts[language] ?? texts.fr;
   const [form, setForm] = useState<FormState>({
     name: '',
     phone: '',
@@ -47,14 +54,15 @@ export default function Careers() {
     e.preventDefault();
     const sectorLabel = isOther ? (form.otherSector || 'Autre') : form.sector;
     const subPart = shouldShowSub ? ` (${form.subSector})` : '';
-    const msg =
-      (language === 'en'
-        ? 'Hello, I would like to apply to your company. '
-        : 'Bonjour, je souhaite postuler dans votre société. ') +
-      (language === 'en'
-        ? `My name is ${form.name}, you can reach me at ${form.phone}. I am based in ${form.city}. I am interested in the ${sectorLabel} sector${subPart}. My background: ${form.experiences} My diplomas and certifications: ${form.diplomas} I will send my CV and photo via WhatsApp. Thank you.`
-        : `Je m'appelle ${form.name}, vous pouvez me joindre au ${form.phone}. J'habite à ${form.city}. Je suis intéressé(e) par le secteur ${sectorLabel}${subPart}. Mon parcours : ${form.experiences} Mes diplômes et certifications : ${form.diplomas} Je vous enverrai mon CV et ma photo via WhatsApp. Merci.`);
-
+    const body = (t as Record<string, string>).msgBody
+      ?.replace('{name}', form.name)
+      ?.replace('{phone}', form.phone)
+      ?.replace('{city}', form.city)
+      ?.replace('{sector}', sectorLabel)
+      ?.replace('{sub}', subPart)
+      ?.replace('{exp}', form.experiences)
+      ?.replace('{dip}', form.diplomas) ?? '';
+    const msg = ((t as Record<string, string>).msgIntro ?? '') + body;
     const url = `https://wa.me/25377141498?text=${encodeURIComponent(msg)}`;
     window.open(url, '_blank', 'noopener,noreferrer');
   };
@@ -70,14 +78,14 @@ export default function Careers() {
           <div className="max-w-3xl mx-auto rounded-2xl border border-white/10 bg-white/[0.11] p-8 md:p-12 text-center fade-in-up stagger-1">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-sm font-bold mb-6 mx-auto">
               <Users size={16} />
-              <span>{language === 'en' ? 'Join Us' : 'Nous Rejoindre'}</span>
+              <span>{t.joinUs}</span>
             </div>
             <h1 className="text-4xl md:text-7xl font-extrabold tracking-tight mb-6">
-              {language === 'en' ? 'Careers' : 'Carrières'} <br />
+              {t.careers} <br />
               <span className="text-gradient-anim">@ KLIK</span>
             </h1>
             <p className="text-lg md:text-2xl text-theme-secondary mt-4 max-w-xl leading-relaxed mx-auto">
-              {language === 'en' ? 'Build something that matters. We hire — and our team vets for fit.' : "Construisez quelque chose qui compte. On recrute — et l'équipe veille au fit."}
+              {t.heroDesc}
             </p>
           </div>
         </div>
@@ -93,18 +101,16 @@ export default function Careers() {
               Application Portal
             </div>
             <h2 className="text-4xl md:text-6xl font-black text-theme mb-6 tracking-tighter">
-              {language === 'en' ? 'Apply Now' : 'Postuler'}
+              {t.apply}
             </h2>
             <p className="text-xl text-theme-secondary mb-12 font-medium max-w-2xl leading-relaxed">
-              {language === 'en'
-                ? "Fill the form, then send your CV + photo on WhatsApp — we'll get back to you fast."
-                : 'Remplis le formulaire, puis envoie ton CV et ta photo sur WhatsApp — on te recontacte vite.'}
+              {t.formDesc}
             </p>
 
             <form onSubmit={submitToWhatsApp} className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-3">
                 <label className="block text-theme text-sm font-black uppercase tracking-widest mb-2">
-                  {language === 'en' ? 'Full name' : 'Nom complet'}
+                  {t.fullName}
                 </label>
                 <input
                   required
@@ -118,7 +124,7 @@ export default function Careers() {
 
               <div className="space-y-3">
                 <label className="block text-theme text-sm font-black uppercase tracking-widest mb-2">
-                  {language === 'en' ? 'Phone' : 'Téléphone'}
+                  {t.phone}
                 </label>
                 <input
                   required
@@ -132,7 +138,7 @@ export default function Careers() {
 
               <div className="space-y-3">
                 <label className="block text-theme text-sm font-black uppercase tracking-widest mb-2">
-                  {language === 'en' ? 'City' : 'Ville'}
+                  {t.city}
                 </label>
                 <input
                   required
@@ -146,7 +152,7 @@ export default function Careers() {
 
               <div className="space-y-3">
                 <label className="block text-theme text-sm font-black uppercase tracking-widest mb-2">
-                  {language === 'en' ? 'Sector' : 'Secteur'}
+                  {t.sector}
                 </label>
                 <select
                   required
@@ -156,7 +162,7 @@ export default function Careers() {
                   }
                   className="w-full px-5 py-3 rounded-xl bg-gray-900/80 border border-white/20 text-white text-base font-medium focus:outline-none focus:ring-2 focus:ring-violet-500/50"
                 >
-                  <option value="">{language === 'en' ? 'Select Sector' : 'Sélectionner'}</option>
+                  <option value="">{t.select}</option>
                   {sectors.map((s) => (
                     <option key={s.value} value={s.value}>
                       {s.label}
@@ -168,11 +174,11 @@ export default function Careers() {
               {isOther && (
                 <div className="md:col-span-2 space-y-3">
                   <label className="block text-theme text-sm font-black uppercase tracking-widest mb-2">
-                    {language === 'en' ? 'Other (specify)' : 'Autre (précisez)'}
+                    {t.otherSpecify}
                   </label>
                   <input
                     type="text"
-                    placeholder={language === 'en' ? 'Your sector...' : 'Votre secteur...'}
+                    placeholder={t.yourSector}
                     value={form.otherSector}
                     onChange={(e) => setForm((p) => ({ ...p, otherSector: e.target.value }))}
                     className="w-full px-5 py-3 rounded-xl bg-gray-900/80 border border-white/20 text-white text-base font-medium focus:outline-none focus:ring-2 focus:ring-violet-500/50"
@@ -182,7 +188,7 @@ export default function Careers() {
 
               <div className={`space-y-3 ${shouldShowSub ? '' : 'opacity-30 pointer-events-none'}`}>
                 <label className="block text-theme text-sm font-black uppercase tracking-widest mb-2">
-                  {language === 'en' ? 'Sub-sector' : 'Sous-secteur'}
+                  {t.subSector}
                 </label>
                 <select
                   value={form.subSector}
@@ -190,7 +196,7 @@ export default function Careers() {
                   disabled={!shouldShowSub}
                   className="w-full px-5 py-3 rounded-xl bg-gray-900/80 border border-white/20 text-white text-base font-medium focus:outline-none focus:ring-2 focus:ring-violet-500/50 disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                  <option value="">{language === 'en' ? 'Select Sub-sector' : 'Sélectionner'}</option>
+                  <option value="">{t.select}</option>
                   {selectedSector?.subs?.map((s) => (
                     <option key={s} value={s}>
                       {s}
@@ -201,12 +207,12 @@ export default function Careers() {
 
               <div className="md:col-span-2 space-y-3">
                 <label className="block text-theme text-sm font-black uppercase tracking-widest mb-2">
-                  {language === 'en' ? 'Experiences' : 'Expériences'}
+                  {t.experiences}
                 </label>
                 <textarea
                   required
                   rows={4}
-                  placeholder={language === 'en' ? 'Tell us about your background...' : 'Parlez-nous de votre parcours...'}
+                  placeholder={t.experiencesPlaceholder}
                   value={form.experiences}
                   onChange={(e) => setForm((p) => ({ ...p, experiences: e.target.value }))}
                   className="w-full px-5 py-3 klik-input text-base font-medium resize-none"
@@ -215,12 +221,12 @@ export default function Careers() {
 
               <div className="md:col-span-2 space-y-3">
                 <label className="block text-theme text-sm font-black uppercase tracking-widest mb-2">
-                  {language === 'en' ? 'Diplomas' : 'Diplômes'}
+                  {t.diplomas}
                 </label>
                 <textarea
                   required
                   rows={3}
-                  placeholder={language === 'en' ? 'Degrees and certifications...' : 'Diplômes et certifications...'}
+                  placeholder={t.diplomasPlaceholder}
                   value={form.diplomas}
                   onChange={(e) => setForm((p) => ({ ...p, diplomas: e.target.value }))}
                   className="w-full px-5 py-3 klik-input text-base font-medium resize-none"
@@ -230,14 +236,14 @@ export default function Careers() {
               <div className="md:col-span-2 flex flex-col sm:flex-row gap-6 mt-6">
                 <button type="submit" className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-[#25D366] text-white text-base font-black uppercase tracking-widest border-0">
                   <MessageCircle className="w-6 h-6" />
-                  {language === 'en' ? 'Postuler via WhatsApp' : 'Postuler via WhatsApp'}
+                  {t.applyWhatsApp}
                 </button>
                 <a
                   href="mailto:contact@klik.dj?subject=Postuler%20KLIK"
                   className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-white/10 border border-white/20 text-theme text-base font-black uppercase tracking-widest"
                 >
                   <Mail className="w-6 h-6" />
-                  {language === 'en' ? 'Postuler par email' : 'Postuler par email'}
+                  {t.applyEmail}
                 </a>
                 <a
                   href="https://wa.me/25377141498"
@@ -245,7 +251,7 @@ export default function Careers() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-white/10 border border-white/20 text-theme text-base font-black uppercase tracking-widest"
                 >
-                  {language === 'en' ? 'Questions? WhatsApp or email' : 'Questions ? WhatsApp ou email'}
+                  {t.questions}
                 </a>
               </div>
             </form>

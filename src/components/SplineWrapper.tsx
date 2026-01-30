@@ -28,7 +28,7 @@ export default function SplineWrapper({ scene, className }: Props) {
       progressRef.current = null;
     }
     setLoadPercent(100);
-    setTimeout(() => setLoaded(true), 400);
+    setLoaded(true);
   }, []);
 
   // Masquer le texte "build with spline" (logo Spline)

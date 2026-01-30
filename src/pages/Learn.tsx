@@ -5,9 +5,15 @@ import type { Language } from '../types/klik';
 
 type OutletCtx = { language: Language };
 
+const texts = {
+  fr: { hub: 'Centre de Connaissances', learn: 'Learn', expertise: 'Expertise', heroDesc: 'Études de marché actionnables et formations premium — boostez votre stratégie.', marketStudies: 'Études de marché', marketDesc: 'Packs par secteur à acheter tout de suite — prix clairs, valeur immédiate.', comingSoon: 'Coming soon' },
+  en: { hub: 'Knowledge Hub', learn: 'Learn', expertise: 'Expertise', heroDesc: 'Actionable market insights and premium training — level up your strategy.', marketStudies: 'Market studies', marketDesc: 'Sector-specific packs you can buy now — clear pricing, immediate value.', comingSoon: 'Coming soon' },
+  ar: { hub: 'مركز المعرفة', learn: 'تعلم', expertise: 'الخبرة', heroDesc: 'دراسات السوق القابلة للتطبيق وتدريبات متميزة — تعزز استراتيجيتك.', marketStudies: 'دراسات السوق', marketDesc: 'حزم حسب القطاع للشراء فورًا — أسعار واضحة، قيمة فورية.', comingSoon: 'قريباً' },
+};
+
 export default function Learn() {
   const { language } = useOutletContext<OutletCtx>();
-
+  const t = texts[language] ?? texts.fr;
   const studies = useMemo(() => [0, 1, 2, 3], []);
 
   const videos = useMemo(() => Array.from({ length: 4 }).map((_, i) => ({ id: i + 1 })), []);
@@ -23,16 +29,14 @@ export default function Learn() {
           <div className="max-w-3xl mx-auto rounded-2xl border border-white/10 bg-white/[0.11] p-8 md:p-12 text-center fade-in-up stagger-1">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-sm font-bold mb-6 mx-auto">
               <BookOpen size={16} />
-              <span>{language === 'en' ? 'Knowledge Hub' : 'Centre de Connaissances'}</span>
+              <span>{t.hub}</span>
             </div>
             <h1 className="text-4xl md:text-7xl font-extrabold tracking-tight mb-6">
-              {language === 'en' ? 'Learn' : 'Learn'} <br />
-              <span className="text-gradient-anim">Expertise</span>
+              {t.learn} <br />
+              <span className="text-gradient-anim">{t.expertise}</span>
             </h1>
             <p className="text-lg md:text-2xl text-theme-secondary mt-4 max-w-xl leading-relaxed mx-auto">
-              {language === 'en'
-                ? 'Actionable market insights and premium training — level up your strategy.'
-                : 'Études de marché actionnables et formations premium — boostez votre stratégie.'}
+              {t.heroDesc}
             </p>
           </div>
         </div>
@@ -43,12 +47,10 @@ export default function Learn() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-5xl font-black text-theme mb-3 pb-4 border-b-2 border-violet-500/30 inline-block">
-              {language === 'en' ? 'Market studies' : 'Études de marché'}
+              {t.marketStudies}
             </h2>
             <p className="text-theme-secondary mt-4 max-w-2xl mx-auto text-lg">
-            {language === 'en'
-              ? 'Sector-specific packs you can buy now — clear pricing, immediate value.'
-              : 'Packs par secteur à acheter tout de suite — prix clairs, valeur immédiate.'}
+            {t.marketDesc}
           </p>
           </div>
 
@@ -61,7 +63,7 @@ export default function Learn() {
                 <div className="p-6 flex flex-col">
                   <div className="rounded-2xl overflow-hidden border border-white/10 bg-black/25 flex-1 flex items-center justify-center min-h-[200px] aspect-[9/16]">
                     <span className="text-theme-secondary font-bold uppercase tracking-widest text-sm md:text-base">
-                      Coming soon
+                      {t.comingSoon}
                     </span>
                   </div>
                 </div>

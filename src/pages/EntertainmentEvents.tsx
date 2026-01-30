@@ -5,8 +5,15 @@ import type { Language } from '../types/klik';
 
 type OutletCtx = { language: Language };
 
+const texts = {
+  fr: { badge: 'Expériences Exclusives', title: 'Divertissement', title2: '& Events', heroDesc: 'Expériences immersives et événements exclusifs — conçus pour captiver et marquer les esprits.', divertissement: 'Divertissement', divDesc: 'Visuels percutants et moments inoubliables — on donne vie à vos événements.', comingSoon: 'Coming soon', events: 'Events', eventsDesc: 'Événements et avant-premières exclusives — la suite arrive très bientôt.', eventTeaser: 'Event teaser', exclusif: 'Exclusif', nextMoment: 'Prochain moment fort', reserveDate: 'Réservez la date' },
+  en: { badge: 'Exclusive Experiences', title: 'Entertainment', title2: '& Events', heroDesc: 'Immersive experiences and exclusive events — designed to captivate and leave a lasting impression.', divertissement: 'Entertainment', divDesc: 'Stunning visuals and unforgettable moments — we bring your events to life.', comingSoon: 'Coming soon', events: 'Events', eventsDesc: 'Exclusive events and premieres — stay tuned for what\'s next.', eventTeaser: 'Event teaser', exclusif: 'Exclusive', nextMoment: 'Next big moment', reserveDate: 'Save the date' },
+  ar: { badge: 'تجارب حصرية', title: 'الترفيه', title2: 'والفعاليات', heroDesc: 'تجارب غامرة وفعاليات حصرية — مصممة للإبهار وترك انطباع دائم.', divertissement: 'الترفيه', divDesc: 'مرئيات مؤثرة ولحظات لا تُنسى — نحيي فعالياتكم.', comingSoon: 'قريباً', events: 'الفعاليات', eventsDesc: 'فعاليات وعروض أولى حصرية — المزيد قريباً جداً.', eventTeaser: 'معاينة الحدث', exclusif: 'حصري', nextMoment: 'اللحظة القادمة', reserveDate: 'احجز التاريخ' },
+};
+
 export default function EntertainmentEvents() {
   const { language } = useOutletContext<OutletCtx>();
+  const t = texts[language] ?? texts.fr;
 
   const entertainmentCards = useMemo(
     () => [
@@ -38,16 +45,14 @@ export default function EntertainmentEvents() {
           <div className="max-w-3xl mx-auto rounded-2xl border border-white/10 bg-white/[0.11] p-8 md:p-12 text-center fade-in-up stagger-1">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-sm font-bold mb-6 mx-auto">
               <Sparkles size={16} />
-              <span>{language === 'en' ? 'Exclusive Experiences' : 'Expériences Exclusives'}</span>
+              <span>{t.badge}</span>
             </div>
             <h1 className="text-4xl md:text-7xl font-extrabold tracking-tight mb-6">
-              {language === 'en' ? 'Entertainment' : 'Divertissement'} <br />
-              <span className="text-gradient-anim">& Events</span>
+              {t.title} <br />
+              <span className="text-gradient-anim">{t.title2}</span>
             </h1>
             <p className="text-lg md:text-2xl text-theme-secondary mt-4 max-w-xl leading-relaxed mx-auto">
-              {language === 'en'
-                ? 'Immersive experiences and exclusive events — designed to captivate and leave a lasting impression.'
-                : 'Expériences immersives et événements exclusifs — conçus pour captiver et marquer les esprits.'}
+              {t.heroDesc}
             </p>
           </div>
         </div>
@@ -59,13 +64,11 @@ export default function EntertainmentEvents() {
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-5xl font-black text-theme mb-3 pb-4 border-b-2 border-violet-500/30 inline-block">
               <span className="text-gradient-anim">
-                {language === 'en' ? 'Entertainment' : 'Divertissement'}
+                {t.divertissement}
               </span>
             </h2>
             <p className="text-theme-secondary text-lg mt-4 max-w-2xl mx-auto">
-              {language === 'en'
-                ? 'Stunning visuals and unforgettable moments — we bring your events to life.'
-                : 'Visuels percutants et moments inoubliables — on donne vie à vos événements.'}
+              {t.divDesc}
             </p>
           </div>
 
@@ -94,7 +97,7 @@ export default function EntertainmentEvents() {
                   {/* Coming soon */}
                   <div className="absolute bottom-3 left-3 right-3">
                     <div className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-black/60 border border-white/20 text-white font-bold uppercase tracking-widest text-xs">
-                      {language === 'en' ? 'Coming soon' : 'Coming soon'}
+                      {t.comingSoon}
                     </div>
                   </div>
                 </div>
@@ -109,12 +112,10 @@ export default function EntertainmentEvents() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-5xl font-black text-theme mb-3 pb-4 border-b-2 border-violet-500/30 inline-block">
-              Events
+              {t.events}
             </h2>
             <p className="text-theme-secondary mt-4 max-w-2xl mx-auto text-lg">
-              {language === 'en'
-                ? 'Exclusive events and premieres — stay tuned for what\'s next.'
-                : 'Événements et avant-premières exclusives — la suite arrive très bientôt.'}
+              {t.eventsDesc}
             </p>
           </div>
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -136,13 +137,13 @@ export default function EntertainmentEvents() {
 
                   <div>
                     <div className="text-sm font-black text-violet-400 uppercase tracking-[0.2em] mb-4">
-                      {language === 'en' ? 'Exclusive' : 'Exclusif'}
+                      {t.exclusif}
                     </div>
                     <h3 className="text-3xl font-black text-white leading-tight uppercase tracking-tighter mb-6">
-                      {language === 'en' ? 'Next Big Moment' : 'Prochain moment fort'}
+                      {t.nextMoment}
                     </h3>
                     <div className="inline-flex px-6 py-2 rounded-full bg-white/10 border border-white/20 text-white/80 text-sm font-bold backdrop-blur-md">
-                      {language === 'en' ? 'Save the date' : 'Réservez la date'}
+                      {t.reserveDate}
                     </div>
                   </div>
                 </div>
