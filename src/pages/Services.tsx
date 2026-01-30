@@ -85,7 +85,7 @@ const texts = {
     article: 'Article',
     printDesc: 'Impression premium — demandez un devis.',
     chooseArticle: 'Choisissez un article. Demandez le prix. WhatsApp.',
-    printItemsDesc: 'Des articles d'impression premium, réponse rapide.',
+    printItemsDesc: "Des articles d'impression premium, réponse rapide.",
     quickView: 'Aperçu',
     quote: 'Devis',
     askPriceWhatsApp: 'Demandez le tarif premium via WhatsApp.',
