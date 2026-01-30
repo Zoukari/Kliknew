@@ -8,6 +8,55 @@ export type ClientTranslation = {
   visitSite: string | null;
 };
 
+export type HomeTranslations = {
+  valueInnovation: string;
+  valuePrecision: string;
+  valuePerformance: string;
+  valueSpeed: string;
+  valueImpact: string;
+  btnAbout: string;
+  btnOurServices: string;
+  mapTitle: string;
+  mapTitleHighlight: string;
+  mapDesc: string;
+  clientsHeader: string;
+  clientsHighlight: string;
+  servicesBadge: string;
+  servicesTitle1: string;
+  servicesTitle2: string;
+  servicesAll: string;
+  webApps: string;
+  webAppsDesc: string;
+  marketing: string;
+  marketingDesc: string;
+  automation: string;
+  automationDesc: string;
+  aboutBadge: string;
+  aboutTitle: string;
+  aboutTitle2?: string;
+  aboutDesc: string;
+  aboutCta: string;
+  learnBadge: string;
+  learnTitle: string;
+  learnSubtitle: string;
+  learnDesc: string;
+  marketStudies: string;
+  videoTraining: string;
+  resources: string;
+  explore: string;
+  exploreResources: string;
+  entertainmentBadge: string;
+  entertainmentTitle: string;
+  entertainmentTitle2?: string;
+  entertainmentDesc: string;
+  entertainmentCta: string;
+  careersBadge: string;
+  careersTitle: string;
+  careersTitle2?: string;
+  careersDesc: string;
+  careersCta: string;
+};
+
 export type KlikTranslations = {
   nav: {
     home: string;
@@ -40,10 +89,13 @@ export type KlikTranslations = {
     voyageVoyage: ClientTranslation;
     byLouli: ClientTranslation;
     marketStudyCena: ClientTranslation;
+    continentalTransit?: ClientTranslation;
+    confidential?: ClientTranslation;
   };
   footer: {
     madeBy: string;
     rights: string;
   };
+  home: HomeTranslations;
 };
 

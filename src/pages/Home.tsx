@@ -47,16 +47,11 @@ type ClientItem = {
 export default function Home() {
   const { t, language } = useOutletContext<OutletCtx>();
   const [selectedClient, setSelectedClient] = useState<string | null>(null);
-  const [splineInView, setSplineInView] = useState(false);
+  const [splineInView] = useState(true);
   const [mapInView, setMapInView] = useState(false);
   const splineRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    const splineOb = new IntersectionObserver(([e]) => { if (e.isIntersecting) setSplineInView(true); }, { rootMargin: '100px', threshold: 0.1 });
-    splineRef.current && splineOb.observe(splineRef.current);
-    return () => splineOb.disconnect();
-  }, []);
   useEffect(() => {
     const mapOb = new IntersectionObserver(([e]) => { if (e.isIntersecting) setMapInView(true); }, { rootMargin: '80px', threshold: 0.1 });
     mapRef.current && mapOb.observe(mapRef.current);
@@ -130,26 +125,20 @@ export default function Home() {
       },
       {
         id: 'continentalTransit',
-        name: 'Continental Transit',
-        description:
-          language === 'en'
-            ? 'Continental Transit is a premium logistics partner specializing in international freight and transportation solutions. We collaborated on their digital transformation, creating a modern platform that streamlines operations and enhances customer experience across borders.'
-            : 'Continental Transit est un partenaire logistique premium spécialisé dans le fret international et les solutions de transport. Nous avons collaboré à leur transformation digitale, créant une plateforme moderne qui optimise les opérations et améliore l\'expérience client à travers les frontières.',
-        website: 'https://continental-transit.com',
-        visitSite: language === 'en' ? 'Visit site' : 'Visiter le site',
+        name: t.clients.continentalTransit?.name ?? 'Continental Transit',
+        description: t.clients.continentalTransit?.description ?? '',
+        website: t.clients.continentalTransit?.website ?? 'https://continental-transit.com',
+        visitSite: t.clients.continentalTransit?.visitSite ?? null,
         image: 'continental.png',
         color: 'from-slate-500 to-gray-600',
         icon: Truck,
       },
       {
         id: 'confidential',
-        name: language === 'en' ? 'Confidential Client' : 'Client Confidentiel',
-        description:
-          language === 'en'
-            ? 'We cannot show the logo due to confidentiality, but this partnership is a source of pride for our agency.'
-            : 'Nous ne pouvons pas montrer le logo par souci de confidentialité, mais ce partenariat est une fierté pour notre agence.',
-        website: null,
-        visitSite: null,
+        name: t.clients.confidential?.name ?? 'Client Confidentiel',
+        description: t.clients.confidential?.description ?? '',
+        website: t.clients.confidential?.website ?? null,
+        visitSite: t.clients.confidential?.visitSite ?? null,
         image: 'mofalogo.png',
         imageClassName: 'blur-[20px] grayscale brightness-100 opacity-90',
         color: 'from-zinc-500 to-zinc-700',
@@ -202,7 +191,7 @@ export default function Home() {
               <div className="absolute bottom-0 left-0 right-0 pb-[12%] flex items-end justify-center z-20 pointer-events-none">
                 <h2 className="text-xl md:text-3xl font-bold text-white drop-shadow-2xl text-center px-4">
                   KLIK <br />
-                  <span className="text-violet-400">{language === 'en' ? 'Your digital partner' : 'Votre partenaire digital'}</span>
+                  <span className="text-gradient-anim">{t.hero.subtitle}</span>
                 </h2>
               </div>
             </div>
@@ -211,30 +200,28 @@ export default function Home() {
             <div className="w-full max-w-4xl mx-auto mt-8 md:mt-12 px-4">
               <div className="flex flex-col items-center gap-6 md:gap-8">
                 <p className="text-lg md:text-2xl text-center font-bold leading-relaxed text-theme-secondary">
-                  {language === 'en' 
-                    ? 'We transform your ideas into digital success with creativity and expertise.'
-                    : 'Nous transformons vos idées en succès digitaux avec créativité et expertise.'}
+                  {t.hero.description}
                 </p>
                 <div className="flex flex-wrap justify-center gap-4 md:gap-6">
                   <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-violet-400">
                     <Lightbulb className="w-5 h-5" />
-                    <span className="text-sm font-medium">{language === 'en' ? 'Innovation' : 'Innovation'}</span>
+                    <span className="text-sm font-medium">{t.home.valueInnovation}</span>
                   </div>
                   <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-violet-400">
                     <Target className="w-5 h-5" />
-                    <span className="text-sm font-medium">{language === 'en' ? 'Precision' : 'Précision'}</span>
+                    <span className="text-sm font-medium">{t.home.valuePrecision}</span>
                   </div>
                   <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-violet-400">
                     <Rocket className="w-5 h-5" />
-                    <span className="text-sm font-medium">{language === 'en' ? 'Performance' : 'Performance'}</span>
+                    <span className="text-sm font-medium">{t.home.valuePerformance}</span>
                   </div>
                   <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-violet-400">
                     <Zap className="w-5 h-5" />
-                    <span className="text-sm font-medium">{language === 'en' ? 'Speed' : 'Rapidité'}</span>
+                    <span className="text-sm font-medium">{t.home.valueSpeed}</span>
                   </div>
                   <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-violet-400">
                     <Sparkles className="w-5 h-5" />
-                    <span className="text-sm font-medium">{language === 'en' ? 'Impact' : 'Impact'}</span>
+                    <span className="text-sm font-medium">{t.home.valueImpact}</span>
                   </div>
                 </div>
                 
@@ -244,7 +231,7 @@ export default function Home() {
                     to="/about"
                     className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-violet-600 to-purple-600 text-white text-lg font-bold rounded-2xl hover:opacity-90 transition-opacity"
                   >
-                    {language === 'en' ? 'About' : 'À propos'}
+                    {t.home.btnAbout}
                     <ArrowRight className="w-5 h-5" />
                   </NavLink>
                   
@@ -252,7 +239,7 @@ export default function Home() {
                     to="/services"
                     className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 text-white text-lg font-bold rounded-2xl border border-violet-500/30 hover:bg-white/15 transition-colors"
                   >
-                    {language === 'en' ? 'Our Services' : 'Nos Services'}
+                    {t.home.btnOurServices}
                     <ArrowRight className="w-5 h-5" />
                   </NavLink>
                 </div>
@@ -269,13 +256,11 @@ export default function Home() {
         <div className="container mx-auto px-4 md:px-6 lg:px-10 max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-5xl font-black text-theme mb-4 pb-4 border-b-2 border-violet-500/30 inline-block">
-              {language === 'en' ? 'Present here and' : 'Présents ici et'} <br />
-              <span className="text-gradient-anim">{language === 'en' ? 'beyond' : 'ailleurs'}</span>
+              {t.home.mapTitle} <br />
+              <span className="text-gradient-anim">{t.home.mapTitleHighlight}</span>
             </h2>
             <p className="text-theme-secondary text-base md:text-lg max-w-2xl mx-auto">
-              {language === 'en'
-                ? 'We work at a global scale, delivering premium experiences across continents.'
-                : "Nous travaillons à l'échelle mondiale, livrant des expériences premium à travers les continents."}
+              {t.home.mapDesc}
             </p>
           </div>
           <div className="relative rounded-3xl overflow-hidden klik-card p-6 md:p-8 border border-white/10 min-h-[200px]">
@@ -293,8 +278,8 @@ export default function Home() {
         <div className="container mx-auto px-4 md:px-6 lg:px-10 max-w-full">
           <div className="text-center mb-16 fade-in-up">
             <h2 className="text-3xl md:text-5xl font-black text-theme mb-5 pb-4 border-b-2 border-violet-500/30 inline-block">
-              {language === 'en' ? 'Some of our' : 'Une partie de nos'} <br />
-              <span className="text-gradient-anim">{language === 'en' ? 'Clients' : 'Clients'}</span>
+              {t.home.clientsHeader} <br />
+              <span className="text-gradient-anim">{t.home.clientsHighlight}</span>
             </h2>
           </div>
 
@@ -315,9 +300,7 @@ export default function Home() {
                     alt={client.name}
                     loading="lazy"
                     decoding="async"
-                    className={`absolute inset-0 w-full h-full object-cover transition-transform duration-300 ${
-                      selectedClient === client.id ? 'scale-105' : 'scale-110'
-                    } ${client.imageClassName || ''}`}
+                    className={`absolute inset-0 w-full h-full object-cover ${client.imageClassName || ''}`}
                   />
                   
                   {/* Overlay default */}

@@ -27,6 +27,7 @@ const texts = {
     ctoTagline: 'Tech & design. Architecture produit, livraison technique.',
     cmoTagline: 'Marketing, croissance, marque. Impact et visibilité.',
     prTagline: 'Partenariats, presse et image publique.',
+    founderMessage: "Je suis la CEO de Klik, et je viens avec une mentalité simple : on avance, on teste, on optimise, on gagne. Je suis entrepreneur avant tout, passionné par l'innovation tech et par ce qu'elle permet de créer quand on l'utilise intelligemment : plus de vitesse, plus de précision, plus d'impact.\n\nPour moi, un bon marketing ne doit pas \"faire joli\" — il doit faire grandir. Un site web n'est pas une vitrine : c'est une machine de conversion. Et chaque action digitale doit servir un objectif clair : attirer, convaincre, transformer.\n\nChez Klik, on construit des stratégies solides, on produit du contenu qui marque, et on déploie des outils modernes pour passer au niveau supérieur. On ne suit pas les tendances : on les exploite.",
   },
   en: {
     ourStory: 'Our Story',
@@ -49,6 +50,7 @@ const texts = {
     ctoTagline: 'Tech & design. Product architecture, technical delivery.',
     cmoTagline: 'Marketing, growth, brand. Impact and visibility.',
     prTagline: 'Partnerships, press, and public image.',
+    founderMessage: "I'm the CEO of Klik, and I come with a simple mindset: we move forward, we test, we optimize, we win. I'm an entrepreneur first, passionate about tech innovation and what it unlocks when used intelligently: more speed, more precision, more impact.\n\nFor me, good marketing shouldn't \"look nice\" — it should make you grow. A website isn't a showcase: it's a conversion machine. And every digital action must serve a clear objective: attract, convince, convert.\n\nAt Klik, we build solid strategies, we produce content that sticks, and we deploy modern tools to level up. We don't follow trends: we exploit them.",
   },
   ar: {
     ourStory: 'قصتنا',
@@ -71,6 +73,7 @@ const texts = {
     ctoTagline: 'التقنية والتصميم. هندسة المنتج، التسليم التقني.',
     cmoTagline: 'التسويق، النمو، العلامة التجارية. التأثير والرؤية.',
     prTagline: 'الشراكات، الصحافة، والصورة العامة.',
+    founderMessage: "أنا المديرة التنفيذية لـ Klik، وأتيت بعقلية بسيطة: نتقدم، نختبر، نحسن، نفوز. أنا رائدة أعمال أولاً، شغوفة بالابتكار التقني وما يفتحه عند استخدامه بذكاء: سرعة أكثر، دقة أكثر، تأثير أكثر.\n\nبالنسبة لي، التسويق الجيد لا يجب أن \"يبدو جميلاً\" — يجب أن يُنميك. الموقع ليس واجهة عرض: إنه آلة تحويل. وكل إجراء رقمي يجب أن يخدم هدفاً واضحاً: جذب، إقناع، تحويل.\n\nفي Klik، نبني استراتيجيات قوية، ننتج محتوى يُعلق، وننشر أدوات حديثة للتقدم. لا نتبع الاتجاهات: نستغلها.",
   },
 };
 
@@ -78,10 +81,7 @@ export default function About() {
   const { language } = useOutletContext<OutletCtx>();
   const t = texts[language];
 
-  const founderMessage =
-    language === 'en'
-      ? "I'm the CEO of Klik, and I come with a simple mindset: we move forward, we test, we optimize, we win. I'm an entrepreneur first, passionate about tech innovation and what it unlocks when used intelligently: more speed, more precision, more impact.\n\nFor me, good marketing shouldn’t “look nice” — it should make you grow. A website isn’t a showcase: it’s a conversion machine. And every digital action must serve a clear objective: attract, convince, convert.\n\nAt Klik, we build solid strategies, we produce content that sticks, and we deploy modern tools to level up. We don’t follow trends: we exploit them."
-      : "Je suis la CEO de Klik, et je viens avec une mentalité simple : on avance, on teste, on optimise, on gagne. Je suis entrepreneur avant tout, passionné par l’innovation tech et par ce qu’elle permet de créer quand on l’utilise intelligemment : plus de vitesse, plus de précision, plus d’impact.\n\nPour moi, un bon marketing ne doit pas “faire joli” — il doit faire grandir. Un site web n’est pas une vitrine : c’est une machine de conversion. Et chaque action digitale doit servir un objectif clair : attirer, convaincre, transformer.\n\nChez Klik, on construit des stratégies solides, on produit du contenu qui marque, et on déploie des outils modernes pour passer au niveau supérieur. On ne suit pas les tendances : on les exploite.";
+  const founderMessage = (t as Record<string, string>).founderMessage;
 
   const values = [
     { title: t.passionateTeam, icon: Users },
@@ -139,9 +139,7 @@ export default function About() {
               : 'L’Équipe qui révolutionne le digital'}
           </h2>
           <p className="text-theme-secondary mt-4 max-w-3xl mx-auto">
-            {language === 'en'
-              ? 'A tight-knit team that designs, builds and ships. Product mindset first — clarity and quality, every time.'
-              : "Une équipe soudée qui conçoit, construit et livre. Mentalité produit d'abord — clarté et qualité, à chaque fois."}
+            {t.teamDesc}
           </p>
           </div>
           <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -213,7 +211,7 @@ export default function About() {
             <div className="fade-in-up stagger-2 order-2 lg:order-2 flex-1 min-w-0">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-bold mb-6">
                 <Users size={16} />
-                <span>{language === 'en' ? 'Message from CEO' : 'Message de la CEO'}</span>
+                <span>{t.ceoMessage}</span>
               </div>
               <h2 className="text-3xl md:text-5xl font-black mb-6 pb-4 border-b-2 border-violet-500/30 inline-block leading-tight">
                 Mot de la <br />
@@ -238,7 +236,7 @@ export default function About() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-20 fade-in-up">
             <h2 className="text-4xl md:text-6xl font-black mb-6 pb-4 border-b-2 border-violet-500/30 inline-block">
-              The people behind <span className="text-gradient-anim">KLIK</span>
+              {t.peopleBehind} <span className="text-gradient-anim">KLIK</span>
             </h2>
             <p className="text-theme-secondary text-xl max-w-2xl mx-auto">
               {language === 'en' ? 'A collective of experts dedicated to your success.' : 'Un collectif d’experts dédiés à votre succès.'}

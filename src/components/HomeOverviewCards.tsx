@@ -1,27 +1,25 @@
 import React, { useEffect, useRef } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useOutletContext } from 'react-router-dom';
 import {
   ArrowRight,
   BookOpen,
   Briefcase,
-  Globe,
   Sparkles,
   Users,
-  Rocket,
   Code,
   TrendingUp,
   Zap,
   Play,
-  FileText,
   GraduationCap,
-  Target,
   Heart,
 } from 'lucide-react';
-import type { Language } from '../types/klik';
+import type { KlikTranslations, Language } from '../types/klik';
 
 type Props = { language: Language };
+type OutletCtx = { t: KlikTranslations; language: Language };
 
 export default function HomeOverviewCards({ language }: Props) {
+  const { t } = useOutletContext<OutletCtx>();
   const sectionsRef = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
@@ -64,23 +62,26 @@ export default function HomeOverviewCards({ language }: Props) {
                   <div>
                     <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/15 border border-violet-400/20 text-violet-400 text-xs font-bold mb-3 md:mb-4">
                       <Rocket size={14} />
-                      <span>01. SERVICES</span>
+                      <span>{t.home.servicesBadge}</span>
                     </div>
                     <h2 className="text-2xl md:text-3xl lg:text-5xl font-black text-white">
-                      {language === 'en' ? 'What we' : 'Ce qu\'on'}{' '}
-                      <span className="text-violet-400">{language === 'en' ? 'build' : 'construit'}</span>
+                      {t.home.servicesTitle2 ? (
+                        <>{t.home.servicesTitle1} <span className="text-gradient-anim">{t.home.servicesTitle2}</span></>
+                      ) : (
+                        <span className="text-gradient-anim">{t.home.servicesTitle1}</span>
+                      )}
                     </h2>
                   </div>
                   <div className="flex items-center gap-2 text-violet-400 font-bold text-sm md:text-base group-hover:gap-4 transition-all">
-                    {language === 'en' ? 'All services' : 'Tous les services'}
+                    {t.home.servicesAll}
                     <ArrowRight className="group-hover:translate-x-2 transition-transform" size={16} />
                   </div>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
                   {[
-                    { icon: Code, title: language === 'en' ? 'Web & Apps' : 'Web & Apps', desc: language === 'en' ? 'Sites that convert & apps that scale' : 'Sites qui convertissent & apps qui scalent' },
-                    { icon: TrendingUp, title: 'Marketing', desc: language === 'en' ? 'Strategy, ads & growth' : 'Stratégie, pubs & croissance' },
-                    { icon: Zap, title: language === 'en' ? 'Automation' : 'Automatisation', desc: language === 'en' ? 'Scale smarter, deliver faster' : 'Scaler mieux, livrer plus vite' },
+                    { icon: Code, title: t.home.webApps, desc: t.home.webAppsDesc },
+                    { icon: TrendingUp, title: t.home.marketing, desc: t.home.marketingDesc },
+                    { icon: Zap, title: t.home.automation, desc: t.home.automationDesc },
                   ].map((item, i) => (
                     <div
                       key={i}
@@ -99,7 +100,7 @@ export default function HomeOverviewCards({ language }: Props) {
               <img
                 src="services.png"
                 alt="Services"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-none"
+                className="w-full h-full object-cover rounded-none"
                 loading="lazy"
                 decoding="async"
               />
@@ -124,19 +125,17 @@ export default function HomeOverviewCards({ language }: Props) {
             <div className="flex-[3] p-6 md:p-8 lg:p-12 flex flex-col justify-center min-w-0">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-white/70 text-xs font-bold w-fit mb-3 md:mb-4">
                 <Users size={14} />
-                <span>02. ABOUT</span>
+                <span>{t.home.aboutBadge}</span>
               </div>
               <h2 className="text-2xl md:text-3xl lg:text-5xl font-black text-white mb-3 md:mb-4">
-                {language === 'en' ? 'The' : 'L\'équipe'}{' '}
-                <span className="text-gradient-anim">{language === 'en' ? 'KLIK Team' : 'KLIK'}</span>
+                {t.home.aboutTitle}{' '}
+                <span className="text-gradient-anim">{t.home.aboutTitle2 ?? 'KLIK'}</span>
               </h2>
               <p className="text-base md:text-lg text-white/60 mb-4 md:mb-6 leading-relaxed">
-                {language === 'en'
-                  ? 'Vision, ambition, impact. We design, build and ship — product mindset, premium execution.'
-                  : 'Vision, ambition, impact. On conçoit, construit et livre — mentalité produit, exécution premium.'}
+                {t.home.aboutDesc}
               </p>
               <div className="flex items-center text-white font-bold text-sm md:text-base group-hover:gap-4 transition-all">
-                {language === 'en' ? 'Discover our story' : 'Découvrir notre histoire'}
+                {t.home.aboutCta}
                 <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform" size={16} />
               </div>
             </div>
@@ -145,7 +144,7 @@ export default function HomeOverviewCards({ language }: Props) {
               <img
                 src="about.png"
                 alt="KLIK Team"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-none"
+                className="w-full h-full object-cover rounded-none"
                 loading="lazy"
               />
               <div className="absolute inset-0 w-1/2 bg-gradient-to-r from-white/45 via-white/20 to-transparent pointer-events-none" />
@@ -172,36 +171,34 @@ export default function HomeOverviewCards({ language }: Props) {
                 <div className="text-center mb-6 md:mb-10">
                   <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-blue-500/15 border border-blue-400/25 text-blue-400 text-xs md:text-sm font-bold mb-3 md:mb-4">
                     <GraduationCap size={14} />
-                    <span>03. LEARN</span>
+                    <span>{t.home.learnBadge}</span>
                   </div>
                   <h2 className="text-2xl md:text-3xl lg:text-5xl font-black text-white mb-3 md:mb-4">
-                    {language === 'en' ? 'Knowledge' : 'Ressources'}{' '}
-                    <span className="text-blue-400">Hub</span>
+                    {t.home.learnTitle}{' '}
+                    <span className="text-gradient-anim">{t.home.learnSubtitle}</span>
                   </h2>
                   <p className="text-sm md:text-base lg:text-lg text-white/60 max-w-2xl mx-auto px-2">
-                    {language === 'en'
-                      ? 'Market studies, training & tools — grow faster with actionable know-how.'
-                      : 'Études de marché, formations et outils — progressez plus vite avec du concret.'}
+                    {t.home.learnDesc}
                   </p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 lg:gap-5">
                   {[
-                    { icon: FileText, title: language === 'en' ? 'Market Studies' : 'Études de marché', color: 'blue' },
-                    { icon: Play, title: language === 'en' ? 'Video Training' : 'Vidéos formation', color: 'indigo' },
-                    { icon: BookOpen, title: language === 'en' ? 'Resources' : 'Ressources', color: 'violet' },
+                    { icon: BookOpen, title: t.home.marketStudies, color: 'blue' },
+                    { icon: Play, title: t.home.videoTraining, color: 'indigo' },
+                    { icon: BookOpen, title: t.home.resources, color: 'violet' },
                   ].map((item, i) => (
                     <div key={i} className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors group/card text-center">
                       <div className={`w-14 h-14 mx-auto rounded-xl bg-${item.color}-500/20 border border-${item.color}-400/20 flex items-center justify-center mb-4 group-hover/card:scale-110 transition-transform`}>
                         <item.icon className={`w-7 h-7 text-${item.color}-400`} />
                       </div>
                       <h3 className="text-lg font-bold text-white mb-1">{item.title}</h3>
-                      <p className="text-white/40 text-sm">{language === 'en' ? 'Explore' : 'Explorer'}</p>
+                      <p className="text-white/40 text-sm">{t.home.explore}</p>
                     </div>
                   ))}
                 </div>
                 <div className="text-center mt-6 md:mt-10">
                   <span className="inline-flex items-center gap-2 text-blue-400 font-bold text-sm md:text-base group-hover:gap-4 transition-all">
-                    {language === 'en' ? 'Explore resources' : 'Explorer les ressources'}
+                    {t.home.exploreResources}
                     <ArrowRight className="group-hover:translate-x-2 transition-transform" size={16} />
                   </span>
                 </div>
@@ -212,7 +209,7 @@ export default function HomeOverviewCards({ language }: Props) {
               <img
                 src="learn.png"
                 alt="Learn"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-none"
+                className="w-full h-full object-cover rounded-none"
                 loading="lazy"
                 decoding="async"
               />
@@ -239,22 +236,20 @@ export default function HomeOverviewCards({ language }: Props) {
               <div className="relative z-10 p-6 md:p-8 lg:p-16 h-full flex flex-col justify-end">
               <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-pink-500/20 border border-pink-400/30 text-pink-400 text-xs md:text-sm font-bold w-fit mb-3 md:mb-4">
                 <Sparkles size={14} />
-                <span>04. EXPERIENCES</span>
+                <span>{t.home.entertainmentBadge}</span>
               </div>
               <h2 className="text-2xl md:text-3xl lg:text-6xl font-black text-white mb-3 md:mb-4">
-                {language === 'en' ? 'Entertainment' : 'Divertissement'}
+                {t.home.entertainmentTitle}
                 <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
-                  & Events
+                <span className="text-gradient-anim">
+                  {t.home.entertainmentTitle2 ?? '& Events'}
                 </span>
               </h2>
               <p className="text-sm md:text-base lg:text-lg text-white/60 mb-4 md:mb-6 max-w-xl">
-                {language === 'en'
-                  ? 'Immersive experiences and exclusive events — we make moments unforgettable.'
-                  : 'Expériences immersives et événements exclusifs — on rend chaque moment inoubliable.'}
+                {t.home.entertainmentDesc}
               </p>
               <div className="flex items-center text-pink-400 font-bold text-sm md:text-base group-hover:gap-4 transition-all">
-                {language === 'en' ? 'Discover' : 'Découvrir'}
+                {t.home.entertainmentCta}
                 <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform" size={16} />
               </div>
               </div>
@@ -264,7 +259,7 @@ export default function HomeOverviewCards({ language }: Props) {
               <img
                 src="entertainemtn.png"
                 alt="Entertainment"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-none"
+                className="w-full h-full object-cover rounded-none"
                 loading="lazy"
                 decoding="async"
               />
@@ -316,7 +311,7 @@ export default function HomeOverviewCards({ language }: Props) {
               <img
                 src="blog.png"
                 alt="Blog"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-none"
+                className="w-full h-full object-cover rounded-none"
                 loading="lazy"
                 decoding="async"
               />
@@ -351,19 +346,20 @@ export default function HomeOverviewCards({ language }: Props) {
                 <div className="flex-1 text-center md:text-left">
                   <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/10 border border-violet-400/20 text-violet-400 text-xs font-bold mb-3 md:mb-4">
                     <Briefcase size={14} />
-                    <span>06. CAREERS</span>
+                    <span>{t.home.careersBadge}</span>
                   </div>
                   <h2 className="text-2xl md:text-3xl lg:text-5xl font-black text-white mb-2 md:mb-3">
-                    {language === 'en' ? 'Join the' : 'Rejoins l\''}{' '}
-                    <span className="text-violet-400">{language === 'en' ? 'adventure' : 'aventure'}</span>
+                    {t.home.careersTitle2 ? (
+                      <>{t.home.careersTitle} <span className="text-gradient-anim">{t.home.careersTitle2}</span></>
+                    ) : (
+                      <span className="text-gradient-anim">{t.home.careersTitle}</span>
+                    )}
                   </h2>
                   <p className="text-sm md:text-base lg:text-lg text-white/60 mb-4 md:mb-6 max-w-xl">
-                    {language === 'en'
-                      ? 'Join a team that ships. Fast, direct, human — build something that matters.'
-                      : 'Rejoins une équipe qui livre. Rapide, direct, humain — construis quelque chose qui compte.'}
+                    {t.home.careersDesc}
                   </p>
                   <div className="inline-flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 rounded-xl bg-violet-500/20 border border-violet-400/30 text-violet-300 font-bold text-sm md:text-base group-hover:bg-violet-500/30 transition-colors">
-                    {language === 'en' ? 'See opportunities' : 'Voir les opportunités'}
+                    {t.home.careersCta}
                     <ArrowRight className="group-hover:translate-x-2 transition-transform" size={16} />
                   </div>
                 </div>
@@ -375,7 +371,7 @@ export default function HomeOverviewCards({ language }: Props) {
               <img
                 src="carrieres.png"
                 alt="Careers"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-none"
+                className="w-full h-full object-cover rounded-none"
                 loading="lazy"
                 decoding="async"
               />
