@@ -49,6 +49,10 @@
     {
       "source": "/robots.txt",
       "destination": "/public/robots.txt"
+    },
+    {
+      "source": "/((?!assets|.*\\.).*)",
+      "destination": "/index.html"
     }
   ]
 }
