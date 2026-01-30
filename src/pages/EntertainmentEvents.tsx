@@ -1,10 +1,9 @@
 import React, { useMemo } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { Lock, Sparkles } from 'lucide-react';
+import type { Language } from '../types/klik';
 
-type OutletCtx = {
-  language: 'fr' | 'en' | 'ar' | 'is';
-};
+type OutletCtx = { language: Language };
 
 export default function EntertainmentEvents() {
   const { language } = useOutletContext<OutletCtx>();
@@ -12,9 +11,9 @@ export default function EntertainmentEvents() {
   const entertainmentCards = useMemo(
     () => [
       { title: 'dekrypt #1' },
-      { title: 'sa pique #1' },
+      { title: 'ça pique #1' },
       { title: 'dekrypt #2' },
-      { title: 'sa pique #2' },
+      { title: 'ça pique #2' },
     ],
     []
   );

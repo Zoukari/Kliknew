@@ -3,10 +3,9 @@ import { NavLink, useOutletContext } from 'react-router-dom';
 import { ArrowRight, BookOpen, Calendar } from 'lucide-react';
 import { stripHtml } from '../lib/html';
 import { getPosts, type WpPost } from '../lib/wordpress';
+import type { Language } from '../types/klik';
 
-type OutletCtx = {
-  language: 'fr' | 'en' | 'ar' | 'is';
-};
+type OutletCtx = { language: Language };
 
 export default function BlogIndex() {
   const { language } = useOutletContext<OutletCtx>();

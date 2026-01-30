@@ -17,10 +17,9 @@ import {
   Target,
   Heart,
 } from 'lucide-react';
+import type { Language } from '../types/klik';
 
-type Props = {
-  language: 'fr' | 'en' | 'ar' | 'is';
-};
+type Props = { language: Language };
 
 export default function HomeOverviewCards({ language }: Props) {
   const sectionsRef = useRef<(HTMLElement | null)[]>([]);
@@ -144,7 +143,7 @@ export default function HomeOverviewCards({ language }: Props) {
             {/* Image right 25% - white fade on left edge */}
             <div className="w-full md:w-1/4 h-[200px] md:h-auto min-w-[100px] flex-shrink-0 self-stretch overflow-hidden relative rounded-b-[2rem] md:rounded-l-none md:rounded-r-[2rem]">
               <img
-                src="about us.png"
+                src="about.png"
                 alt="KLIK Team"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-none"
                 loading="lazy"
@@ -263,7 +262,7 @@ export default function HomeOverviewCards({ language }: Props) {
             {/* Image right 25% - white fade on left edge */}
             <div className="w-full md:w-1/4 h-[200px] md:h-auto min-w-[100px] flex-shrink-0 self-stretch overflow-hidden relative rounded-b-[2rem] md:rounded-l-none md:rounded-r-[2rem]">
               <img
-                src="entertainement.png"
+                src="entertainemtn.png"
                 alt="Entertainment"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-none"
                 loading="lazy"
@@ -374,7 +373,7 @@ export default function HomeOverviewCards({ language }: Props) {
             {/* Image right 25% - white fade on left edge */}
             <div className="w-full md:w-1/4 h-[200px] md:h-auto min-w-[100px] flex-shrink-0 self-stretch overflow-hidden relative rounded-b-[2rem] md:rounded-l-none md:rounded-r-[2rem]">
               <img
-                src="careers.png"
+                src="carrieres.png"
                 alt="Careers"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-none"
                 loading="lazy"

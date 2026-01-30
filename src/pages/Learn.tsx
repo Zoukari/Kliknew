@@ -1,10 +1,9 @@
 import React, { useMemo } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { BookOpen } from 'lucide-react';
+import type { Language } from '../types/klik';
 
-type OutletCtx = {
-  language: 'fr' | 'en' | 'ar' | 'is';
-};
+type OutletCtx = { language: Language };
 
 export default function Learn() {
   const { language } = useOutletContext<OutletCtx>();

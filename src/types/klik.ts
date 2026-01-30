@@ -1,4 +1,4 @@
-export type Language = 'fr' | 'en' | 'ar' | 'is';
+export type Language = 'fr' | 'en' | 'ar';
 export type Theme = 'dark' | 'light';
 
 export type ClientTranslation = {

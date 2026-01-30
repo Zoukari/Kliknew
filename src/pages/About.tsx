@@ -1,10 +1,9 @@
 import React from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { ArrowRight, Shield, Sparkles, Target, Trophy, Users } from 'lucide-react';
+import type { Language } from '../types/klik';
 
-type OutletCtx = {
-  language: 'fr' | 'en' | 'ar' | 'is';
-};
+type OutletCtx = { language: Language };
 
 export default function About() {
   const { language } = useOutletContext<OutletCtx>();

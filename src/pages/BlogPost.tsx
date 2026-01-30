@@ -4,10 +4,9 @@ import { NavLink, useOutletContext, useParams } from 'react-router-dom';
 import { ArrowLeft, Calendar } from 'lucide-react';
 import { stripHtml } from '../lib/html';
 import { getPostBySlug, type WpPost } from '../lib/wordpress';
+import type { Language } from '../types/klik';
 
-type OutletCtx = {
-  language: 'fr' | 'en' | 'ar' | 'is';
-};
+type OutletCtx = { language: Language };
 
 export default function BlogPost() {
   const { language } = useOutletContext<OutletCtx>();

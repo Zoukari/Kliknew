@@ -1,10 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { Mail, MessageCircle, Users } from 'lucide-react';
+import type { Language } from '../types/klik';
 
-type OutletCtx = {
-  language: 'fr' | 'en' | 'ar' | 'is';
-};
+type OutletCtx = { language: Language };
 
 type FormState = {
   name: string;
@@ -46,18 +45,17 @@ export default function Careers() {
 
   const submitToWhatsApp = (e: React.FormEvent) => {
     e.preventDefault();
+    const sectorLabel = isOther ? (form.otherSector || 'Autre') : form.sector;
+    const subPart = shouldShowSub ? ` (${form.subSector})` : '';
     const msg =
-      `On recrute. Nos collaborateurs aussi. Rejoignez l’aventure KLIK.\n\n` +
-      `Nom: ${form.name}\n` +
-      `Téléphone: ${form.phone}\n` +
-      `Secteur: ${isOther ? (form.otherSector || 'Autre') : form.sector}\n` +
-      (shouldShowSub ? `Sous-secteur: ${form.subSector}\n` : '') +
-      `Ville: ${form.city}\n` +
-      `Expériences: ${form.experiences}\n` +
-      `Diplômes: ${form.diplomas}\n\n` +
-      `Merci d’envoyer votre CV et photo via WhatsApp après l’envoi du formulaire.`;
+      (language === 'en'
+        ? 'Hello, I would like to apply to your company. '
+        : 'Bonjour, je souhaite postuler dans votre société. ') +
+      (language === 'en'
+        ? `My name is ${form.name}, you can reach me at ${form.phone}. I am based in ${form.city}. I am interested in the ${sectorLabel} sector${subPart}. My background: ${form.experiences} My diplomas and certifications: ${form.diplomas} I will send my CV and photo via WhatsApp. Thank you.`
+        : `Je m'appelle ${form.name}, vous pouvez me joindre au ${form.phone}. J'habite à ${form.city}. Je suis intéressé(e) par le secteur ${sectorLabel}${subPart}. Mon parcours : ${form.experiences} Mes diplômes et certifications : ${form.diplomas} Je vous enverrai mon CV et ma photo via WhatsApp. Merci.`);
 
-    const url = `https://wa.me/33712345678?text=${encodeURIComponent(msg)}`;
+    const url = `https://wa.me/25377141498?text=${encodeURIComponent(msg)}`;
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
@@ -242,7 +240,7 @@ export default function Careers() {
                   {language === 'en' ? 'Postuler par email' : 'Postuler par email'}
                 </a>
                 <a
-                  href="https://wa.me/33712345678"
+                  href="https://wa.me/25377141498"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-white/10 border border-white/20 text-theme text-base font-black uppercase tracking-widest"

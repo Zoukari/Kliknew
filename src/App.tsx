@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect, useRef, useState } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
-import { Menu, MessageCircle, X } from 'lucide-react';
+import { Globe, Menu, MessageCircle, X } from 'lucide-react';
 import type { KlikTranslations, Language, Theme } from './types/klik';
 
 const translations: Record<Language, KlikTranslations> = {
@@ -190,52 +190,16 @@ const translations: Record<Language, KlikTranslations> = {
       rights: 'جميع الحقوق محفوظة.',
     },
   },
-  is: {
-    nav: {
-      home: 'Heim',
-      services: 'Þjónusta',
-      about: 'Um okkur',
-      learn: 'Læra',
-      entertainment: 'Unterhaltung & Viðburðir',
-      blog: 'Blogg',
-      careers: 'Ferill',
-      contact: 'Hafðu samband',
-    },
-    hero: {
-      title: 'KLIK',
-      subtitle: 'Stafræn samstarfsaðili þinn',
-      description: 'Við umbreytum hugmyndum þínum í stafrænan árangur með sköpun og sérfræðiþekkingu.',
-      cta: 'Kynntu þér þjónustu okkar',
-    },
-    contact: {
-      specialOffer: {
-        title: 'Hafðu samband',
-        description: 'Við skulum ræða verkefnið þitt og byggja eitthvað stórt saman.',
-        button: 'Hafðu samband',
-      },
-    },
-    clients: {
-      title: 'Viðskiptavinir okkar',
-      shakpot: { name: 'SHAKPOT', description: '...', website: 'https://shakpot.com', visitSite: 'Heimsækja vefsíðu' },
-      vagabox: { name: 'VAGABOX', description: '...', website: 'https://vagabox.fr', visitSite: 'Heimsækja vefsíðu' },
-      deeqsan: { name: 'DEEQSAN', description: '...', website: 'https://deeqsan.com', visitSite: 'Heimsækja vefsíðu' },
-      voyageVoyage: { name: 'VOYAGE VOYAGE', description: '...', website: 'https://voyagevoyagedj.com', visitSite: 'Heimsækja vefsíðu' },
-      byLouli: { name: 'BY LOULI', description: '...', website: null, visitSite: null },
-      marketStudyCena: { name: 'MARKET STUDY CENA', description: '...', website: 'https://www.marketstudycena.com/', visitSite: 'Heimsækja vefsíðu' },
-    },
-    footer: {
-      madeBy: 'Vefsíða búin til af',
-      rights: 'Öll réttindi áskilin.',
-    },
-  },
 };
 
 export default function App() {
   const location = useLocation();
   const progressRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
+  const langMenuRef = useRef<HTMLDivElement>(null);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [langMenuOpen, setLangMenuOpen] = useState(false);
   const [footerFloating, setFooterFloating] = useState(true);
   const [language, setLanguage] = useState<Language>(() => {
     const saved = localStorage.getItem('language');
@@ -290,6 +254,18 @@ export default function App() {
     const t = setTimeout(() => setFooterFloating(false), 10000);
     return () => clearTimeout(t);
   }, []);
+
+  useEffect(() => {
+    const closeLangMenu = (e: MouseEvent) => {
+      if (langMenuRef.current && !langMenuRef.current.contains(e.target as Node)) {
+        setLangMenuOpen(false);
+      }
+    };
+    if (langMenuOpen) {
+      document.addEventListener('click', closeLangMenu);
+      return () => document.removeEventListener('click', closeLangMenu);
+    }
+  }, [langMenuOpen]);
 
   const toggleMenu = () => {
     setIsMenuOpen((v) => !v);
@@ -456,57 +432,47 @@ export default function App() {
       </footer>
 
       <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
-        {/* Language Selector */}
-        <div className="flex flex-col gap-2 p-2 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg">
+        {/* Language Selector - dropdown au clic */}
+        <div ref={langMenuRef} className="relative">
           <button
-            onClick={() => setLanguage('fr')}
-            className={`px-4 py-2 rounded-xl font-bold text-sm transition-all ${
-              language === 'fr'
-                ? 'bg-violet-500 text-white shadow-lg'
-                : 'text-white/70 hover:text-white hover:bg-white/10'
-            }`}
-            aria-label="Français"
+            type="button"
+            onClick={(e) => { e.stopPropagation(); setLangMenuOpen((v) => !v); }}
+            className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg text-white font-bold text-sm hover:bg-white/15 transition-all"
+            aria-label={language === 'fr' ? 'Langue : Français' : language === 'en' ? 'Language: English' : 'Langue'}
+            aria-expanded={langMenuOpen}
+            aria-haspopup="true"
           >
-            FR
+            <Globe className="w-5 h-5" />
+            <span>{language.toUpperCase()}</span>
           </button>
-          <button
-            onClick={() => setLanguage('en')}
-            className={`px-4 py-2 rounded-xl font-bold text-sm transition-all ${
-              language === 'en'
-                ? 'bg-violet-500 text-white shadow-lg'
-                : 'text-white/70 hover:text-white hover:bg-white/10'
-            }`}
-            aria-label="English"
-          >
-            EN
-          </button>
-          <button
-            onClick={() => setLanguage('ar')}
-            className={`px-4 py-2 rounded-xl font-bold text-sm transition-all ${
-              language === 'ar'
-                ? 'bg-violet-500 text-white shadow-lg'
-                : 'text-white/70 hover:text-white hover:bg-white/10'
-            }`}
-            aria-label="العربية"
-          >
-            AR
-          </button>
-          <button
-            onClick={() => setLanguage('is')}
-            className={`px-4 py-2 rounded-xl font-bold text-sm transition-all ${
-              language === 'is'
-                ? 'bg-violet-500 text-white shadow-lg'
-                : 'text-white/70 hover:text-white hover:bg-white/10'
-            }`}
-            aria-label="Íslenska"
-          >
-            IS
-          </button>
+          {langMenuOpen && (
+            <div className="absolute bottom-full right-0 mb-2 flex flex-col gap-1 p-2 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-xl min-w-[120px]">
+              {[
+                { code: 'fr' as const, label: 'Français' },
+                { code: 'en' as const, label: 'English' },
+                { code: 'ar' as const, label: 'العربية' },
+              ].map(({ code, label }) => (
+                <button
+                  key={code}
+                  type="button"
+                  onClick={() => { setLanguage(code); setLangMenuOpen(false); }}
+                  className={`px-4 py-2 rounded-xl font-bold text-sm text-left transition-all ${
+                    language === code
+                      ? 'bg-violet-500 text-white shadow-lg'
+                      : 'text-white/70 hover:text-white hover:bg-white/10'
+                  }`}
+                  aria-label={label}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
         
         {/* WhatsApp Button */}
         <a
-          href="https://wa.me/33712345678"
+          href="https://wa.me/25377141498"
           target="_blank"
           rel="noopener noreferrer"
           className="p-3 rounded-full bg-green-500 hover:bg-green-600 text-white shadow-lg transition-all hover:scale-110"

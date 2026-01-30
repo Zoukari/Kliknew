@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
-import { Mail, MessageCircle } from 'lucide-react';
+import { Clock, Mail, MapPin, MessageCircle } from 'lucide-react';
+import type { Language } from '../types/klik';
 
-type OutletCtx = {
-  language: 'fr' | 'en' | 'ar' | 'is';
-};
+type OutletCtx = { language: Language };
 
 const SUBJECTS = [
   { value: 'devis', fr: 'Devis / Quote', en: 'Quote' },
@@ -18,7 +17,7 @@ export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', subject: '', message: '' });
 
   const openWhatsApp = (prefill: string) => {
-    const url = `https://wa.me/33712345678?text=${encodeURIComponent(prefill)}`;
+    const url = `https://wa.me/25377141498?text=${encodeURIComponent(prefill)}`;
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
@@ -53,24 +52,57 @@ export default function Contact() {
         <div className="container mx-auto px-4 md:px-6 lg:px-10 max-w-6xl">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             {/* Infos à gauche */}
-            <div className="rounded-2xl klik-card p-8 md:p-10 border border-white/10 form-fixed">
-              <h2 className="text-2xl md:text-3xl font-bold text-theme mb-4">
-                {language === 'en' ? 'Contact' : 'Contact'}
-              </h2>
-              <p className="text-theme-secondary mb-6 leading-relaxed">
-                {language === 'en'
-                  ? 'Prefer a quick chat? Reach us directly — we reply fast.'
-                  : 'Plutôt discuter ? Joignez-nous directement — on répond vite.'}
-              </p>
-              <div className="space-y-4">
-                <a href="https://wa.me/33712345678" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-emerald-400">
-                  <MessageCircle className="w-5 h-5" />
-                  <span>WhatsApp +33 7 12 34 56 78</span>
-                </a>
-                <a href="mailto:contact@klik.dj" className="flex items-center gap-3 text-violet-400">
-                  <Mail className="w-5 h-5" />
-                  <span>{language === 'en' ? 'Email' : 'Email'}</span>
-                </a>
+            <div className="rounded-2xl klik-card p-8 md:p-10 border border-white/10 form-fixed overflow-hidden relative">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-violet-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+              <div className="relative">
+                <h2 className="text-2xl md:text-3xl font-bold text-theme mb-2">
+                  {language === 'en' ? 'Contact' : 'Contact'}
+                </h2>
+                <p className="text-theme-secondary mb-8 leading-relaxed">
+                  {language === 'en'
+                    ? 'Prefer a quick chat? Reach us directly — we reply fast.'
+                    : 'Plutôt discuter ? Joignez-nous directement — on répond vite.'}
+                </p>
+                <div className="space-y-6">
+                  <a href="https://wa.me/25377141498" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 hover:bg-emerald-500/15 transition-colors group">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center group-hover:scale-105 transition-transform">
+                      <MessageCircle className="w-6 h-6 text-emerald-400" />
+                    </div>
+                    <div>
+                      <p className="font-bold text-theme">WhatsApp</p>
+                      <p className="text-emerald-400 text-sm">+253 77 14 14 98</p>
+                      <p className="text-theme-secondary text-xs mt-1">{language === 'en' ? 'Fast reply' : 'Réponse rapide'}</p>
+                    </div>
+                  </a>
+                  <a href="mailto:contact@klik.dj" className="flex items-center gap-4 p-4 rounded-xl bg-violet-500/10 border border-violet-500/20 hover:bg-violet-500/15 transition-colors group">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-violet-500/20 flex items-center justify-center group-hover:scale-105 transition-transform">
+                      <Mail className="w-6 h-6 text-violet-400" />
+                    </div>
+                    <div>
+                      <p className="font-bold text-theme">{language === 'en' ? 'Email' : 'Email'}</p>
+                      <p className="text-violet-400 text-sm">contact@klik.dj</p>
+                      <p className="text-theme-secondary text-xs mt-1">{language === 'en' ? 'We reply within 24h' : 'Réponse sous 24h'}</p>
+                    </div>
+                  </a>
+                  <div className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/10">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
+                      <Clock className="w-6 h-6 text-theme-secondary" />
+                    </div>
+                    <div>
+                      <p className="font-bold text-theme">{language === 'en' ? 'Availability' : 'Disponibilité'}</p>
+                      <p className="text-theme-secondary text-sm">24/24</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/10">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
+                      <MapPin className="w-6 h-6 text-theme-secondary" />
+                    </div>
+                    <div>
+                      <p className="font-bold text-theme">{language === 'en' ? 'Base' : 'Implantation'}</p>
+                      <p className="text-theme-secondary text-sm">{language === 'en' ? 'Djibouti · Remote worldwide' : 'Djibouti · Télétravail international'}</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -89,13 +121,12 @@ export default function Contact() {
               className="grid grid-cols-1 gap-4"
               onSubmit={(e) => {
                 e.preventDefault();
+                const subjectLabel = SUBJECTS.find((s) => s.value === form.subject);
+                const sub = subjectLabel ? (language === 'en' ? subjectLabel.en : subjectLabel.fr) : form.subject;
                 const msg =
-                  `Bonjour KLIK !\n\n` +
-                  `Nom: ${form.name}\n` +
-                  `Email: ${form.email}\n` +
-                  `Téléphone: ${form.phone}\n` +
-                  `Sujet: ${form.subject}\n` +
-                  `Message: ${form.message}`;
+                  language === 'en'
+                    ? `Hello KLIK, my name is ${form.name}. My email is ${form.email} and my phone number is ${form.phone}. I am contacting you regarding: ${sub}. Here is my message: ${form.message}`
+                    : `Bonjour KLIK, je m'appelle ${form.name}. Mon email est ${form.email} et mon téléphone ${form.phone}. Je vous contacte au sujet de : ${sub}. Voici mon message : ${form.message}`;
                 openWhatsApp(msg);
               }}
             >
@@ -136,7 +167,8 @@ export default function Contact() {
                   required
                   value={form.subject}
                   onChange={(e) => setForm((p) => ({ ...p, subject: e.target.value }))}
-                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-theme focus:outline-none focus:ring-2 focus:ring-violet-500/50"
+                  className="w-full px-4 py-3 rounded-xl bg-gray-100 text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 [&>option]:bg-gray-100 [&>option]:text-gray-900"
+                  style={{ colorScheme: 'light' }}
                 >
                   <option value="">{language === 'en' ? 'Choose' : 'Choisir'}</option>
                   {SUBJECTS.map((s) => (

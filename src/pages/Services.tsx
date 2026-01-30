@@ -16,10 +16,9 @@ import {
   X,
   Zap,
 } from 'lucide-react';
+import type { Language } from '../types/klik';
 
-type OutletCtx = {
-  language: 'fr' | 'en' | 'ar' | 'is';
-};
+type OutletCtx = { language: Language };
 
 type ModalState =
   | { type: 'none' }
@@ -233,7 +232,7 @@ export default function Services() {
 
   const openWhatsAppPrice = (itemName: string) => {
     const message = `J’aimerais connaître le prix de : ${itemName}`;
-    const url = `https://wa.me/33712345678?text=${encodeURIComponent(message)}`;
+    const url = `https://wa.me/25377141498?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
