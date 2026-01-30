@@ -495,20 +495,20 @@ export default function App() {
     <>
       <div ref={progressRef} className="progress-bar" />
 
-      <header className="fixed top-0 left-0 w-full z-50 px-4 py-3">
-        <nav className="navbar-glass container mx-auto rounded-2xl px-4 py-2 flex items-center justify-between">
-          <NavLink to="/" className="flex items-center gap-3 group">
+      <header className="fixed top-0 left-0 right-0 w-full z-50 px-3 sm:px-4 py-2 sm:py-3">
+        <nav className="navbar-glass container mx-auto rounded-xl sm:rounded-2xl px-3 sm:px-5 py-2.5 flex items-center justify-between gap-2">
+          <NavLink to="/" className="flex items-center gap-2 sm:gap-3 group shrink-0" onClick={closeMenu}>
             <img
               src="logo.png"
               alt="KLIK - Logo"
-              className="h-10 md:h-12 w-auto transition-all duration-300 group-hover:scale-105"
+              className="h-9 sm:h-10 md:h-12 w-auto transition-transform duration-300 group-hover:scale-105 brightness-0 invert opacity-95"
               loading="eager"
               width="64"
               height="64"
             />
           </NavLink>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             {/* Desktop nav pill container */}
             <div className="hidden lg:flex navbar-pill-container">
               {[
@@ -535,51 +535,53 @@ export default function App() {
             {/* Mobile menu */}
             <div
               ref={menuRef}
-              className="nav-links nav-links-glass fixed lg:hidden right-0 top-0 h-screen w-full flex flex-col items-center justify-center transition-all duration-300 ease-in-out z-50"
+              className="nav-links nav-links-glass fixed lg:hidden inset-0 h-screen w-full flex flex-col items-center justify-center gap-2 px-4 py-20 transition-all duration-300 ease-out z-50"
             >
               <button
                 onClick={closeMenu}
-                className="absolute top-6 right-6 text-white hover:text-violet-400 transition-colors transform hover:rotate-90 duration-300"
+                className="absolute top-4 right-4 sm:top-6 sm:right-6 end-4 p-2.5 rounded-xl text-white/80 hover:text-white hover:bg-white/10 transition-all"
                 aria-label="Close menu"
               >
-                <X size={32} />
+                <X size={28} className="sm:w-8 sm:h-8" />
               </button>
 
-              {[
-                { to: '/', label: t.nav.home },
-                { to: '/about', label: t.nav.about },
-                { to: '/services', label: t.nav.services },
-                { to: '/learn', label: t.nav.learn },
-                { to: '/entertainment-events', label: t.nav.entertainment },
-                { to: '/careers', label: t.nav.careers },
-                { to: '/contact', label: t.nav.contact },
-              ].map((item) => (
-                <NavLink
-                  key={item.to}
-                  to={item.to}
-                  className="my-2 px-6 py-3 rounded-xl w-[80%] max-w-xs text-center text-lg font-semibold transition-all"
-                  onClick={closeMenu}
-                >
-                  {item.label}
-                </NavLink>
-              ))}
+              <nav className="flex flex-col items-center gap-1.5 w-full max-w-sm overflow-y-auto">
+                {[
+                  { to: '/', label: t.nav.home },
+                  { to: '/about', label: t.nav.about },
+                  { to: '/services', label: t.nav.services },
+                  { to: '/learn', label: t.nav.learn },
+                  { to: '/entertainment-events', label: t.nav.entertainment },
+                  { to: '/careers', label: t.nav.careers },
+                  { to: '/contact', label: t.nav.contact },
+                ].map((item) => (
+                  <NavLink
+                    key={item.to}
+                    to={item.to}
+                    className={({ isActive }) =>
+                      `nav-mobile-link min-h-[48px] flex items-center justify-center px-5 py-3.5 rounded-2xl w-full text-base sm:text-lg font-semibold transition-all ${isActive ? 'nav-mobile-link-active' : ''}`
+                    }
+                    onClick={closeMenu}
+                  >
+                    {item.label}
+                  </NavLink>
+                ))}
+              </nav>
             </div>
-
-            {/* Language toggle supprimé - sera en floating button */}
 
             {/* Mobile menu button */}
             <button
               onClick={toggleMenu}
-              className="lg:hidden z-50 text-white hover:text-violet-400 transition-colors p-2 hover:bg-white/10 rounded-xl"
+              className="lg:hidden relative z-[60] flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-xl text-white/90 hover:text-white hover:bg-white/10 active:scale-95 transition-all"
               aria-label={isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
             >
-              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+              {isMenuOpen ? <X size={24} className="sm:w-7 sm:h-7" /> : <Menu size={24} className="sm:w-7 sm:h-7" />}
             </button>
           </div>
         </nav>
       </header>
 
-      <main className="pt-[90px]">
+      <main className="pt-[72px] sm:pt-[82px] md:pt-[90px]">
         <Suspense fallback={<div className="min-h-[60vh] flex items-center justify-center" aria-hidden="true"><div className="w-10 h-10 border-2 border-violet-500/30 border-t-violet-400 rounded-full animate-spin" /></div>}>
           <Outlet context={{ t, language, theme }} />
         </Suspense>
@@ -641,22 +643,22 @@ export default function App() {
         </div>
       </footer>
 
-      <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 flex flex-col gap-2 sm:gap-3 z-50 pb-[env(safe-area-inset-bottom)] pr-[env(safe-area-inset-right)]">
         {/* Language Selector - dropdown au clic */}
         <div ref={langMenuRef} className="relative">
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); setLangMenuOpen((v) => !v); }}
-            className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg text-white font-bold text-sm hover:bg-white/15 transition-all"
+            className="flex items-center justify-center gap-2 min-h-[44px] min-w-[44px] px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl sm:rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg text-white font-bold text-xs sm:text-sm hover:bg-white/15 active:scale-95 transition-all"
             aria-label={language === 'fr' ? 'Langue : Français' : language === 'en' ? 'Language: English' : 'Langue'}
             aria-expanded={langMenuOpen}
             aria-haspopup="true"
           >
-            <Globe className="w-5 h-5" />
-            <span>{language.toUpperCase()}</span>
+            <Globe className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+            <span className="hidden sm:inline">{language.toUpperCase()}</span>
           </button>
           {langMenuOpen && (
-            <div className="absolute bottom-full right-0 mb-2 flex flex-col gap-1 p-2 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-xl min-w-[120px]">
+            <div className="absolute bottom-full right-0 mb-2 flex flex-col gap-1 p-2 rounded-xl sm:rounded-2xl bg-black/80 backdrop-blur-xl border border-white/20 shadow-xl min-w-[110px] sm:min-w-[120px]">
               {[
                 { code: 'fr' as const, label: 'Français' },
                 { code: 'en' as const, label: 'English' },
@@ -685,10 +687,10 @@ export default function App() {
           href="https://wa.me/25377141498"
           target="_blank"
           rel="noopener noreferrer"
-          className="p-3 rounded-full bg-green-500 hover:bg-green-600 text-white shadow-lg transition-all hover:scale-110"
+          className="flex items-center justify-center min-h-[44px] min-w-[44px] p-3 rounded-full bg-[#25D366] hover:bg-[#20BD5A] text-white shadow-lg transition-all hover:scale-105 active:scale-95"
           aria-label="Contact WhatsApp"
         >
-          <MessageCircle className="w-6 h-6" />
+          <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />
         </a>
       </div>
 
