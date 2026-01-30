@@ -39,8 +39,162 @@ type ModalState =
       index: number;
     };
 
+const texts = {
+  fr: {
+    ourExpertise: 'Notre Expertise',
+    services: 'Services',
+    heroDesc: 'Web, apps, marketing, automatisation — on construit ce qui scale et convertit.',
+    fourPillars: '4 piliers',
+    fourPillarsDesc: 'Explorez nos offres — chaque pilier révèle plus de détails.',
+    details: 'Détails',
+    web: 'Web',
+    webDesc: 'Sites web modernes & responsives',
+    webPoints: ['Performance, UX, SEO et sécurité intégrés', 'Applications web sur-mesure', 'Un site qui rassure. Un site qui convertit.'],
+    whatYouGet: 'Ce que vous obtenez',
+    webText: 'Nous concevons des sites web premium, rapides et responsives, pensés pour renforcer votre crédibilité et générer des demandes. Performance, UX, SEO et sécurité sont intégrés dès le départ.',
+    deliverables: 'Livrables',
+    webDeliverables: 'Site web premium, applications web sur-mesure, systèmes de réservation, portails clients, dashboards et solutions d\'automatisation.',
+    marketing: 'Marketing',
+    marketingDesc: 'Stratégie marketing · Publicités ciblées · Reporting',
+    marketingPoints: ['Stratégie personnalisée', 'Campagnes pilotées par la donnée', 'Plus de résultats mesurables.'],
+    marketingText: 'Nous construisons une stratégie marketing personnalisée basée sur vos objectifs, puis nous déployons des campagnes publicitaires ciblées.',
+    useCases: "Cas d'usage",
+    marketingUseCases: 'Publicités réseaux sociaux, Google Ads, marketing de contenu, campagnes email.',
+    socialMedia: 'Réseaux Sociaux',
+    socialMediaDesc: 'Gestion des réseaux sociaux · Contenu visuel · Croissance',
+    socialMediaPoints: ['Planification, création, publication', 'Contenu visuel aligné', 'Une communauté active.'],
+    socialMediaText: 'Nous assurons la gestion complète de vos réseaux sociaux : planification, création, publication et animation.',
+    process: 'Process',
+    socialMediaProcess: 'Calendrier éditorial, création visuelle, community management, analyse de performance.',
+    reputation: 'Réputation',
+    reputationDesc: 'Avis · Service client · Veille & gestion de crise',
+    reputationPoints: ['Gestion proactive des avis', 'Service client dédié', 'Marque protégée.'],
+    reputationText: 'Nous protégeons votre réputation avec une approche structurée : gestion proactive des avis, service client dédié.',
+    benefits: 'Bénéfices',
+    reputationBenefits: 'Réputation en ligne améliorée, confiance client renforcée, image de marque protégée.',
+    saasDesc: 'Un système complet pour gérer, vendre et propulser votre business.',
+    features: 'Fonctions',
+    saasTargets: ['Restaurateurs', 'Commerçants', 'Prêt-à-porter', 'Salons de beauté', 'Cliniques/cabinets', 'Dark kitchens'],
+    saasFeatures: ['Commandes & produits', 'Caisse / POS', 'Ventes & stats', 'Gestion équipe', 'Site client inclus'],
+    saasBenefits: ['Gain de temps', 'Organisation', 'Plus de ventes', 'Vision claire', 'Clé en main'],
+    bulkDesc: 'Atteignez des milliers de clients instantanément. Disponible pour les clients de plus de 1 an.',
+    yearPartnership: 'Clients de plus de 1 an',
+    deliveryRate: 'Taux de livraison',
+    responseTime: 'Temps de réponse',
+    availability: 'Disponibilité',
+    article: 'Article',
+    printDesc: 'Impression premium — demandez un devis.',
+    chooseArticle: 'Choisissez un article. Demandez le prix. WhatsApp.',
+    printItemsDesc: 'Des articles d'impression premium, réponse rapide.',
+    quickView: 'Aperçu',
+    quote: 'Devis',
+    askPriceWhatsApp: 'Demandez le tarif premium via WhatsApp.',
+  },
+  en: {
+    ourExpertise: 'Our Expertise',
+    services: 'Services',
+    heroDesc: 'Web, apps, marketing, automation — we build what scales and converts.',
+    fourPillars: '4 pillars',
+    fourPillarsDesc: 'Explore our offerings — each pillar unlocks deeper insights.',
+    details: 'Details',
+    web: 'Web',
+    webDesc: 'Modern & responsive websites',
+    webPoints: ['Performance, UX, SEO & security built-in', 'Custom web applications', 'A site that reassures and converts'],
+    whatYouGet: 'What you get',
+    webText: 'We design premium, fast and responsive websites, designed to strengthen your credibility and generate leads.',
+    deliverables: 'Deliverables',
+    webDeliverables: 'Premium website, custom web applications, booking systems, customer portals, dashboards.',
+    marketing: 'Marketing',
+    marketingDesc: 'Marketing strategy · Targeted ads · Reporting',
+    marketingPoints: ['Strategy tailored to your goals', 'Data-driven campaigns', 'More measurable results.'],
+    marketingText: 'We build a personalized marketing strategy based on your goals, then we deploy targeted advertising campaigns.',
+    useCases: 'Use cases',
+    marketingUseCases: 'Social media advertising, Google Ads, content marketing, email campaigns.',
+    socialMedia: 'Social Media',
+    socialMediaDesc: 'Social media management · Visual content · Growth',
+    socialMediaPoints: ['Planning, creation, publication', 'Visual content aligned', 'Active community.'],
+    socialMediaText: 'We ensure complete management of your social networks: planning, creation, publication and animation.',
+    process: 'Process',
+    socialMediaProcess: 'Content calendar, visual creation, community management, performance analysis.',
+    reputation: 'Reputation',
+    reputationDesc: 'Reviews · Customer service · Crisis management',
+    reputationPoints: ['Proactive review management', 'Dedicated customer service', 'Protected brand.'],
+    reputationText: 'We protect your reputation with a structured approach: proactive review management, dedicated customer service.',
+    benefits: 'Benefits',
+    reputationBenefits: 'Improved online reputation, increased customer trust, protected brand image.',
+    saasDesc: 'A complete system to manage, sell and grow your business.',
+    features: 'Features',
+    saasTargets: ['Restaurants', 'Retail', 'Fashion', 'Beauty salons', 'Clinics', 'Dark kitchens'],
+    saasFeatures: ['Orders & products', 'POS / cashier', 'Sales & stats', 'Team management', 'Customer site included'],
+    saasBenefits: ['Save time', 'Better organization', 'More sales', 'Clear visibility', 'Turnkey'],
+    bulkDesc: 'Reach thousands of customers instantly. Available for clients with more than 1 year of partnership.',
+    yearPartnership: 'Year Partnership',
+    deliveryRate: 'Delivery Rate',
+    responseTime: 'Response Time',
+    availability: 'Availability',
+    article: 'Article',
+    printDesc: 'Premium print — request a quote.',
+    chooseArticle: 'Choose an article. Ask for the price. WhatsApp.',
+    printItemsDesc: 'Premium print items, fast reply.',
+    quickView: 'Quick View',
+    quote: 'Quote',
+    askPriceWhatsApp: 'Ask for premium pricing on WhatsApp.',
+  },
+  ar: {
+    ourExpertise: 'خبرتنا',
+    services: 'الخدمات',
+    heroDesc: 'الويب، التطبيقات، التسويق، الأتمتة — نبني ما ينمو ويحقق النتائج.',
+    fourPillars: '4 ركائز',
+    fourPillarsDesc: 'اكتشف عروضنا — كل ركيزة تكشف المزيد من التفاصيل.',
+    details: 'التفاصيل',
+    web: 'الويب',
+    webDesc: 'مواقع حديثة ومتجاوبة',
+    webPoints: ['الأداء، تجربة المستخدم، SEO والأمان مدمجة', 'تطبيقات ويب مخصصة', 'موقع يطمئن ويحول'],
+    whatYouGet: 'ما تحصل عليه',
+    webText: 'نصمم مواقع ويب متميزة وسريعة ومتجاوبة لتعزيز مصداقيتك وتوليد الطلبات.',
+    deliverables: 'المخرجات',
+    webDeliverables: 'موقع ويب متميز، تطبيقات ويب مخصصة، أنظمة حجز، بوابات عملاء.',
+    marketing: 'التسويق',
+    marketingDesc: 'استراتيجية تسويق · إعلانات مستهدفة · تقارير',
+    marketingPoints: ['استراتيجية مخصصة', 'حملات مدعومة بالبيانات', 'نتائج قابلة للقياس.'],
+    marketingText: 'نبني استراتيجية تسويق مخصصة بناءً على أهدافك، ثم ننشر حملات إعلانية مستهدفة.',
+    useCases: 'حالات الاستخدام',
+    marketingUseCases: 'إعلانات وسائل التواصل، Google Ads، تسويق المحتوى، حملات البريد.',
+    socialMedia: 'وسائل التواصل',
+    socialMediaDesc: 'إدارة وسائل التواصل · محتوى بصري · نمو',
+    socialMediaPoints: ['التخطيط والإنشاء والنشر', 'محتوى بصري متوافق', 'مجتمع نشط.'],
+    socialMediaText: 'نضمن الإدارة الكاملة لوسائل التواصل الاجتماعي: التخطيط والإنشاء والنشر.',
+    process: 'العملية',
+    socialMediaProcess: 'تقويم المحتوى، الإنشاء البصري، إدارة المجتمع، تحليل الأداء.',
+    reputation: 'السمعة',
+    reputationDesc: 'المراجعات · خدمة العملاء · إدارة الأزمات',
+    reputationPoints: ['إدارة استباقية للمراجعات', 'خدمة عملاء مخصصة', 'علامة تجارية محمية.'],
+    reputationText: 'نحمي سمعتك بنهج منظم: إدارة استباقية للمراجعات، خدمة عملاء مخصصة.',
+    benefits: 'الفوائد',
+    reputationBenefits: 'سمعة محسنة، ثقة عملاء معززة، صورة علامة تجارية محمية.',
+    saasDesc: 'نظام كامل لإدارة وبيع وتنمية عملك.',
+    features: 'الميزات',
+    saasTargets: ['المطاعم', 'التجزئة', 'الأزياء', 'صالونات التجميل', 'العيادات', 'المطابخ السحابية'],
+    saasFeatures: ['الطلبات والمنتجات', 'نقاط البيع', 'المبيعات والإحصاءات', 'إدارة الفريق', 'موقع العميل مشمول'],
+    saasBenefits: ['توفير الوقت', 'تنظيم أفضل', 'مزيد من المبيعات', 'رؤية واضحة', 'جاهز للاستخدام'],
+    bulkDesc: 'الوصول لآلاف العملاء فوراً. متاح للعملاء لأكثر من سنة.',
+    yearPartnership: 'شراكة سنة+',
+    deliveryRate: 'معدل التوصيل',
+    responseTime: 'وقت الاستجابة',
+    availability: 'التوفر',
+    article: 'منتج',
+    printDesc: 'طباعة متميزة — اطلب عرض سعر.',
+    chooseArticle: 'اختر منتجاً. اسأل عن السعر. واتساب.',
+    printItemsDesc: 'منتجات طباعة متميزة، رد سريع.',
+    quickView: 'معاينة',
+    quote: 'عرض سعر',
+    askPriceWhatsApp: 'اطلب السعر المتميز عبر واتساب.',
+  },
+};
+
 export default function Services() {
   const { language } = useOutletContext<OutletCtx>();
+  const t = texts[language];
   const [modal, setModal] = useState<ModalState>({ type: 'none' });
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -68,146 +222,52 @@ export default function Services() {
   const pillars = useMemo(
     () => [
       {
-        title: language === 'en' ? 'Web' : 'Web',
+        title: t.web,
         icon: Globe,
-        description: language === 'en'
-          ? 'Modern & responsive websites'
-          : 'Sites web modernes & responsives',
-        keyPoints: language === 'en'
-          ? ['Performance, UX, SEO & security built-in', 'Custom web applications', 'A site that reassures and converts']
-          : ['Performance, UX, SEO et sécurité intégrés', 'Applications web sur-mesure', 'Un site qui rassure. Un site qui convertit.'],
+        description: t.webDesc,
+        keyPoints: t.webPoints,
         blocks: [
-          {
-            title: language === 'en' ? 'What you get' : 'Ce que vous obtenez',
-            text:
-              language === 'en'
-                ? 'We design premium, fast and responsive websites, designed to strengthen your credibility and generate leads. Performance, UX, SEO and security are integrated from the start. And if your needs go beyond a showcase site, we develop custom web applications (booking, ordering, customer area, dashboards, automations). A site that reassures. A site that converts.'
-                : 'Nous concevons des sites web premium, rapides et responsives, pensés pour renforcer votre crédibilité et générer des demandes. Performance, UX, SEO et sécurité sont intégrés dès le départ. Et si votre besoin dépasse un site vitrine, nous développons des applications web sur-mesure (réservation, commande, espace client, dashboards, automatisations). Un site qui rassure. Un site qui convertit.',
-          },
-          {
-            title: language === 'en' ? 'Deliverables' : 'Livrables',
-            text:
-              language === 'en'
-                ? 'Premium website, custom web applications, booking systems, customer portals, dashboards, and automation solutions tailored to your business needs.'
-                : 'Site web premium, applications web sur-mesure, systèmes de réservation, portails clients, dashboards et solutions d\'automatisation adaptées à vos besoins.',
-          },
+          { title: t.whatYouGet, text: t.webText },
+          { title: t.deliverables, text: t.webDeliverables },
         ],
       },
       {
-        title: language === 'en' ? 'Marketing' : 'Marketing',
+        title: t.marketing,
         icon: Sparkles,
-        description: language === 'en'
-          ? 'Marketing strategy · Targeted ads · Reporting'
-          : 'Stratégie marketing · Publicités ciblées · Reporting',
-        keyPoints: language === 'en'
-          ? ['Strategy tailored to your goals', 'Data-driven campaigns', 'Less waste. More measurable results.']
-          : ['Stratégie personnalisée basée sur vos objectifs', 'Campagnes pilotées par la donnée', 'Moins de dépenses inutiles. Plus de résultats mesurables.'],
+        description: t.marketingDesc,
+        keyPoints: t.marketingPoints,
         blocks: [
-          {
-            title: language === 'en' ? 'What you get' : 'Ce que vous obtenez',
-            text:
-              language === 'en'
-                ? 'We build a personalized marketing strategy based on your goals and your market, then we deploy targeted advertising campaigns to reach the right audience, at the right time, with the right message. Every action is driven by data through clear and detailed reporting: you know what performs, why, and how to optimize. Less unnecessary spending. More measurable results.'
-                : 'Nous construisons une stratégie marketing personnalisée basée sur vos objectifs et votre marché, puis nous déployons des campagnes publicitaires ciblées pour toucher le bon public, au bon moment, avec le bon message. Chaque action est pilotée par la donnée grâce à un reporting clair et détaillé : vous savez ce qui performe, pourquoi, et comment optimiser. Moins de dépenses inutiles. Plus de résultats mesurables.',
-          },
-          {
-            title: language === 'en' ? 'Use cases' : "Cas d'usage",
-            text:
-              language === 'en'
-                ? 'Social media advertising, Google Ads, content marketing, email campaigns, influencer partnerships, and conversion optimization across all channels.'
-                : 'Publicités réseaux sociaux, Google Ads, marketing de contenu, campagnes email, partenariats influenceurs et optimisation de conversion sur tous les canaux.',
-          },
+          { title: t.whatYouGet, text: t.marketingText },
+          { title: t.useCases, text: t.marketingUseCases },
         ],
       },
       {
-        title: language === 'en' ? 'Social Media' : 'Réseaux Sociaux',
+        title: t.socialMedia,
         icon: Users,
-        description: language === 'en'
-          ? 'Social media management · Visual content · Growth & engagement'
-          : 'Gestion des réseaux sociaux · Contenu visuel · Croissance & engagement',
-        keyPoints: language === 'en'
-          ? ['Planning, creation, publication', 'Visual content aligned with your brand', 'Constant presence. Strong image. Active community.']
-          : ['Planification, création, publication', 'Contenu visuel aligné à votre image', 'Une présence constante. Une image forte. Une communauté active.'],
+        description: t.socialMediaDesc,
+        keyPoints: t.socialMediaPoints,
         blocks: [
-          {
-            title: language === 'en' ? 'What you get' : 'Ce que vous obtenez',
-            text:
-              language === 'en'
-                ? 'We ensure complete management of your social networks: planning, creation, publication and animation. We produce visual content aligned with your image and optimized for performance (formats, messages, storytelling). Our priority: healthy organic growth and real engagement that transforms audiences into prospects, then into customers. Constant presence. Strong image. Active community.'
-                : 'Nous assurons la gestion complète de vos réseaux sociaux : planification, création, publication et animation. Nous produisons du contenu visuel aligné à votre image et optimisé pour la performance (formats, messages, storytelling). Notre priorité : une croissance organique saine et un engagement réel qui transforme l\'audience en prospects, puis en clients. Une présence constante. Une image forte. Une communauté active.',
-          },
-          {
-            title: language === 'en' ? 'Process' : 'Process',
-            text:
-              language === 'en'
-                ? 'Content calendar, visual creation, community management, performance analysis, and continuous optimization to maximize engagement and conversions.'
-                : 'Calendrier éditorial, création visuelle, community management, analyse de performance et optimisation continue pour maximiser l\'engagement et les conversions.',
-          },
+          { title: t.whatYouGet, text: t.socialMediaText },
+          { title: t.process, text: t.socialMediaProcess },
         ],
       },
       {
-        title: language === 'en' ? 'Reputation' : 'Réputation',
+        title: t.reputation,
         icon: Shield,
-        description: language === 'en'
-          ? 'Reviews · Customer service · Monitoring & crisis management'
-          : 'Avis · Service client · Veille & gestion de crise',
-        keyPoints: language === 'en'
-          ? ['Proactive review management', 'Dedicated customer service', 'Reputation secured. Trust strengthened. Brand protected.']
-          : ['Gestion proactive des avis', 'Service client dédié', 'Réputation sécurisée. Confiance renforcée. Marque protégée.'],
+        description: t.reputationDesc,
+        keyPoints: t.reputationPoints,
         blocks: [
-          {
-            title: language === 'en' ? 'What you get' : 'Ce que vous obtenez',
-            text:
-              language === 'en'
-                ? 'We protect your reputation with a structured approach: proactive review management, dedicated customer service and continuous monitoring. In case of a sensitive situation, we intervene with a proven method: rapid response, controlled tone, coherent messages, action plan. Secured reputation. Strengthened trust. Protected brand.'
-                : 'Nous protégeons votre réputation avec une approche structurée : gestion proactive des avis, service client dédié et surveillance continue. En cas de situation sensible, nous intervenons avec une méthode éprouvée : réponse rapide, ton maîtrisé, messages cohérents, plan d\'action. Réputation sécurisée. Confiance renforcée. Marque protégée.',
-          },
-          {
-            title: language === 'en' ? 'Benefits' : 'Bénéfices',
-            text:
-              language === 'en'
-                ? 'Improved online reputation, increased customer trust, reduced negative impact, faster response times, and a protected brand image in all situations.'
-                : 'Réputation en ligne améliorée, confiance client renforcée, impact négatif réduit, temps de réponse accélérés et image de marque protégée en toutes situations.',
-          },
+          { title: t.whatYouGet, text: t.reputationText },
+          { title: t.benefits, text: t.reputationBenefits },
         ],
       },
     ],
-    [language]
+    [t]
   );
 
-  const saasTargets = useMemo(
-    () => [
-      language === 'en' ? 'Restaurants' : 'Restaurateurs',
-      language === 'en' ? 'Retail' : 'Commerçants',
-      language === 'en' ? 'Fashion' : 'Prêt-à-porter',
-      language === 'en' ? 'Beauty salons' : 'Salons de beauté',
-      language === 'en' ? 'Clinics' : 'Cliniques/cabinets',
-      language === 'en' ? 'Dark kitchens / franchises' : 'Dark kitchens / franchises',
-    ],
-    [language]
-  );
-
-  const saasFeatures = useMemo(
-    () => [
-      language === 'en' ? 'Orders & products' : 'Commandes & produits',
-      language === 'en' ? 'POS / cashier' : 'Caisse / POS',
-      language === 'en' ? 'Sales & stats' : 'Ventes & stats',
-      language === 'en' ? 'Team management' : 'Gestion équipe',
-      language === 'en' ? 'Customer site included' : 'Site client inclus',
-    ],
-    [language]
-  );
-
-  const saasBenefits = useMemo(
-    () => [
-      language === 'en' ? 'Save time' : 'Gain de temps',
-      language === 'en' ? 'Better organization' : 'Organisation',
-      language === 'en' ? 'More sales' : 'Plus de ventes',
-      language === 'en' ? 'Clear visibility' : 'Vision claire',
-      language === 'en' ? 'Turnkey' : 'Clé en main',
-    ],
-    [language]
-  );
+  const saasTargets = t.saasTargets;
+  const saasFeatures = t.saasFeatures;
+  const saasBenefits = t.saasBenefits;
 
   const saasImages = useMemo(() => ['shakpotapp2.png', 'shakpotapp3.png', 'shakpotapp5.png'], []);
   const [saasIndex, setSaasIndex] = useState(0);
@@ -220,14 +280,11 @@ export default function Services() {
   const impressions = useMemo(
     () =>
       Array.from({ length: 20 }).map((_, i) => ({
-        name: `${language === 'en' ? 'Article' : 'Article'} ${i + 1}`,
-        description:
-          language === 'en'
-            ? 'Premium print — request a quote.'
-            : 'Impression premium — demandez un devis.',
+        name: `${t.article} ${i + 1}`,
+        description: t.printDesc,
         images: ['1.png', '2.png', '4.png'],
       })),
-    [language]
+    [t]
   );
 
   const openWhatsAppPrice = (itemName: string) => {
@@ -247,16 +304,14 @@ export default function Services() {
           <div className="max-w-3xl mx-auto rounded-2xl border border-white/10 bg-white/[0.11] p-8 md:p-12 text-center fade-in-up stagger-1">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-sm font-bold mb-6 mx-auto">
               <Globe size={16} />
-              <span>{language === 'en' ? 'Our Expertise' : 'Notre Expertise'}</span>
+              <span>{t.ourExpertise}</span>
             </div>
             <h1 className="text-4xl md:text-7xl font-extrabold tracking-tight mb-6">
-              {language === 'en' ? 'Services' : 'Services'} <br />
+              {t.services} <br />
               <span className="text-gradient-anim">Premium</span>
             </h1>
             <p className="text-lg md:text-2xl text-theme-secondary mt-4 max-w-xl leading-relaxed mx-auto">
-              {language === 'en'
-                ? 'Web, apps, marketing, automation — we build what scales and converts.'
-                : 'Web, apps, marketing, automatisation — on construit ce qui scale et convertit.'}
+              {t.heroDesc}
             </p>
           </div>
         </div>
@@ -267,13 +322,11 @@ export default function Services() {
         <div className="container mx-auto px-4 md:px-6 lg:px-10 max-w-6xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-black text-theme mb-3 pb-4 border-b-2 border-violet-500/30 inline-block">
-              {language === 'en' ? '4 pillars' : '4 piliers'}
+              {t.fourPillars}
             </h2>
             <p className="text-theme-secondary mt-4 max-w-2xl mx-auto text-lg">
-            {language === 'en'
-              ? 'Explore our core offerings — each pillar unlocks deeper insights.'
-              : 'Explorez nos offres — chaque pilier révèle plus de détails.'}
-          </p>
+              {t.fourPillarsDesc}
+            </p>
           </div>
           <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {pillars.map((p, idx) => (
@@ -302,7 +355,7 @@ export default function Services() {
                   </div>
                 )}
                 <div className="inline-flex items-center gap-2 text-violet-400 font-bold uppercase text-sm tracking-widest">
-                  <span>{language === 'en' ? 'Details' : 'Détails'}</span>
+                  <span>{t.details}</span>
                   <ArrowRight size={16} />
                 </div>
               </button>
@@ -324,9 +377,7 @@ export default function Services() {
                 </div>
                 <h2 className="text-4xl md:text-6xl font-black mb-8 pb-4 border-b-2 border-violet-500/30 inline-block tracking-tighter">SaaS <span className="text-gradient-anim">Custom</span></h2>
                 <p className="text-xl text-theme-secondary mb-10 leading-relaxed font-medium">
-                  {language === 'en'
-                    ? 'A complete system to manage, sell and grow your business with a premium interface and powerful logic.'
-                    : 'Un système complet pour gérer, vendre et propulser votre business avec une interface premium et une logique puissante.'}
+                  {t.saasDesc}
                 </p>
 
                 <div className="flex flex-wrap gap-3 mb-10">
@@ -344,7 +395,7 @@ export default function Services() {
                   <div>
                     <div className="text-theme font-black uppercase text-sm tracking-[0.2em] mb-6 flex items-center gap-3">
                       <div className="w-2 h-2 bg-blue-500 rounded-full" />
-                      {language === 'en' ? 'Features' : 'Fonctions'}
+                      {t.features}
                     </div>
                     <ul className="space-y-4">
                       {saasFeatures && saasFeatures.map((x) => (
@@ -358,7 +409,7 @@ export default function Services() {
                   <div>
                     <div className="text-theme font-black uppercase text-sm tracking-[0.2em] mb-6 flex items-center gap-3">
                       <div className="w-2 h-2 bg-violet-500 rounded-full" />
-                      {language === 'en' ? 'Benefits' : 'Bénéfices'}
+                      {t.benefits}
                     </div>
                     <ul className="space-y-4">
                       {saasBenefits && saasBenefits.map((x) => (
@@ -468,17 +519,15 @@ export default function Services() {
                 </div>
                 <h2 className="text-4xl md:text-6xl font-black mb-8 pb-4 border-b-2 border-violet-500/30 inline-block tracking-tighter">Bulk <span className="text-gradient-anim">Messages</span></h2>
                 <p className="text-xl text-theme-secondary mb-6 leading-relaxed font-medium">
-                  {language === 'en'
-                    ? 'Reach thousands of customers instantly with our high-performance messaging infrastructure. Send messages via WhatsApp, Email, and Instagram. Available for clients with more than 1 year of partnership.'
-                    : 'Atteignez des milliers de clients instantanément avec notre infrastructure de messagerie haute performance. Envoyez des messages par WhatsApp, Email et Instagram. Disponible pour les clients de plus de 1 an.'}
+                  {t.bulkDesc}
                 </p>
 
                 <div className="grid sm:grid-cols-2 gap-6 mb-6">
                   {[
-                    { number: '1+', label: language === 'en' ? 'Year Partnership' : 'Clients de plus de 1 an' },
-                    { number: '99.9%', label: language === 'en' ? 'Delivery Rate' : 'Taux de livraison' },
-                    { number: '<1s', label: language === 'en' ? 'Response Time' : 'Temps de réponse' },
-                    { number: '24/7', label: language === 'en' ? 'Availability' : 'Disponibilité' },
+                    { number: '1+', label: t.yearPartnership },
+                    { number: '99.9%', label: t.deliveryRate },
+                    { number: '<1s', label: t.responseTime },
+                    { number: '24/7', label: t.availability },
                   ].map((stat) => (
                     <div key={stat.label} className="klik-card p-6 rounded-2xl group hover:border-violet-500/40 transition-colors text-center">
                       <div className="text-4xl md:text-5xl font-black text-violet-400 mb-2">{stat.number}</div>
@@ -645,9 +694,7 @@ export default function Services() {
                   <div>
                     <div className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white mb-4">{modal.itemName}</div>
                     <div className="text-white/60 text-lg">
-                      {language === 'en'
-                        ? 'Ask for premium pricing on WhatsApp.'
-                        : 'Demandez le tarif premium via WhatsApp.'}
+                      {t.askPriceWhatsApp}
                     </div>
                   </div>
                   <button

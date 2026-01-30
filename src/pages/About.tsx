@@ -5,8 +5,78 @@ import type { Language } from '../types/klik';
 
 type OutletCtx = { language: Language };
 
+const texts = {
+  fr: {
+    ourStory: 'Notre Histoire',
+    about: 'À propos de',
+    heroDesc: "Vision, ambition, impact. On livre du digital premium — sans jamais lâcher sur l'exécution.",
+    meetTeam: 'Découvrir l'équipe',
+    teamTitle: 'L'Équipe qui révolutionne le digital',
+    teamDesc: "Une équipe soudée qui conçoit, construit et livre. Mentalité produit d'abord — clarté et qualité, à chaque fois.",
+    valuesDesc: 'Ce qui nous anime — et ce qu'on livre sur chaque projet.',
+    passionateTeam: 'Équipe Passionnée',
+    pureInnovation: 'Innovation Pure',
+    localExpertise: 'Expertise Locale',
+    totalCommitment: 'Engagement Total',
+    revelation: 'La participation au Hackaton de Nantes 2023 a été l'étincelle. Nous avons réalisé que le monde digital avait besoin de plus que du code — il avait besoin d'âme, d'une exécution premium et d'une mentalité produit qui résout réellement les problèmes. Nous étions fiers de représenter KLIK en France.',
+    ceoMessage: 'Message de la CEO',
+    peopleBehind: 'Les personnes derrière',
+    expertsDesc: 'Un collectif d'experts dédiés à votre succès.',
+    headPR: 'Responsable Relations Publiques',
+    ceoTagline: 'Vision et stratégie. Exécution premium.',
+    ctoTagline: 'Tech & design. Architecture produit, livraison technique.',
+    cmoTagline: 'Marketing, croissance, marque. Impact et visibilité.',
+    prTagline: 'Partenariats, presse et image publique.',
+  },
+  en: {
+    ourStory: 'Our Story',
+    about: 'About',
+    heroDesc: 'Vision, ambition, impact. We ship premium digital — and we never compromise on execution.',
+    meetTeam: 'Meet the team',
+    teamTitle: 'The team revolutionizing digital',
+    teamDesc: 'A tight-knit team that designs, builds and ships. Product mindset first — clarity and quality, every time.',
+    valuesDesc: 'What drives us — and what we deliver on every project.',
+    passionateTeam: 'Passionate Team',
+    pureInnovation: 'Pure Innovation',
+    localExpertise: 'Local Expertise',
+    totalCommitment: 'Total Commitment',
+    revelation: 'Participation in the Nantes Hackathon 2023 was the spark. We realized the digital world needed more than code — it needed soul, premium execution, and a product mindset that actually solves problems. We were proud to represent KLIK in France.',
+    ceoMessage: 'Message from CEO',
+    peopleBehind: 'The people behind',
+    expertsDesc: 'A collective of experts dedicated to your success.',
+    headPR: 'Head of Public Relations',
+    ceoTagline: 'Vision and strategy. Premium execution.',
+    ctoTagline: 'Tech & design. Product architecture, technical delivery.',
+    cmoTagline: 'Marketing, growth, brand. Impact and visibility.',
+    prTagline: 'Partnerships, press, and public image.',
+  },
+  ar: {
+    ourStory: 'قصتنا',
+    about: 'حول',
+    heroDesc: 'رؤية، طموح، تأثير. نقدم رقمية متميزة — دون التنازل عن التنفيذ.',
+    meetTeam: 'تعرف على الفريق',
+    teamTitle: 'الفريق الذي يُحدث ثورة في الرقمية',
+    teamDesc: 'فريق متماسك يصمم ويبني ويُنجز. عقلية المنتج أولاً — الوضوح والجودة، في كل مرة.',
+    valuesDesc: 'ما يحركنا — وما نقدمه في كل مشروع.',
+    passionateTeam: 'فريق شغوف',
+    pureInnovation: 'ابتكار خالص',
+    localExpertise: 'خبرة محلية',
+    totalCommitment: 'التزام كامل',
+    revelation: 'كانت المشاركة في هاكاثون نانت 2023 الشرارة. أدركنا أن العالم الرقمي يحتاج أكثر من مجرد كود — يحتاج روحًا، تنفيذًا متميزًا، وعقلية منتج تحل المشاكل فعلاً. كنا فخورين بتمثيل KLIK في فرنسا.',
+    ceoMessage: 'رسالة من المديرة التنفيذية',
+    peopleBehind: 'الأشخاص وراء',
+    expertsDesc: 'مجموعة من الخبراء مكرسين لنجاحك.',
+    headPR: 'رئيس العلاقات العامة',
+    ceoTagline: 'رؤية واستراتيجية. تنفيذ متميز.',
+    ctoTagline: 'التقنية والتصميم. هندسة المنتج، التسليم التقني.',
+    cmoTagline: 'التسويق، النمو، العلامة التجارية. التأثير والرؤية.',
+    prTagline: 'الشراكات، الصحافة، والصورة العامة.',
+  },
+};
+
 export default function About() {
   const { language } = useOutletContext<OutletCtx>();
+  const t = texts[language];
 
   const founderMessage =
     language === 'en'
@@ -14,49 +84,17 @@ export default function About() {
       : "Je suis la CEO de Klik, et je viens avec une mentalité simple : on avance, on teste, on optimise, on gagne. Je suis entrepreneur avant tout, passionné par l’innovation tech et par ce qu’elle permet de créer quand on l’utilise intelligemment : plus de vitesse, plus de précision, plus d’impact.\n\nPour moi, un bon marketing ne doit pas “faire joli” — il doit faire grandir. Un site web n’est pas une vitrine : c’est une machine de conversion. Et chaque action digitale doit servir un objectif clair : attirer, convaincre, transformer.\n\nChez Klik, on construit des stratégies solides, on produit du contenu qui marque, et on déploie des outils modernes pour passer au niveau supérieur. On ne suit pas les tendances : on les exploite.";
 
   const values = [
-    { title: language === 'en' ? 'Passionate Team' : 'Équipe Passionnée', icon: Users },
-    { title: language === 'en' ? 'Pure Innovation' : 'Innovation Pure', icon: Sparkles },
-    { title: language === 'en' ? 'Local Expertise' : 'Expertise Locale', icon: Target },
-    { title: language === 'en' ? 'Total Commitment' : 'Engagement Total', icon: Shield },
+    { title: t.passionateTeam, icon: Users },
+    { title: t.pureInnovation, icon: Sparkles },
+    { title: t.localExpertise, icon: Target },
+    { title: t.totalCommitment, icon: Shield },
   ];
 
   const team = [
-    {
-      name: 'Ravaka S.',
-      role: 'CEO',
-      photo: 'saro-klik.jpeg',
-      tagline:
-        language === 'en'
-          ? 'Vision and strategy. Premium execution.'
-          : 'Vision et stratégie. Exécution premium.',
-    },
-    {
-      name: 'Zoukari A.',
-      role: 'CTO',
-      photo: 'zouk klik.png',
-      tagline:
-        language === 'en'
-          ? 'Tech & design. Product architecture, technical delivery.'
-          : 'Tech & design. Architecture produit, livraison technique.',
-    },
-    {
-      name: 'Sitraka S.',
-      role: 'CMO',
-      photo: 'sitraka klik.png',
-      tagline:
-        language === 'en'
-          ? 'Marketing, growth, brand. Impact and visibility.'
-          : 'Marketing, croissance, marque. Impact et visibilité.',
-    },
-    {
-      name: 'Alicia P.',
-      role: language === 'en' ? 'Head of Public Relations' : 'Responsable Relations Publiques',
-      photo: 'cara.png',
-      tagline:
-        language === 'en'
-          ? 'Partnerships, press, and public image.'
-          : 'Partenariats, presse et image publique.',
-    },
+    { name: 'Ravaka S.', role: 'CEO', photo: 'saro-klik.jpeg', tagline: t.ceoTagline },
+    { name: 'Zoukari A.', role: 'CTO', photo: 'zouk klik.png', tagline: t.ctoTagline },
+    { name: 'Sitraka S.', role: 'CMO', photo: 'sitraka klik.png', tagline: t.cmoTagline },
+    { name: 'Alicia P.', role: t.headPR, photo: 'cara.png', tagline: t.prTagline },
   ];
 
   return (
@@ -70,10 +108,10 @@ export default function About() {
           <div className="max-w-3xl mx-auto rounded-2xl border border-white/10 bg-white/[0.11] p-8 md:p-12 text-center fade-in-up stagger-1">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-sm font-bold mb-6 mx-auto">
               <Users size={16} />
-              <span>{language === 'en' ? 'Our Story' : 'Notre Histoire'}</span>
+              <span>{t.ourStory}</span>
             </div>
             <h1 className="text-4xl md:text-7xl font-extrabold tracking-tight mb-6">
-              {language === 'en' ? 'About' : 'À propos de'} <br />
+              {t.about} <br />
               <span className="text-gradient-anim">KLIK</span>
             </h1>
             <p className="text-lg md:text-2xl text-theme-secondary mt-4 max-w-xl leading-relaxed mx-auto">

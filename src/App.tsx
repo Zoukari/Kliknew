@@ -178,12 +178,42 @@ const translations: Record<Language, KlikTranslations> = {
     },
     clients: {
       title: 'عملاؤنا',
-      shakpot: { name: 'SHAKPOT', description: '...', website: 'https://shakpot.com', visitSite: 'زيارة الموقع' },
-      vagabox: { name: 'VAGABOX', description: '...', website: 'https://vagabox.fr', visitSite: 'زيارة الموقع' },
-      deeqsan: { name: 'DEEQSAN', description: '...', website: 'https://deeqsan.com', visitSite: 'زيارة الموقع' },
-      voyageVoyage: { name: 'VOYAGE VOYAGE', description: '...', website: 'https://voyagevoyagedj.com', visitSite: 'زيارة الموقع' },
-      byLouli: { name: 'BY LOULI', description: '...', website: null, visitSite: null },
-      marketStudyCena: { name: 'MARKET STUDY CENA', description: '...', website: 'https://www.marketstudycena.com/', visitSite: 'زيارة الموقع' },
+      shakpot: {
+        name: 'SHAKPOT',
+        description: 'مطعم مميز - تجربة طهي فريدة تُحدث ثورة في فن الطهي المحلي بأطباق إبداعية وأجواء استثنائية.',
+        website: 'https://shakpot.com',
+        visitSite: 'زيارة الموقع',
+      },
+      vagabox: {
+        name: 'VAGABOX',
+        description: 'خدمة توصيل طرود مبتكرة - حل لوجستي حديث يُبسط إرسال واستقبال الطرود بتقنية متطورة.',
+        website: 'https://vagabox.fr',
+        visitSite: 'زيارة الموقع',
+      },
+      deeqsan: {
+        name: 'DEEQSAN',
+        description: 'دار نشر - منصة مخصصة لتعزيز الأدب والثقافة، تقدم مجموعة منتقاة من الكتب والمحتوى التحريري.',
+        website: 'https://deeqsan.com',
+        visitSite: 'زيارة الموقع',
+      },
+      voyageVoyage: {
+        name: 'VOYAGE VOYAGE',
+        description: 'وكالة سياحية - شريكك الموثوق لاكتشاف تجارب فريدة مع جولات مخصصة.',
+        website: 'https://voyagevoyagedj.com',
+        visitSite: 'زيارة الموقع',
+      },
+      byLouli: {
+        name: 'BY LOULI',
+        description: 'أزياء نسائية أنيقة - مجموعة حصرية من الملابس النسائية والحجاب والعباءات والجلابيات، تجمع بين التقليد والحداثة.',
+        website: null,
+        visitSite: null,
+      },
+      marketStudyCena: {
+        name: 'MARKET STUDY CENA',
+        description: 'أبحاث ودراسات السوق - شركة متخصصة في الاستطلاعات والتحليلات لتحسين استراتيجيات الأعمال.',
+        website: 'https://www.marketstudycena.com/',
+        visitSite: 'زيارة الموقع',
+      },
     },
     footer: {
       madeBy: 'الموقع من صنع',
