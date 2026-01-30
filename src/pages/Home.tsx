@@ -22,8 +22,8 @@ import {
 import type { LucideIcon } from 'lucide-react';
 import type { KlikTranslations, Language, Theme } from '../types/klik';
 import HomeOverviewCards from '../components/HomeOverviewCards';
+import SplineWrapper from '../components/SplineWrapper';
 
-const Spline = lazy(() => import('@splinetool/react-spline'));
 const WorldMap = lazy(() => import('../components/WorldMap'));
 
 type OutletCtx = {
@@ -188,11 +188,9 @@ export default function Home() {
             {/* Spline 3D - load only when in view */}
             <div ref={splineRef} className="relative w-full max-w-[500px] h-[400px] md:h-[500px] mx-auto rounded-3xl overflow-hidden bg-black/20 border border-violet-500/30 shadow-[0_0_60px_rgba(139,92,246,0.3)]">
               {splineInView ? (
-                <Suspense fallback={<div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-violet-900/20 to-purple-900/10"><div className="w-10 h-10 border-2 border-violet-500/40 border-t-violet-400 rounded-full animate-spin" /></div>}>
-                  <div className="w-full h-full spline-violet">
-                    <Spline scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" className="w-full h-full" />
-                  </div>
-                </Suspense>
+                <div className="w-full h-full spline-violet">
+                  <SplineWrapper scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" className="w-full h-full" />
+                </div>
               ) : (
                 <div className="w-full h-full bg-gradient-to-br from-violet-900/15 to-purple-900/10" aria-hidden="true" />
               )}

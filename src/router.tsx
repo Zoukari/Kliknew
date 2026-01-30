@@ -1,11 +1,9 @@
 import { lazy } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import App from './App';
+import ErrorFallback from './components/ErrorFallback';
 
-// Debug: log the base URL
-console.log('BASE_URL:', import.meta.env.BASE_URL);
 const basename = import.meta.env.BASE_URL.replace(/\/$/, '') || undefined;
-console.log('Router basename:', basename);
 
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
@@ -21,6 +19,7 @@ export const router = createBrowserRouter(
   [
     {
       element: <App />,
+      errorElement: <ErrorFallback />,
       children: [
         { path: '/', element: <Home /> },
         { path: '/about', element: <About /> },
