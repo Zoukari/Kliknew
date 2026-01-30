@@ -480,13 +480,11 @@ export default function App() {
   const toggleMenu = () => {
     setIsMenuOpen((v) => !v);
     document.body.classList.toggle('no-scroll');
-    menuRef.current?.classList.toggle('nav-active');
   };
 
   const closeMenu = () => {
     setIsMenuOpen(false);
     document.body.classList.remove('no-scroll');
-    menuRef.current?.classList.remove('nav-active');
   };
 
   // Plus de toggle theme - dark uniquement
@@ -495,20 +493,20 @@ export default function App() {
     <>
       <div ref={progressRef} className="progress-bar" />
 
-      <header className="fixed top-0 left-0 right-0 w-full z-50 px-3 sm:px-4 py-2 sm:py-3">
-        <nav className="navbar-glass container mx-auto rounded-xl sm:rounded-2xl px-3 sm:px-5 py-2.5 flex items-center justify-between gap-2">
-          <NavLink to="/" className="flex items-center gap-2 sm:gap-3 group shrink-0" onClick={closeMenu}>
+      <header className="fixed top-0 left-0 w-full z-50 px-4 py-3">
+        <nav className="navbar-glass container mx-auto rounded-2xl px-4 py-2 flex items-center justify-between">
+          <NavLink to="/" className="flex items-center gap-3 group">
             <img
               src="logo.png"
               alt="KLIK - Logo"
-              className="h-9 sm:h-10 md:h-12 w-auto transition-transform duration-300 group-hover:scale-105 brightness-0 invert opacity-95"
+              className="h-10 md:h-12 w-auto transition-all duration-300 group-hover:scale-105"
               loading="eager"
               width="64"
               height="64"
             />
           </NavLink>
 
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-3">
             {/* Desktop nav pill container */}
             <div className="hidden lg:flex navbar-pill-container">
               {[
@@ -532,56 +530,55 @@ export default function App() {
               ))}
             </div>
 
-            {/* Mobile menu */}
-            <div
-              ref={menuRef}
-              className="nav-links nav-links-glass fixed lg:hidden inset-0 h-screen w-full flex flex-col items-center justify-center gap-2 px-4 py-20 transition-all duration-300 ease-out z-50"
-            >
+            {/* Overlay + Sidebar panel */}
+            <div className={`fixed inset-0 lg:hidden z-[55] transition-opacity duration-300 ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
               <button
                 onClick={closeMenu}
-                className="absolute top-4 right-4 sm:top-6 sm:right-6 end-4 p-2.5 rounded-xl text-white/80 hover:text-white hover:bg-white/10 transition-all"
-                aria-label="Close menu"
+                className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+                aria-hidden="true"
+              />
+              <aside
+                ref={menuRef}
+                className={`nav-sidebar-panel absolute right-0 top-0 h-full w-[min(300px,88vw)] flex flex-col shadow-2xl transition-transform duration-300 ease-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
               >
-                <X size={28} className="sm:w-8 sm:h-8" />
-              </button>
-
-              <nav className="flex flex-col items-center gap-1.5 w-full max-w-sm overflow-y-auto">
-                {[
-                  { to: '/', label: t.nav.home },
-                  { to: '/about', label: t.nav.about },
-                  { to: '/services', label: t.nav.services },
-                  { to: '/learn', label: t.nav.learn },
-                  { to: '/entertainment-events', label: t.nav.entertainment },
-                  { to: '/careers', label: t.nav.careers },
-                  { to: '/contact', label: t.nav.contact },
-                ].map((item) => (
-                  <NavLink
-                    key={item.to}
-                    to={item.to}
-                    className={({ isActive }) =>
-                      `nav-mobile-link min-h-[48px] flex items-center justify-center px-5 py-3.5 rounded-2xl w-full text-base sm:text-lg font-semibold transition-all ${isActive ? 'nav-mobile-link-active' : ''}`
-                    }
-                    onClick={closeMenu}
-                  >
-                    {item.label}
-                  </NavLink>
-                ))}
-              </nav>
+                <div className="nav-links-glass flex-1 flex flex-col pt-24 pb-8 px-4 overflow-y-auto rounded-l-2xl border-l border-white/10">
+                  {[
+                    { to: '/', label: t.nav.home },
+                    { to: '/about', label: t.nav.about },
+                    { to: '/services', label: t.nav.services },
+                    { to: '/learn', label: t.nav.learn },
+                    { to: '/entertainment-events', label: t.nav.entertainment },
+                    { to: '/careers', label: t.nav.careers },
+                    { to: '/contact', label: t.nav.contact },
+                  ].map((item) => (
+                    <NavLink
+                      key={item.to}
+                      to={item.to}
+                      className={({ isActive }) =>
+                        `nav-sidebar-link block py-3.5 px-5 rounded-xl text-center text-[15px] font-bold uppercase tracking-widest transition-all duration-200 my-1 ${isActive ? 'nav-sidebar-active' : ''}`
+                      }
+                      onClick={closeMenu}
+                    >
+                      {item.label}
+                    </NavLink>
+                  ))}
+                </div>
+              </aside>
             </div>
 
             {/* Mobile menu button */}
             <button
               onClick={toggleMenu}
-              className="lg:hidden relative z-[60] flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-xl text-white/90 hover:text-white hover:bg-white/10 active:scale-95 transition-all"
+              className="lg:hidden relative z-[60] p-3 rounded-xl text-white/90 hover:text-white hover:bg-white/10 transition-all duration-200"
               aria-label={isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
             >
-              {isMenuOpen ? <X size={24} className="sm:w-7 sm:h-7" /> : <Menu size={24} className="sm:w-7 sm:h-7" />}
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </nav>
       </header>
 
-      <main className="pt-[72px] sm:pt-[82px] md:pt-[90px]">
+      <main className="pt-[90px]">
         <Suspense fallback={<div className="min-h-[60vh] flex items-center justify-center" aria-hidden="true"><div className="w-10 h-10 border-2 border-violet-500/30 border-t-violet-400 rounded-full animate-spin" /></div>}>
           <Outlet context={{ t, language, theme }} />
         </Suspense>
@@ -643,22 +640,22 @@ export default function App() {
         </div>
       </footer>
 
-      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 flex flex-col gap-2 sm:gap-3 z-50 pb-[env(safe-area-inset-bottom)] pr-[env(safe-area-inset-right)]">
+      <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
         {/* Language Selector - dropdown au clic */}
         <div ref={langMenuRef} className="relative">
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); setLangMenuOpen((v) => !v); }}
-            className="flex items-center justify-center gap-2 min-h-[44px] min-w-[44px] px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl sm:rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg text-white font-bold text-xs sm:text-sm hover:bg-white/15 active:scale-95 transition-all"
+            className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg text-white font-bold text-sm hover:bg-white/15 transition-all"
             aria-label={language === 'fr' ? 'Langue : Français' : language === 'en' ? 'Language: English' : 'Langue'}
             aria-expanded={langMenuOpen}
             aria-haspopup="true"
           >
-            <Globe className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
-            <span className="hidden sm:inline">{language.toUpperCase()}</span>
+            <Globe className="w-5 h-5" />
+            <span>{language.toUpperCase()}</span>
           </button>
           {langMenuOpen && (
-            <div className="absolute bottom-full right-0 mb-2 flex flex-col gap-1 p-2 rounded-xl sm:rounded-2xl bg-black/80 backdrop-blur-xl border border-white/20 shadow-xl min-w-[110px] sm:min-w-[120px]">
+            <div className="absolute bottom-full right-0 mb-2 flex flex-col gap-1 p-2 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-xl min-w-[120px]">
               {[
                 { code: 'fr' as const, label: 'Français' },
                 { code: 'en' as const, label: 'English' },
@@ -687,10 +684,10 @@ export default function App() {
           href="https://wa.me/25377141498"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center min-h-[44px] min-w-[44px] p-3 rounded-full bg-[#25D366] hover:bg-[#20BD5A] text-white shadow-lg transition-all hover:scale-105 active:scale-95"
+          className="p-3 rounded-full bg-green-500 hover:bg-green-600 text-white shadow-lg transition-all hover:scale-110"
           aria-label="Contact WhatsApp"
         >
-          <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />
+          <MessageCircle className="w-6 h-6" />
         </a>
       </div>
 
