@@ -4,14 +4,15 @@ import {
   ArrowRight,
   BookOpen,
   Briefcase,
-  Sparkles,
-  Users,
   Code,
-  TrendingUp,
-  Zap,
-  Play,
   GraduationCap,
   Heart,
+  Play,
+  Rocket,
+  Sparkles,
+  TrendingUp,
+  Users,
+  Zap,
 } from 'lucide-react';
 import type { KlikTranslations, Language } from '../types/klik';
 
