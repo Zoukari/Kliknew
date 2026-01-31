@@ -530,18 +530,18 @@ export default function App() {
               ))}
             </div>
 
-            {/* Overlay + Sidebar panel */}
+            {/* Full-page mobile menu */}
             <div className={`fixed inset-0 lg:hidden z-[55] transition-opacity duration-300 ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
-              <button
-                onClick={closeMenu}
-                className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-                aria-hidden="true"
-              />
               <aside
                 ref={menuRef}
-                className={`nav-sidebar-panel absolute right-0 top-0 h-full w-[min(300px,88vw)] flex flex-col shadow-2xl transition-transform duration-300 ease-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
+                className={`nav-sidebar-panel nav-menu-fullpage absolute inset-0 w-full h-full flex flex-col transition-opacity duration-300 ${isMenuOpen ? 'opacity-100' : 'opacity-0'}`}
               >
-                <div className="nav-links-glass flex-1 flex flex-col pt-24 pb-8 px-4 overflow-y-auto rounded-l-2xl border-l border-white/10">
+                <button
+                  onClick={closeMenu}
+                  className="absolute inset-0 bg-gradient-to-b from-[#0d0d1a] via-[#12122a] to-[#0d0d1a] backdrop-blur-xl"
+                  aria-hidden="true"
+                />
+                <div className="nav-links-glass relative z-10 flex-1 flex flex-col items-center justify-center gap-4 px-6 py-12 pointer-events-none">
                   {[
                     { to: '/', label: t.nav.home },
                     { to: '/about', label: t.nav.about },
@@ -555,7 +555,7 @@ export default function App() {
                       key={item.to}
                       to={item.to}
                       className={({ isActive }) =>
-                        `nav-sidebar-link block py-3.5 px-5 rounded-xl text-center text-[15px] font-bold uppercase tracking-widest transition-all duration-200 my-1 ${isActive ? 'nav-sidebar-active' : ''}`
+                        `nav-sidebar-link block w-full max-w-xs py-4 px-6 rounded-2xl text-center text-lg font-black uppercase tracking-widest transition-all duration-200 pointer-events-auto ${isActive ? 'nav-sidebar-active' : ''}`
                       }
                       onClick={closeMenu}
                     >
