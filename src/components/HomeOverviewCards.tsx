@@ -5,6 +5,7 @@ import {
   BookOpen,
   Briefcase,
   Code,
+  FileText,
   GraduationCap,
   Heart,
   Play,
@@ -278,43 +279,45 @@ export default function HomeOverviewCards({ language }: Props) {
         </div>
       </section>
 
-      {/* ==================== SECTION 5: Blog - Emerald Theme (commenté) ==================== */}
-      {/* <section
+      {/* ==================== SECTION 5: Blog - Emerald Theme ==================== */}
+      <section
         ref={(el) => { sectionsRef.current[4] = el; }}
         className="scroll-reveal-zoom scroll-delay-2 py-16 md:py-24 lamp-section"
       >
         <div className="px-4 md:px-6 lg:px-10">
-          <NavLink
-            to="/blog"
+          <div
             className="group flex flex-col md:flex-row relative overflow-hidden rounded-[2rem] border border-white/10 hover:border-emerald-400/30 transition-all duration-500 min-h-[280px] md:min-h-[320px]"
             style={{ background: 'linear-gradient(135deg, rgba(20,35,30,0.9) 0%, rgba(25,40,35,0.8) 100%)' }}
           >
             <div className="flex-[3] p-6 md:p-8 lg:p-12 relative z-10 min-w-0">
-            <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-emerald-500/10 blur-[100px] rounded-full pointer-events-none" />
-            <div className="relative z-10 flex flex-col md:flex-row items-center gap-6 md:gap-8 lg:gap-12">
-              <div className="w-20 h-20 md:w-28 md:h-28 lg:w-36 lg:h-36 rounded-2xl bg-emerald-500/15 border border-emerald-400/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                <BookOpen className="w-10 h-10 md:w-14 md:h-14 lg:w-16 lg:h-16 text-emerald-400" />
-              </div>
-              <div className="flex-1 text-center md:text-left">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-400/20 text-emerald-400 text-xs font-bold mb-3 md:mb-4">
-                  <FileText size={14} />
-                  <span>05. BLOG</span>
+              <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-emerald-500/10 blur-[100px] rounded-full pointer-events-none" />
+              <div className="relative z-10 flex flex-col md:flex-row items-center gap-6 md:gap-8 lg:gap-12">
+                <div className="w-20 h-20 md:w-28 md:h-28 lg:w-36 lg:h-36 rounded-2xl bg-emerald-500/15 border border-emerald-400/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                  <BookOpen className="w-10 h-10 md:w-14 md:h-14 lg:w-16 lg:h-16 text-emerald-400" />
                 </div>
-                <h2 className="text-2xl md:text-3xl lg:text-5xl font-black text-white mb-2 md:mb-3">
-                  {language === 'en' ? 'Insights &' : 'Insights &'}{' '}
-                  <span className="text-emerald-400">{language === 'en' ? 'Ideas' : 'Idées'}</span>
-                </h2>
-                <p className="text-sm md:text-base lg:text-lg text-white/60 mb-4 md:mb-5">
-                  {language === 'en'
-? 'Strategy, tech, and growth — sharp reads that move the needle.'
-                : 'Stratégie, tech et croissance — des articles qui font avancer.'}
-                </p>
-                <div className="flex items-center justify-center md:justify-start text-emerald-400 font-bold text-sm md:text-base group-hover:gap-4 transition-all">
-                  {language === 'en' ? 'Read articles' : 'Lire les articles'}
-                  <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform" size={16} />
+                <div className="flex-1 text-center md:text-left">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-400/20 text-emerald-400 text-xs font-bold mb-3 md:mb-4">
+                    <FileText size={14} />
+                    <span>05. BLOG</span>
+                  </div>
+                  <h2 className="text-2xl md:text-3xl lg:text-5xl font-black text-white mb-2 md:mb-3">
+                    {language === 'en' ? 'Insights &' : 'Insights &'}{' '}
+                    <span className="text-emerald-400">{language === 'en' ? 'Ideas' : 'Idées'}</span>
+                  </h2>
+                  <p className="text-sm md:text-base lg:text-lg text-white/60 mb-4 md:mb-5">
+                    {language === 'en'
+                      ? 'Strategy, tech, and growth — sharp reads that move the needle.'
+                      : 'Stratégie, tech et croissance — des articles qui font avancer.'}
+                  </p>
+                  <NavLink
+                    to="/blog"
+                    className="flex items-center justify-center md:justify-start text-emerald-400 font-bold text-sm md:text-base hover:gap-4 transition-all w-fit hover:text-emerald-300"
+                  >
+                    {language === 'en' ? 'Read articles' : 'Lire les articles'}
+                    <ArrowRight className="ml-2 transition-transform group-hover:translate-x-2" size={16} />
+                  </NavLink>
                 </div>
               </div>
-            </div>
             </div>
             <div className="w-full md:w-1/4 h-[200px] md:h-auto min-w-[100px] flex-shrink-0 self-stretch overflow-hidden relative rounded-b-[2rem] md:rounded-l-none md:rounded-r-[2rem]">
               <img
@@ -326,13 +329,13 @@ export default function HomeOverviewCards({ language }: Props) {
               />
               <div className="absolute inset-0 w-1/2 bg-gradient-to-r from-white/45 via-white/20 to-transparent pointer-events-none" />
             </div>
-          </NavLink>
+          </div>
         </div>
-      </section> */}
+      </section>
 
       {/* ==================== SECTION 6: Careers - Clean Dark Style ==================== */}
       <section
-        ref={(el) => { sectionsRef.current[4] = el; }}
+        ref={(el) => { sectionsRef.current[5] = el; }}
         className="scroll-reveal scroll-delay-1 py-16 md:py-24 lamp-section"
       >
         <div className="px-4 md:px-6 lg:px-10">

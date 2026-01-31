@@ -386,36 +386,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION BLOG */}
-      <section className="py-16 md:py-24 relative z-10 lamp-section">
-        <div className="container mx-auto px-4 md:px-6 lg:px-10 max-w-6xl">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-sm font-bold mb-6">
-              <BookOpen size={16} />
-              <span>05. BLOG</span>
-            </div>
-            <h2 className="text-3xl md:text-5xl font-black text-theme mb-4 pb-4 border-b-2 border-violet-500/30 inline-block">
-              {language === 'en' ? 'Latest' : 'Derniers'} <br />
-              <span className="text-gradient-anim">{language === 'en' ? 'Insights' : 'Articles'}</span>
-            </h2>
-            <p className="text-theme-secondary text-base md:text-lg max-w-2xl mx-auto mt-4">
-              {language === 'en' 
-                ? 'Strategy, tech & growth — sharp reads that move the needle.'
-                : 'Stratégie, tech & croissance — des articles qui font avancer.'}
-            </p>
-          </div>
-          <div className="text-center">
-            <NavLink
-              to="/blog"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-violet-600 to-purple-600 text-white text-lg font-bold rounded-2xl hover:opacity-90 transition-opacity"
-            >
-              {language === 'en' ? 'View all articles' : 'Voir tous les articles'}
-              <ArrowRight className="w-5 h-5" />
-            </NavLink>
-          </div>
-        </div>
-      </section>
-
       {/* Anchor target for HERO CTA */}
       <div id="contact" className="h-0 w-0 overflow-hidden" />
     </div>
