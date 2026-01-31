@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect, useRef, useState } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
-import { Globe, Menu, MessageCircle, X } from 'lucide-react';
+import { BookOpen, Briefcase, Globe, GraduationCap, Home, Menu, MessageCircle, Rocket, Sparkles, Users, X } from 'lucide-react';
 import type { KlikTranslations, Language, Theme } from './types/klik';
 
 const translations: Record<Language, KlikTranslations> = {
@@ -406,6 +406,7 @@ export default function App() {
   const location = useLocation();
   const progressRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
+  const mobileMenuContainerRef = useRef<HTMLDivElement>(null);
   const langMenuRef = useRef<HTMLDivElement>(null);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -443,6 +444,9 @@ export default function App() {
     };
     doScrollTop();
     requestAnimationFrame(doScrollTop);
+
+    // IMPORTANT: Fermer le menu mobile lors de la navigation
+    closeMenu();
   }, [location.pathname]);
 
   useEffect(() => {
@@ -477,15 +481,26 @@ export default function App() {
     }
   }, [langMenuOpen]);
 
-  const toggleMenu = () => {
-    setIsMenuOpen((v) => !v);
-    document.body.classList.toggle('no-scroll');
-  };
+  // Fermer le menu mobile en cliquant en dehors (setTimeout évite de capturer le clic d'ouverture)
+  useEffect(() => {
+    if (!isMenuOpen) return;
 
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-    document.body.classList.remove('no-scroll');
-  };
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as Node;
+      if (mobileMenuContainerRef.current && !mobileMenuContainerRef.current.contains(target)) {
+        closeMenu();
+      }
+    };
+
+    const id = setTimeout(() => document.addEventListener('click', handleClickOutside), 0);
+    return () => {
+      clearTimeout(id);
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [isMenuOpen]);
+
+  const toggleMenu = () => setIsMenuOpen((v) => !v);
+  const closeMenu = () => setIsMenuOpen(false);
 
   // Plus de toggle theme - dark uniquement
 
@@ -515,6 +530,7 @@ export default function App() {
                 { to: '/services', label: t.nav.services },
                 { to: '/learn', label: t.nav.learn },
                 { to: '/entertainment-events', label: t.nav.entertainment },
+                { to: '/blog', label: t.nav.blog },
                 { to: '/careers', label: t.nav.careers },
                 { to: '/contact', label: t.nav.contact },
               ].map((item) => (
@@ -530,50 +546,58 @@ export default function App() {
               ))}
             </div>
 
-            {/* Full-page mobile menu */}
-            <div className={`fixed inset-0 lg:hidden z-[55] transition-opacity duration-300 ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
-              <aside
-                ref={menuRef}
-                className={`nav-sidebar-panel nav-menu-fullpage absolute inset-0 w-full h-full flex flex-col transition-opacity duration-300 ${isMenuOpen ? 'opacity-100' : 'opacity-0'}`}
+            {/* Mobile: bouton hamburger + dropdown */}
+            <div ref={mobileMenuContainerRef} className="lg:hidden relative">
+              <button
+                onClick={toggleMenu}
+                className={`p-3 rounded-xl transition-all duration-200 ${isMenuOpen ? 'bg-violet-500/20 text-violet-300' : 'text-white/90 hover:text-white hover:bg-white/10'}`}
+                aria-label={isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+                aria-expanded={isMenuOpen}
               >
-                <button
-                  onClick={closeMenu}
-                  className="absolute inset-0 bg-gradient-to-b from-[#0d0d1a] via-[#12122a] to-[#0d0d1a] backdrop-blur-xl"
-                  aria-hidden="true"
-                />
-                <div className="nav-links-glass relative z-10 flex-1 flex flex-col items-center justify-center gap-4 px-6 py-12 pointer-events-none">
-                  {[
-                    { to: '/', label: t.nav.home },
-                    { to: '/about', label: t.nav.about },
-                    { to: '/services', label: t.nav.services },
-                    { to: '/learn', label: t.nav.learn },
-                    { to: '/entertainment-events', label: t.nav.entertainment },
-                    { to: '/careers', label: t.nav.careers },
-                    { to: '/contact', label: t.nav.contact },
-                  ].map((item) => (
-                    <NavLink
-                      key={item.to}
-                      to={item.to}
-                      className={({ isActive }) =>
-                        `nav-sidebar-link block w-full max-w-xs py-4 px-6 rounded-2xl text-center text-lg font-black uppercase tracking-widest transition-all duration-200 pointer-events-auto ${isActive ? 'nav-sidebar-active' : ''}`
-                      }
-                      onClick={closeMenu}
-                    >
-                      {item.label}
-                    </NavLink>
-                  ))}
-                </div>
-              </aside>
-            </div>
+                {isMenuOpen ? <X size={22} strokeWidth={2} /> : <Menu size={22} strokeWidth={2} />}
+              </button>
 
-            {/* Mobile menu button */}
-            <button
-              onClick={toggleMenu}
-              className="lg:hidden relative z-[60] p-3 rounded-xl text-white/90 hover:text-white hover:bg-white/10 transition-all duration-200"
-              aria-label={isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+              {isMenuOpen && (
+                <div
+                  ref={menuRef}
+                  className="nav-mobile-dropdown absolute right-0 top-full mt-2 w-[min(92vw,300px)] rounded-2xl border border-violet-500/20 bg-gradient-to-b from-violet-950/95 via-violet-900/95 to-purple-950/95 shadow-[0_20px_60px_rgba(88,28,135,0.4),0_0_0_1px_rgba(139,92,246,0.2)] overflow-hidden z-50"
+                >
+                  <div className="p-2">
+                    {[
+                      { to: '/', label: t.nav.home, icon: Home },
+                      { to: '/about', label: t.nav.about, icon: Users },
+                      { to: '/services', label: t.nav.services, icon: Rocket },
+                      { to: '/learn', label: t.nav.learn, icon: GraduationCap },
+                      { to: '/entertainment-events', label: t.nav.entertainment, icon: Sparkles },
+                      { to: '/blog', label: t.nav.blog, icon: BookOpen },
+                      { to: '/careers', label: t.nav.careers, icon: Briefcase },
+                      { to: '/contact', label: t.nav.contact, icon: MessageCircle },
+                    ].map((item) => (
+                      <NavLink
+                        key={item.to}
+                        to={item.to}
+                        onClick={closeMenu}
+                        className={({ isActive }) =>
+                          `flex items-center gap-3 px-4 py-3 rounded-xl text-[15px] font-semibold transition-all duration-150 ${isActive ? 'bg-violet-500/25 text-violet-200 border border-violet-500/30' : 'text-white/80 hover:bg-white/8 hover:text-white active:scale-[0.98]'}`
+                        }
+                      >
+                        {({ isActive }) => {
+                          const Icon = item.icon;
+                          return (
+                            <>
+                              <span className={`flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center ${isActive ? 'bg-violet-500/30' : 'bg-white/5'}`}>
+                                <Icon size={16} strokeWidth={2} className={isActive ? 'text-violet-300' : 'text-white/70'} />
+                              </span>
+                              {item.label}
+                            </>
+                          );
+                        }}
+                      </NavLink>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </nav>
       </header>

@@ -10,6 +10,10 @@
     "preview": "npx vite preview"
   },
   "dependencies": {
+    "@portabletext/react": "^6.0.2",
+    "@portabletext/types": "^4.0.1",
+    "@sanity/client": "^7.14.1",
+    "@sanity/image-url": "^2.0.3",
     "@types/dompurify": "^3.0.5",
     "dompurify": "^3.3.1",
     "lucide-react": "^0.344.0",

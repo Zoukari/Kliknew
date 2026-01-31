@@ -47,9 +47,7 @@ type ClientItem = {
 export default function Home() {
   const { t, language } = useOutletContext<OutletCtx>();
   const [selectedClient, setSelectedClient] = useState<string | null>(null);
-  const [splineInView] = useState(true);
   const [mapInView, setMapInView] = useState(false);
-  const splineRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -174,20 +172,10 @@ export default function Home() {
 
         <div className="container mx-auto px-4 md:px-6 lg:px-10 relative max-w-6xl">
           <div className="flex flex-col items-center text-center gap-16">
-            {/* Spline 3D - load only when in view */}
-            <div ref={splineRef} className="relative w-full max-w-[500px] h-[400px] md:h-[500px] mx-auto rounded-3xl overflow-hidden bg-black/20 border border-violet-500/30 shadow-[0_0_60px_rgba(139,92,246,0.3)]">
-              {splineInView ? (
-                <div className="w-full h-full spline-violet">
-                  <SplineWrapper scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" className="w-full h-full" />
-                </div>
-              ) : (
-                <div className="w-full h-full bg-gradient-to-br from-violet-900/15 to-purple-900/10" aria-hidden="true" />
-              )}
-              {/* Violet Glow Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-violet-900/30 via-transparent to-violet-900/10 pointer-events-none" />
-              <div className="absolute inset-0 bg-violet-500/5 mix-blend-overlay pointer-events-none" />
-              
-              {/* Texte sur le Spline */}
+            {/* Zone Spline - scene 3D */}
+            <div className="relative w-full max-w-[500px] h-[400px] md:h-[500px] mx-auto rounded-3xl overflow-hidden bg-black/20 border border-violet-500/30 shadow-[0_0_60px_rgba(139,92,246,0.3)]">
+              <SplineWrapper scene="/scene.splinecode" className="w-full h-full rounded-3xl" />
+              <div className="absolute inset-0 bg-gradient-to-t from-violet-900/50 via-transparent to-transparent pointer-events-none" />
               <div className="absolute bottom-0 left-0 right-0 pb-[12%] flex items-end justify-center z-20 pointer-events-none">
                 <h2 className="text-xl md:text-3xl font-bold text-white drop-shadow-2xl text-center px-4">
                   KLIK <br />
@@ -283,7 +271,16 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="flex flex-row gap-4 md:gap-6 overflow-x-auto overflow-y-visible pb-4 scroll-smooth snap-x snap-mandatory -mx-4 md:-mx-6 lg:-mx-10 px-4 md:px-6 lg:px-10" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(139,92,246,0.3) transparent', WebkitOverflowScrolling: 'touch' }}>
+          <div 
+            className="flex flex-row gap-4 md:gap-6 overflow-x-auto overflow-y-visible pb-4 scroll-smooth snap-x snap-mandatory -mx-4 md:-mx-6 lg:-mx-10 px-4 md:px-6 lg:px-10" 
+            style={{ 
+              scrollbarWidth: 'thin', 
+              scrollbarColor: 'rgba(139,92,246,0.3) transparent', 
+              WebkitOverflowScrolling: 'touch', 
+              touchAction: 'pan-x',
+              overscrollBehavior: 'contain'
+            }}
+          >
             {clients.map((client) => (
               <div
                 key={client.id}
@@ -385,6 +382,36 @@ export default function Home() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION BLOG */}
+      <section className="py-16 md:py-24 relative z-10 lamp-section">
+        <div className="container mx-auto px-4 md:px-6 lg:px-10 max-w-6xl">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-sm font-bold mb-6">
+              <BookOpen size={16} />
+              <span>05. BLOG</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-black text-theme mb-4 pb-4 border-b-2 border-violet-500/30 inline-block">
+              {language === 'en' ? 'Latest' : 'Derniers'} <br />
+              <span className="text-gradient-anim">{language === 'en' ? 'Insights' : 'Articles'}</span>
+            </h2>
+            <p className="text-theme-secondary text-base md:text-lg max-w-2xl mx-auto mt-4">
+              {language === 'en' 
+                ? 'Strategy, tech & growth — sharp reads that move the needle.'
+                : 'Stratégie, tech & croissance — des articles qui font avancer.'}
+            </p>
+          </div>
+          <div className="text-center">
+            <NavLink
+              to="/blog"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-violet-600 to-purple-600 text-white text-lg font-bold rounded-2xl hover:opacity-90 transition-opacity"
+            >
+              {language === 'en' ? 'View all articles' : 'Voir tous les articles'}
+              <ArrowRight className="w-5 h-5" />
+            </NavLink>
           </div>
         </div>
       </section>

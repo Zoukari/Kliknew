@@ -50,8 +50,7 @@ export default function HomeOverviewCards({ language }: Props) {
         className="scroll-reveal py-16 md:py-24 lamp-section"
       >
         <div className="px-4 md:px-6 lg:px-10">
-          <NavLink
-            to="/services"
+          <div
             className="group flex flex-col md:flex-row relative overflow-hidden rounded-[2rem] border border-white/10 hover:border-violet-400/30 transition-all duration-500 min-h-[280px] md:min-h-[320px]"
             style={{ background: 'linear-gradient(135deg, rgba(20,20,35,0.9) 0%, rgba(30,25,50,0.8) 100%)' }}
           >
@@ -73,10 +72,13 @@ export default function HomeOverviewCards({ language }: Props) {
                       )}
                     </h2>
                   </div>
-                  <div className="flex items-center gap-2 text-violet-400 font-bold text-sm md:text-base group-hover:gap-4 transition-all">
+                  <NavLink
+                    to="/services"
+                    className="flex items-center gap-2 text-violet-400 font-bold text-sm md:text-base hover:gap-4 transition-all hover:text-violet-300"
+                  >
                     {t.home.servicesAll}
-                    <ArrowRight className="group-hover:translate-x-2 transition-transform" size={16} />
-                  </div>
+                    <ArrowRight className="transition-transform group-hover:translate-x-2" size={16} />
+                  </NavLink>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
                   {[
@@ -107,7 +109,7 @@ export default function HomeOverviewCards({ language }: Props) {
               />
               <div className="absolute inset-0 w-1/2 bg-gradient-to-r from-white/45 via-white/20 to-transparent pointer-events-none" />
             </div>
-          </NavLink>
+          </div>
         </div>
       </section>
 
@@ -117,8 +119,7 @@ export default function HomeOverviewCards({ language }: Props) {
         className="scroll-reveal-right scroll-delay-1 py-16 md:py-24 lamp-section"
       >
         <div className="px-4 md:px-6 lg:px-10">
-          <NavLink
-            to="/about"
+          <div
             className="group flex flex-col md:flex-row relative overflow-hidden rounded-[2rem] border border-white/10 hover:border-white/20 transition-all duration-500 min-h-[280px] md:min-h-[320px]"
             style={{ background: 'linear-gradient(180deg, rgba(25,25,40,0.95) 0%, rgba(20,20,35,0.9) 100%)' }}
           >
@@ -135,10 +136,13 @@ export default function HomeOverviewCards({ language }: Props) {
               <p className="text-base md:text-lg text-white/60 mb-4 md:mb-6 leading-relaxed">
                 {t.home.aboutDesc}
               </p>
-              <div className="flex items-center text-white font-bold text-sm md:text-base group-hover:gap-4 transition-all">
+              <NavLink
+                to="/about"
+                className="flex items-center text-white font-bold text-sm md:text-base hover:gap-4 transition-all w-fit hover:text-violet-300"
+              >
                 {t.home.aboutCta}
-                <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform" size={16} />
-              </div>
+                <ArrowRight className="ml-2 transition-transform group-hover:translate-x-2" size={16} />
+              </NavLink>
             </div>
             {/* Image right 25% - white fade on left edge */}
             <div className="w-full md:w-1/4 h-[200px] md:h-auto min-w-[100px] flex-shrink-0 self-stretch overflow-hidden relative rounded-b-[2rem] md:rounded-l-none md:rounded-r-[2rem]">
@@ -150,7 +154,7 @@ export default function HomeOverviewCards({ language }: Props) {
               />
               <div className="absolute inset-0 w-1/2 bg-gradient-to-r from-white/45 via-white/20 to-transparent pointer-events-none" />
             </div>
-          </NavLink>
+          </div>
         </div>
       </section>
 
@@ -160,8 +164,7 @@ export default function HomeOverviewCards({ language }: Props) {
         className="scroll-reveal-left scroll-delay-2 py-16 md:py-24 lamp-section"
       >
         <div className="px-4 md:px-6 lg:px-10">
-          <NavLink
-            to="/learn"
+          <div
             className="group flex flex-col md:flex-row relative overflow-hidden rounded-[2rem] border border-white/10 hover:border-blue-400/30 transition-all duration-500 min-h-[280px] md:min-h-[320px]"
             style={{ background: 'linear-gradient(135deg, rgba(20,25,50,0.9) 0%, rgba(30,35,70,0.8) 100%)' }}
           >
@@ -198,10 +201,13 @@ export default function HomeOverviewCards({ language }: Props) {
                   ))}
                 </div>
                 <div className="text-center mt-6 md:mt-10">
-                  <span className="inline-flex items-center gap-2 text-blue-400 font-bold text-sm md:text-base group-hover:gap-4 transition-all">
+                  <NavLink
+                    to="/learn"
+                    className="inline-flex items-center gap-2 text-blue-400 font-bold text-sm md:text-base hover:gap-4 transition-all hover:text-blue-300"
+                  >
                     {t.home.exploreResources}
-                    <ArrowRight className="group-hover:translate-x-2 transition-transform" size={16} />
-                  </span>
+                    <ArrowRight className="transition-transform group-hover:translate-x-2" size={16} />
+                  </NavLink>
                 </div>
               </div>
             </div>
@@ -216,7 +222,7 @@ export default function HomeOverviewCards({ language }: Props) {
               />
               <div className="absolute inset-0 w-1/2 bg-gradient-to-r from-white/45 via-white/20 to-transparent pointer-events-none" />
             </div>
-          </NavLink>
+          </div>
         </div>
       </section>
 
@@ -226,8 +232,7 @@ export default function HomeOverviewCards({ language }: Props) {
         className="scroll-reveal-right scroll-delay-1 py-16 md:py-24 lamp-section"
       >
         <div className="px-4 md:px-6 lg:px-10">
-          <NavLink
-            to="/entertainment-events"
+          <div
             className="group flex flex-col md:flex-row relative overflow-hidden rounded-[2rem] border border-white/10 hover:border-pink-500/30 transition-all duration-500 min-h-[280px] md:min-h-[380px]"
           >
             {/* Content left 75% */}
@@ -249,10 +254,13 @@ export default function HomeOverviewCards({ language }: Props) {
               <p className="text-sm md:text-base lg:text-lg text-white/60 mb-4 md:mb-6 max-w-xl">
                 {t.home.entertainmentDesc}
               </p>
-              <div className="flex items-center text-pink-400 font-bold text-sm md:text-base group-hover:gap-4 transition-all">
+              <NavLink
+                to="/entertainment-events"
+                className="flex items-center text-pink-400 font-bold text-sm md:text-base hover:gap-4 transition-all w-fit hover:text-pink-300"
+              >
                 {t.home.entertainmentCta}
-                <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform" size={16} />
-              </div>
+                <ArrowRight className="ml-2 transition-transform group-hover:translate-x-2" size={16} />
+              </NavLink>
               </div>
             </div>
             {/* Image right 25% - white fade on left edge */}
@@ -266,7 +274,7 @@ export default function HomeOverviewCards({ language }: Props) {
               />
               <div className="absolute inset-0 w-1/2 bg-gradient-to-r from-white/45 via-white/20 to-transparent pointer-events-none" />
             </div>
-          </NavLink>
+          </div>
         </div>
       </section>
 
@@ -328,8 +336,7 @@ export default function HomeOverviewCards({ language }: Props) {
         className="scroll-reveal scroll-delay-1 py-16 md:py-24 lamp-section"
       >
         <div className="px-4 md:px-6 lg:px-10">
-          <NavLink
-            to="/careers"
+          <div
             className="group flex flex-col md:flex-row relative overflow-hidden rounded-[2rem] border border-white/15 hover:border-violet-400/30 transition-all duration-500 min-h-[280px] md:min-h-[320px]"
             style={{ background: 'linear-gradient(180deg, rgba(30,25,45,0.95) 0%, rgba(25,20,40,0.9) 100%)' }}
           >
@@ -359,10 +366,13 @@ export default function HomeOverviewCards({ language }: Props) {
                   <p className="text-sm md:text-base lg:text-lg text-white/60 mb-4 md:mb-6 max-w-xl">
                     {t.home.careersDesc}
                   </p>
-                  <div className="inline-flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 rounded-xl bg-violet-500/20 border border-violet-400/30 text-violet-300 font-bold text-sm md:text-base group-hover:bg-violet-500/30 transition-colors">
+                  <NavLink
+                    to="/careers"
+                    className="inline-flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 rounded-xl bg-violet-500/20 border border-violet-400/30 text-violet-300 font-bold text-sm md:text-base hover:bg-violet-500/30 transition-colors"
+                  >
                     {t.home.careersCta}
-                    <ArrowRight className="group-hover:translate-x-2 transition-transform" size={16} />
-                  </div>
+                    <ArrowRight className="transition-transform group-hover:translate-x-2" size={16} />
+                  </NavLink>
                 </div>
               </div>
             </div>
@@ -378,7 +388,7 @@ export default function HomeOverviewCards({ language }: Props) {
               />
               <div className="absolute inset-0 w-1/2 bg-gradient-to-r from-white/45 via-white/20 to-transparent pointer-events-none" />
             </div>
-          </NavLink>
+          </div>
         </div>
       </section>
       

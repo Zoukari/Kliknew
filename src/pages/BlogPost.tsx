@@ -1,9 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import DOMPurify from 'dompurify';
 import { NavLink, useOutletContext, useParams } from 'react-router-dom';
 import { ArrowLeft, Calendar } from 'lucide-react';
-import { stripHtml } from '../lib/html';
-import { getPostBySlug, type WpPost } from '../lib/wordpress';
+import { getPostBySlug, urlFor, type SanityPost } from '../lib/sanity';
+import PortableTextBlock from '../components/PortableTextBlock';
 import type { Language } from '../types/klik';
 
 type OutletCtx = { language: Language };
@@ -12,7 +11,7 @@ export default function BlogPost() {
   const { language } = useOutletContext<OutletCtx>();
   const { slug } = useParams();
 
-  const [post, setPost] = useState<WpPost | null>(null);
+  const [post, setPost] = useState<SanityPost | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -39,8 +38,8 @@ export default function BlogPost() {
   const status: 'loading' | 'success' | 'error' = error ? 'error' : post ? 'success' : 'loading';
 
   const dateLabel = useMemo(() => {
-    if (!post?.date) return '';
-    const d = new Date(post.date);
+    if (!post?.publishedAt) return '';
+    const d = new Date(post.publishedAt);
     if (isNaN(d.getTime())) return '';
     return d.toLocaleDateString(language === 'en' ? 'en-US' : 'fr-FR', {
       year: 'numeric',
@@ -49,8 +48,7 @@ export default function BlogPost() {
     });
   }, [language, post]);
 
-  const safeTitle = useMemo(() => (post ? DOMPurify.sanitize(post.titleHtml) : ''), [post]);
-  const safeContent = useMemo(() => (post ? DOMPurify.sanitize(post.contentHtml) : ''), [post]);
+  const imageUrl = post?.mainImage ? urlFor(post.mainImage).width(1200).height(600).url() : null;
 
   return (
     <div className="relative z-10">
@@ -74,10 +72,9 @@ export default function BlogPost() {
               </div>
               <span>{dateLabel}</span>
             </div>
-            <h1
-              className="text-4xl md:text-7xl font-black text-theme leading-tight tracking-tighter"
-              dangerouslySetInnerHTML={{ __html: safeTitle }}
-            />
+            <h1 className="text-4xl md:text-7xl font-black text-theme leading-tight tracking-tighter">
+              {post?.title || ''}
+            </h1>
           </div>
         </div>
       </section>
@@ -86,21 +83,20 @@ export default function BlogPost() {
         <div className="container mx-auto px-4">
           {status === 'success' && post && (
             <article className="max-w-4xl mx-auto">
-              {post.featuredImageUrl && (
+              {imageUrl && (
                 <div className="mb-16 rounded-[48px] overflow-hidden klik-card shadow-[0_0_80px_rgba(0,0,0,0.3)]">
                   <img
-                    src={post.featuredImageUrl}
-                    alt={stripHtml(post.titleHtml)}
+                    src={imageUrl}
+                    alt={post.title}
                     className="w-full h-auto object-cover max-h-[600px]"
                     loading="lazy"
                   />
                 </div>
               )}
 
-              <div
-                className="klik-card p-10 md:p-20 rounded-[48px] text-theme leading-relaxed wp-content text-xl font-medium shadow-[0_0_100px_rgba(124,58,237,0.05)]"
-                dangerouslySetInnerHTML={{ __html: safeContent }}
-              />
+              <div className="klik-card p-10 md:p-20 rounded-[48px] text-theme leading-relaxed text-xl font-medium shadow-[0_0_100px_rgba(124,58,237,0.05)]">
+                {post.body && <PortableTextBlock value={post.body} />}
+              </div>
             </article>
           )}
         </div>

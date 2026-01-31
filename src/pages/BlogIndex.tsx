@@ -1,21 +1,20 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { NavLink, useOutletContext } from 'react-router-dom';
 import { ArrowRight, BookOpen, Calendar } from 'lucide-react';
-import { stripHtml } from '../lib/html';
-import { getPosts, type WpPost } from '../lib/wordpress';
+import { getPosts, urlFor, type SanityPost } from '../lib/sanity';
 import type { Language } from '../types/klik';
 
 type OutletCtx = { language: Language };
 
 export default function BlogIndex() {
   const { language } = useOutletContext<OutletCtx>();
-  const [posts, setPosts] = useState<WpPost[]>([]);
+  const [posts, setPosts] = useState<SanityPost[]>([]);
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
-    getPosts({ perPage: 12 })
+    getPosts()
       .then((data) => {
         if (cancelled) return;
         setPosts(data);
@@ -77,17 +76,24 @@ export default function BlogIndex() {
               {error && <div className="text-sm mt-2 opacity-90">{error}</div>}
               <div className="text-sm mt-3 opacity-80">
                 {language === 'en'
-                  ? 'Check VITE_WP_API_BASE and your WordPress REST permissions.'
-                  : 'Vérifie VITE_WP_API_BASE et les permissions REST WordPress.'}
+                  ? 'Check your Sanity project configuration and make sure you have published posts.'
+                  : "Vérifie ta config Sanity et assure-toi d'avoir des articles publiés."}
               </div>
             </div>
           )}
 
-          {status === 'success' && (
+          {status === 'success' && posts.length === 0 && (
+            <div className="text-center text-theme-secondary py-12">
+              <p className="text-lg">
+                {language === 'en' ? 'No posts yet. Create your first post in Sanity Studio!' : 'Aucun article pour le moment. Créez votre premier article dans Sanity Studio!'}
+              </p>
+            </div>
+          )}
+
+          {status === 'success' && posts.length > 0 && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {posts.map((p, idx) => {
-                const excerpt = stripHtml(p.excerptHtml);
-                const date = new Date(p.date);
+                const date = new Date(p.publishedAt);
                 const dateLabel = isNaN(date.getTime())
                   ? ''
                   : date.toLocaleDateString(language === 'en' ? 'en-US' : 'fr-FR', {
@@ -96,17 +102,19 @@ export default function BlogIndex() {
                       day: '2-digit',
                     });
 
+                const imageUrl = p.mainImage ? urlFor(p.mainImage).width(800).height(500).url() : null;
+
                 return (
                   <NavLink
-                    key={p.id}
+                    key={p._id}
                     to={`/blog/${p.slug}`}
                     className={`group block klik-card overflow-hidden magnetic-hover shimmer rounded-[40px] fade-in-up stagger-${(idx % 3) + 1}`}
                   >
                     <div className="aspect-[16/10] w-full bg-black/20 overflow-hidden relative">
-                      {p.featuredImageUrl ? (
+                      {imageUrl ? (
                         <img
-                          src={p.featuredImageUrl}
-                          alt={stripHtml(p.titleHtml)}
+                          src={imageUrl}
+                          alt={p.title}
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                           loading="lazy"
                         />
@@ -130,18 +138,17 @@ export default function BlogIndex() {
                         <span>{dateLabel}</span>
                       </div>
 
-                      <h2
-                        className="text-2xl md:text-3xl font-black text-theme group-hover:text-violet-400 transition-colors leading-tight uppercase tracking-tighter mb-6"
-                        dangerouslySetInnerHTML={{ __html: p.titleHtml }}
-                      />
+                      <h2 className="text-2xl md:text-3xl font-black text-theme group-hover:text-violet-400 transition-colors leading-tight uppercase tracking-tighter mb-6">
+                        {p.title}
+                      </h2>
 
                       <p className="text-theme-secondary text-lg leading-relaxed line-clamp-3 font-medium mb-10">
-                        {excerpt}
+                        {p.excerpt || ''}
                       </p>
 
                       <div className="pt-8 border-t border-white/10 flex items-center justify-between">
                         <span className="text-sm font-black text-theme uppercase tracking-widest group-hover:text-violet-400 transition-colors">
-                          {language === 'en' ? 'Read Story' : 'Lire l’article'}
+                          {language === 'en' ? 'Read Story' : "Lire l'article"}
                         </span>
                         <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-violet-500 group-hover:border-violet-500 transition-all">
                           <ArrowRight className="w-5 h-5 text-theme group-hover:text-white group-hover:translate-x-1 transition-all" />
@@ -158,4 +165,3 @@ export default function BlogIndex() {
     </div>
   );
 }
-
