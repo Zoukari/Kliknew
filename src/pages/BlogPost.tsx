@@ -7,9 +7,16 @@ import type { Language } from '../types/klik';
 
 type OutletCtx = { language: Language };
 
+const blogPostTexts: Record<Language, { backToBlog: string; notFound: string }> = {
+  fr: { backToBlog: 'Retour au blog', notFound: 'Article introuvable.' },
+  en: { backToBlog: 'Back to Blog', notFound: 'Article not found.' },
+  ar: { backToBlog: 'العودة إلى المدونة', notFound: 'المقال غير موجود.' },
+};
+
 export default function BlogPost() {
   const { language } = useOutletContext<OutletCtx>();
   const { slug } = useParams();
+  const t = blogPostTexts[language] ?? blogPostTexts.en;
 
   const [post, setPost] = useState<SanityPost | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -21,7 +28,7 @@ export default function BlogPost() {
       .then((p) => {
         if (cancelled) return;
         if (!p) {
-          setError(language === 'en' ? 'Article not found.' : 'Article introuvable.');
+          setError(t.notFound);
           return;
         }
         setPost(p);
@@ -33,7 +40,7 @@ export default function BlogPost() {
     return () => {
       cancelled = true;
     };
-  }, [language, slug]);
+  }, [slug, t.notFound]);
 
   const status: 'loading' | 'success' | 'error' = error ? 'error' : post ? 'success' : 'loading';
 
@@ -41,7 +48,8 @@ export default function BlogPost() {
     if (!post?.publishedAt) return '';
     const d = new Date(post.publishedAt);
     if (isNaN(d.getTime())) return '';
-    return d.toLocaleDateString(language === 'en' ? 'en-US' : 'fr-FR', {
+    const locale = language === 'ar' ? 'ar-SA' : language === 'en' ? 'en-US' : 'fr-FR';
+    return d.toLocaleDateString(locale, {
       year: 'numeric',
       month: 'short',
       day: '2-digit',
@@ -62,7 +70,7 @@ export default function BlogPost() {
             className="inline-flex items-center gap-3 text-violet-400 font-bold uppercase text-xs tracking-[0.3em] hover:text-white transition-all mb-8 group"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-2 transition-transform" />
-            {language === 'en' ? 'Back to Blog' : 'Retour au blog'}
+            {t.backToBlog}
           </NavLink>
 
           <div className="max-w-4xl mx-auto rounded-2xl border border-white/10 bg-white/[0.11] p-8 md:p-12 text-center fade-in-up">

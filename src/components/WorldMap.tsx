@@ -78,24 +78,13 @@ const locations = [
     glowColor: 'rgba(249, 115, 22, 0.3)',
     lineGradient: 'linear-gradient(90deg, rgba(249, 115, 22, 0.4) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(22, 163, 74, 0.4) 100%)'
   },
-  { 
-    name: 'Doha', 
-    country: 'Qatar',
-    flag: '🇶🇦',
-    description: 'Portefeuille clients premium et expansion marché Moyen-Orient',
-    hasPremium: true,
-    gradient: 'linear-gradient(135deg, rgba(153, 27, 27, 0.2) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(153, 27, 27, 0.2) 100%)',
-    borderColor: 'rgba(153, 27, 27, 0.5)',
-    glowColor: 'rgba(153, 27, 27, 0.4)',
-    lineGradient: 'linear-gradient(90deg, transparent 0%, rgba(153, 27, 27, 0.7) 50%, transparent 100%)'
-  },
 ];
 
 export default function WorldMap() {
   return (
     <div className="w-full">
       <p className="text-center text-theme-secondary text-sm md:text-base mb-8">
-        8 villes connectées, une vision globale
+        7 villes connectées, une vision globale
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {locations.map((location, index) => (
@@ -166,7 +155,7 @@ export default function WorldMap() {
       <div className="mt-12 flex flex-wrap gap-6 justify-center items-center">
         <div className="flex items-center gap-2 klik-card px-6 py-3 rounded-full">
           <Globe className="w-5 h-5 text-violet-400" />
-          <span className="text-theme font-semibold">8 Villes</span>
+          <span className="text-theme font-semibold">7 Villes</span>
         </div>
         <div className="flex items-center gap-2 klik-card px-6 py-3 rounded-full">
           <MapPin className="w-5 h-5 text-violet-400" />
