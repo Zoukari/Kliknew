@@ -298,22 +298,20 @@ export default function HomeOverviewCards({ language }: Props) {
                 <div className="flex-1 text-center md:text-left">
                   <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-400/20 text-emerald-400 text-xs font-bold mb-3 md:mb-4">
                     <FileText size={14} />
-                    <span>05. BLOG</span>
+                    <span>{t.home.blogBadge}</span>
                   </div>
                   <h2 className="text-2xl md:text-3xl lg:text-5xl font-black text-white mb-2 md:mb-3">
-                    {language === 'en' ? 'Insights &' : 'Insights &'}{' '}
-                    <span className="text-emerald-400">{language === 'en' ? 'Ideas' : 'Idées'}</span>
+                    {t.home.blogTitle1}{' '}
+                    <span className="text-emerald-400">{t.home.blogTitle2}</span>
                   </h2>
                   <p className="text-sm md:text-base lg:text-lg text-white/60 mb-4 md:mb-5">
-                    {language === 'en'
-                      ? 'Strategy, tech, and growth — sharp reads that move the needle.'
-                      : 'Stratégie, tech et croissance — des articles qui font avancer.'}
+                    {t.home.blogDesc}
                   </p>
                   <NavLink
                     to="/blog"
                     className="flex items-center justify-center md:justify-start text-emerald-400 font-bold text-sm md:text-base hover:gap-4 transition-all w-fit hover:text-emerald-300"
                   >
-                    {language === 'en' ? 'Read articles' : 'Lire les articles'}
+                    {t.home.blogCta}
                     <ArrowRight className="ml-2 transition-transform group-hover:translate-x-2" size={16} />
                   </NavLink>
                 </div>
@@ -322,7 +320,7 @@ export default function HomeOverviewCards({ language }: Props) {
             <div className="w-full md:w-1/4 h-[200px] md:h-auto min-w-[100px] flex-shrink-0 self-stretch overflow-hidden relative rounded-b-[2rem] md:rounded-l-none md:rounded-r-[2rem]">
               <img
                 src="blog.png"
-                alt="Blog"
+                alt={t.nav.blog}
                 className="w-full h-full object-cover rounded-none"
                 loading="lazy"
                 decoding="async"

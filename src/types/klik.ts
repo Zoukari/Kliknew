@@ -50,6 +50,11 @@ export type HomeTranslations = {
   entertainmentTitle2?: string;
   entertainmentDesc: string;
   entertainmentCta: string;
+  blogBadge: string;
+  blogTitle1: string;
+  blogTitle2: string;
+  blogDesc: string;
+  blogCta: string;
   careersBadge: string;
   careersTitle: string;
   careersTitle2?: string;

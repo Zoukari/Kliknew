@@ -131,6 +131,11 @@ const translations: Record<Language, KlikTranslations> = {
       entertainmentTitle2: '& Events',
       entertainmentDesc: 'Expériences immersives et événements exclusifs — on rend chaque moment inoubliable.',
       entertainmentCta: 'Découvrir',
+      blogBadge: '05. BLOG',
+      blogTitle1: 'Insights &',
+      blogTitle2: 'Idées',
+      blogDesc: 'Stratégie, tech et croissance — des articles qui font avancer.',
+      blogCta: 'Lire les articles',
       careersBadge: '06. CAREERS',
       careersTitle: "Rejoins l'",
       careersTitle2: 'aventure',
@@ -265,6 +270,11 @@ const translations: Record<Language, KlikTranslations> = {
       entertainmentTitle2: '& Events',
       entertainmentDesc: 'Immersive experiences and exclusive events — we make moments unforgettable.',
       entertainmentCta: 'Discover',
+      blogBadge: '05. BLOG',
+      blogTitle1: 'Insights &',
+      blogTitle2: 'Ideas',
+      blogDesc: 'Strategy, tech, and growth — sharp reads that move the needle.',
+      blogCta: 'Read articles',
       careersBadge: '06. CAREERS',
       careersTitle: 'Join the',
       careersTitle2: 'adventure',
@@ -393,6 +403,11 @@ const translations: Record<Language, KlikTranslations> = {
       entertainmentTitle2: 'والفعاليات',
       entertainmentDesc: 'تجارب غامرة وفعاليات حصرية — نجعَل كل لحظة لا تُنسى.',
       entertainmentCta: 'اكتشف',
+      blogBadge: '05. المدونة',
+      blogTitle1: 'رؤى و',
+      blogTitle2: 'أفكار',
+      blogDesc: 'استراتيجية وتقنية ونمو — قراءات حادة تدفعك للأمام.',
+      blogCta: 'اقرأ المقالات',
       careersBadge: '06. الوظائف',
       careersTitle: 'انضم للمغامرة',
       careersTitle2: '',
@@ -560,7 +575,7 @@ export default function App() {
               {isMenuOpen && (
                 <div
                   ref={menuRef}
-                  className="nav-mobile-dropdown absolute right-0 top-full mt-2 w-[min(92vw,300px)] rounded-2xl border border-violet-500/20 bg-gradient-to-b from-violet-950/95 via-violet-900/95 to-purple-950/95 shadow-[0_20px_60px_rgba(88,28,135,0.4),0_0_0_1px_rgba(139,92,246,0.2)] overflow-hidden z-50"
+                  className={`nav-mobile-dropdown absolute top-full mt-2 w-[min(92vw,300px)] rounded-2xl border border-violet-500/20 bg-gradient-to-b from-violet-950/95 via-violet-900/95 to-purple-950/95 shadow-[0_20px_60px_rgba(88,28,135,0.4),0_0_0_1px_rgba(139,92,246,0.2)] overflow-hidden z-50 ${language === 'ar' ? 'left-0' : 'right-0'}`}
                 >
                   <div className="p-2">
                     {[
