@@ -70,7 +70,16 @@ Le schema des articles est défini dans `studio-klik/schemas/post.ts` :
 
 ## 🌐 Déploiement du Studio
 
-Pour déployer le Studio sur Sanity.io :
+### Option A : Sur votre domaine (Vercel, avec le site)
+
+Le Studio est déployé **avec le site** sur Vercel. À chaque push sur GitHub, Vercel exécute `npm run build:vercel` (build du site + build du studio + copie dans `dist/sanity.studio`).
+
+- **URL du Studio** : **https://klikdj.com/sanity.studio**
+- Aucune action manuelle : le déploiement est géré par Vercel (déjà lié à GitHub).
+
+### Option B : Hébergement Sanity
+
+Pour déployer le Studio uniquement sur Sanity.io :
 
 ```bash
 cd studio-klik
@@ -78,7 +87,7 @@ npm run build
 sanity deploy
 ```
 
-Votre Studio sera accessible sur `https://klik.sanity.studio`
+Votre Studio sera alors accessible sur `https://klik.sanity.studio`
 
 ## 🔗 Liens utiles
 
@@ -98,4 +107,7 @@ Votre Studio sera accessible sur `https://klik.sanity.studio`
 
 En **développement**, les requêtes Sanity passent par un proxy Vite (`/api/sanity`) : pas besoin d’ajouter d’origine CORS.
 
-En **production** (site déployé), ajoute l’URL de ton site dans les origines CORS : [Sanity.io/manage → API → CORS](https://www.sanity.io/manage/personal/project/ilu5dvrl/api/cors) (ex. `https://ton-site.com`). Pour tester en local sans proxy, tu peux aussi ajouter `http://localhost:5173` et `http://localhost:5174`.
+En **production** (site déployé), ajoute l’URL de ton site dans les origines CORS : [Sanity.io/manage → API → CORS](https://www.sanity.io/manage/personal/project/ilu5dvrl/api/cors). Pour **klikdj.com** (site + studio), ajoute :
+- `https://klikdj.com`
+- `https://www.klikdj.com` (si tu utilises le www)
+Pour tester en local sans proxy, tu peux aussi ajouter `http://localhost:5173` et `http://localhost:5174`.

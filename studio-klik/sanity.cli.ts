@@ -5,5 +5,8 @@ export default defineCliConfig({
     projectId: 'ilu5dvrl',
     dataset: 'production'
   },
-  studioHost: 'klik'
+  studioHost: 'klik',
+  project: {
+    basePath: '/sanity.studio',
+  },
 })

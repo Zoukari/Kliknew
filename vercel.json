@@ -1,4 +1,5 @@
 {
+  "buildCommand": "npm run build:vercel",
   "headers": [
     {
       "source": "/(.*)",
@@ -29,7 +30,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://api.web3forms.com https://*.spline.design https://unpkg.com blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https://api.web3forms.com https://*.spline.design https://prod.spline.design https://unpkg.com wss: blob:; frame-ancestors 'none'; worker-src 'self' blob:;"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://api.web3forms.com https://*.spline.design https://unpkg.com https://*.sanity.io blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https://api.web3forms.com https://*.spline.design https://prod.spline.design https://unpkg.com https://*.sanity.io https://*.apicdn.sanity.io wss: blob:; frame-ancestors 'none'; worker-src 'self' blob:;"
         }
       ]
     }
@@ -49,6 +50,18 @@
     {
       "source": "/robots.txt",
       "destination": "/public/robots.txt"
+    },
+    {
+      "source": "/sanity.studio",
+      "destination": "/sanity.studio/index.html"
+    },
+    {
+      "source": "/sanity.studio/",
+      "destination": "/sanity.studio/index.html"
+    },
+    {
+      "source": "/sanity.studio/:path*",
+      "destination": "/sanity.studio/index.html"
     },
     {
       "source": "/((?!assets|.*\\.).*)",
