@@ -2,11 +2,17 @@ import { createClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
 import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
 
+// En dev, on passe par le proxy Vite pour éviter les erreurs CORS
+const apiHost = typeof window !== 'undefined' && import.meta.env.DEV
+  ? `${window.location.origin}/api/sanity`
+  : undefined;
+
 export const sanityClient = createClient({
   projectId: 'ilu5dvrl',
   dataset: 'production',
   useCdn: true,
   apiVersion: '2024-01-01',
+  ...(apiHost && { apiHost }),
 });
 
 const builder = imageUrlBuilder(sanityClient);

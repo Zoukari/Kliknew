@@ -96,4 +96,6 @@ Votre Studio sera accessible sur `https://klik.sanity.studio`
 
 ### CORS
 
-Si vous avez des erreurs CORS, ajoutez `http://localhost:5173` et `http://localhost:5174` dans les origines autorisées sur [Sanity.io/manage](https://www.sanity.io/manage/personal/project/ilu5dvrl/api/cors).
+En **développement**, les requêtes Sanity passent par un proxy Vite (`/api/sanity`) : pas besoin d’ajouter d’origine CORS.
+
+En **production** (site déployé), ajoute l’URL de ton site dans les origines CORS : [Sanity.io/manage → API → CORS](https://www.sanity.io/manage/personal/project/ilu5dvrl/api/cors) (ex. `https://ton-site.com`). Pour tester en local sans proxy, tu peux aussi ajouter `http://localhost:5173` et `http://localhost:5174`.

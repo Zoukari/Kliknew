@@ -19,5 +19,13 @@ export default defineConfig(() => ({
   server: {
     host: true,
     port: 5173,
+    proxy: {
+      // Évite les erreurs CORS en dev : les requêtes Sanity passent par le serveur Vite
+      '/api/sanity': {
+        target: 'https://ilu5dvrl.apicdn.sanity.io',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/sanity/, ''),
+      },
+    },
   },
 }));
