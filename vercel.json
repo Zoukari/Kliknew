@@ -64,7 +64,7 @@
       "destination": "/sanity.studio/index.html"
     },
     {
-      "source": "/((?!assets|.*\\.).*)",
+      "source": "/((?!api/|assets|sanity\\.studio|.*\\.).*)",
       "destination": "/index.html"
     }
   ]

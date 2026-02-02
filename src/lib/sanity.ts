@@ -2,8 +2,10 @@ import { createClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
 import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
 
-// En dev, on passe par le proxy Vite pour éviter les erreurs CORS
-const apiHost = typeof window !== 'undefined' && import.meta.env.DEV
+// En navigateur (dev + prod), on passe par le proxy pour éviter CORS :
+// - dev : proxy Vite (vite.config.ts)
+// - prod : fonction serverless Vercel (api/sanity/[[...path]].js)
+const apiHost = typeof window !== 'undefined'
   ? `${window.location.origin}/api/sanity`
   : undefined;
 
