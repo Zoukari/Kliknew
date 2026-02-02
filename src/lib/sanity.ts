@@ -2,19 +2,30 @@ import { createClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
 import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
 
-// En navigateur (dev + prod), on passe par le proxy pour éviter CORS :
-// - dev : proxy Vite (vite.config.ts)
-// - prod : fonction serverless Vercel (api/sanity/[[...path]].js)
-const apiHost = typeof window !== 'undefined'
-  ? `${window.location.origin}/api/sanity`
-  : undefined;
+const SANITY_CDN = 'https://ilu5dvrl.apicdn.sanity.io';
+
+// En navigateur (dev + prod), on redirige les requêtes vers notre proxy pour éviter CORS.
+// Le client Sanity construit toujours https://projectId.host/... donc on ne peut pas utiliser apiHost ;
+// on utilise un fetch personnalisé qui réécrit l’URL vers /api/sanity/...
+function createProxyFetch(): ((url: string | URL | Request, init?: RequestInit) => Promise<Response>) | undefined {
+  if (typeof window === 'undefined') return undefined;
+  const proxyBase = `${window.location.origin}/api/sanity`;
+  return (input: string | URL | Request, init?: RequestInit) => {
+    const url = typeof input === 'string' ? input : input instanceof Request ? input.url : input.toString();
+    const useProxy = url.startsWith(SANITY_CDN + '/') || url.startsWith(SANITY_CDN);
+    const proxyUrl = useProxy ? proxyBase + url.slice(SANITY_CDN.length) : url;
+    return fetch(proxyUrl, init);
+  };
+}
+
+const proxyFetch = createProxyFetch();
 
 export const sanityClient = createClient({
   projectId: 'ilu5dvrl',
   dataset: 'production',
   useCdn: true,
   apiVersion: '2024-01-01',
-  ...(apiHost && { apiHost }),
+  ...(proxyFetch && { fetch: proxyFetch }),
 });
 
 const builder = imageUrlBuilder(sanityClient);
